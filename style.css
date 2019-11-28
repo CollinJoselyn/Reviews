@@ -1,0 +1,34 @@
+span.search {
+	display: inline-block;
+}
+
+.recentReleases {
+	column-count: 3;
+	column-gap: 300px;
+}
+
+.hlRatedMovies {
+	column-count: 2;
+	column-gap: 400px;
+	padding-left: 100px;
+}
+
+.moviePoster {
+	column-count: 2;
+	column-fill: balance;
+	column-gap: 10px;
+}
+
+.movieInfo {
+	list-style: none;
+}
+
+.ratingScale {
+	list-style: none;
+}
+
+.ratingScale li {
+	display: inline-block;
+	padding: 40px;
+}
+
