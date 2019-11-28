@@ -19,7 +19,7 @@ require_once 'dbconnection.php';
 
 </head>
 
-
+<!--comment-->
 
 <body>
 
@@ -95,6 +95,7 @@ require_once 'dbconnection.php';
     </div>
   </div>
 
+  <h1>Bottom</h1>
   <!--<div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
