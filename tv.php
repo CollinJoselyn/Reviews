@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'imbdAPI.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,28 @@ require_once 'dbconnection.php';
 
 </head>
 
+<?php
+
+$popular = getImdbRecord("The+Mandalorian", $ApiKey);
+$popular2 = getImdbRecord("The+Crown", $ApiKey);
+$popular3 = getImdbRecord("Rick+and+Morty", $ApiKey);
+$popular4 = getImdbRecord("Watchmen", $ApiKey);
+$popular5 = getImdbRecord("Game+of+Thrones", $ApiKey);
+$popular6 = getImdbRecord("American+Horror+Story", $ApiKey);
+$popular7 = getImdbRecord("Peaky+Blinders", $ApiKey);
+$popular8 = getImdbRecord("Supernatural", $ApiKey);
+$popular9 = getImdbRecord("Black+Mirror", $ApiKey);
+$highest = getImdbRecord("Seinfeld", $ApiKey);
+$highest2 = getImdbRecord("Breaking+Bad", $ApiKey);
+$highest3 = getImdbRecord("Friends", $ApiKey);
+$lowest = getImdbRecord("For+Better+or+Worse", $ApiKey);
+$lowest2 = getImdbRecord("Fred:+the+Show", $ApiKey);
+$lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
+
+
+
+?>
+
 <body>
 
   <!-- Navigation -->
@@ -32,7 +55,7 @@ require_once 'dbconnection.php';
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -78,23 +101,23 @@ require_once 'dbconnection.php';
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <h1>Recent Releases</h1>
+      <h1>Popular TV Shows</h1>
     </div>
     <div class="recentReleases">
     <ul>
-      <li>x</li>
-      <li>x</li>
-      <li>x</li>
+      <li><?php echo $popular['Title']; ?></li>
+      <li><?php echo $popular2['Title']; ?></li>
+      <li><?php echo $popular3['Title']; ?></li>
     </ul>
     <ul>
-      <li>x</li>
-      <li>x</li>
-      <li>x</li>
+      <li><?php echo $popular4['Title']; ?></li>
+      <li><?php echo $popular5['Title']; ?></li>
+      <li><?php echo $popular6['Title']; ?></li>
     </ul>
     <ul>
-      <li>x</li>
-      <li>x</li>
-      <li>x</li>
+      <li><?php echo $popular7['Title']; ?></li>
+      <li><?php echo $popular8['Title']; ?></li>
+      <li><?php echo $popular9['Title']; ?></li>
     </ul>
   </div>
     </div>
@@ -105,15 +128,15 @@ require_once 'dbconnection.php';
       <div class="hlRatedMovies">
         <h1>Highest Rated</h1>
         <ol>
-          <li>x</li>
-          <li>x</li>
-          <li>x</li>
+          <li><?php echo $highest['Title']; ?></li>
+          <li><?php echo $highest2['Title']; ?></li>
+          <li><?php echo $highest3['Title']; ?></li>
         </ol>
         <h1>Lowest Rated</h1>
         <ol>
-          <li>x</li>
-          <li>x</li>
-          <li>x</li>
+          <li><?php echo $lowest['Title']; ?></li>
+          <li><?php echo $lowest2['Title']; ?></li>
+          <li><?php echo $lowest3['Title']; ?></li>
         </ol>
       </div>
     </div>

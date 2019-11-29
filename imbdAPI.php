@@ -18,7 +18,7 @@
 //$result = json_decode($json, TRUE);
 
 //echo $result;
-//$ApiKey = "99000d3e";
+$ApiKey = "99000d3e";
 function getImdbRecord($ImdbId, $ApiKey)
 {
     $path = "http://www.omdbapi.com/?t=$ImdbId&apikey=$ApiKey";
@@ -32,7 +32,7 @@ function getPoster($title, $ApiKey){
 	return json_decode($json, TRUE);
 }
 
-$data = getImdbRecord("The+Big+Lebowski+", "99000d3e");
+$data = getImdbRecord("Black+Panther", "99000d3e");
 
 //echo "<pre>";
 //print_r($data);
