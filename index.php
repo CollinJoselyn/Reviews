@@ -70,7 +70,7 @@ require_once 'dbconnection.php';
         <h1>Search</h1>
         <form>
           <input type="text" name="search" value="movies, games, TV">
-          <input type="submit" value="Search">
+          <input type="submit" value="Search" name="searchBtn">
         </form>
         </div>
     </div>
