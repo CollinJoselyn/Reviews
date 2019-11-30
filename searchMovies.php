@@ -49,7 +49,7 @@ if(isset($_GET['searchMoviesBtn'])){
 			$mTitle = addPlus($_GET['movieTitle']);
 			$data2 = getImdbRecord($mTitle, "99000d3e");
 			$poster = getPoster($mTitle, "99000d3e");
-			if($data2['Title'] != $_GET['movieTitle']){
+			if($data2['Title'] != $_GET['movieTitle'] || $data2['Type'] != "movie"){
 				$movieTitleErr = "Please enter a valid title";
 				$_SESSION['titleErr'] = $movieTitleErr;
 				header('location: movies.php');
@@ -61,7 +61,8 @@ if(isset($_GET['searchMoviesBtn'])){
 					$imdbID = $data2['imdbID'];
 					$year = $data2['Year'];
 					$title = $data2['Title'];
-					$sql2 = "INSERT INTO moviestv (titleID, year, title) VALUES ('$imdbID', '$year', '$title')";
+					$type = $data2['Type'];
+					$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
 					$db->query($sql2);
 					header('location: movieSearchResults.php');
 
