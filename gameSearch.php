@@ -12,7 +12,6 @@ function test_input($data) {
 
 $gameTitle = "";
 $gameTitleErr = "";
-$gameResults = findGame($gameTitle);
 $_SESSION['gameInfo'] = "";
 $_SESSION['gameErr'] = "";
 $sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";

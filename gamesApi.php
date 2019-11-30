@@ -25,11 +25,16 @@ function findGame($name) {
   return null;
 }
 
-$result = findGame("Grand Theft Auto IV");
-
-//echo '<pre>';
-//print_r($result);
-//echo '</pre>';
+$result = findGame("Pulp Fiction");
+/*
+echo '<pre>';
+print_r($result);
+echo '</pre>';
+if($result){
+  echo 'It is true';
+}else{
+  echo 'it is false';
+}*/
 //echo $result->name;
 //echo $result->background_image;
 ?>

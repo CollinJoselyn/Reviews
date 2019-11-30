@@ -18,19 +18,24 @@ function test_input($data) {
 $title = "";
 $titleErr = "";
 $api = "";
-$_SESSION['searchResults'];
-$_SESSION['error'];
+$_SESSION['searchResults'] = "";
+$_SESSION['error'] = "";
+$mtApi = getImdb($title, $ApiKey);
+$vgApi = findGame($title);
 
 if(isset($_GET['searchBtn'])){
+   if($_SERVER['REQUEST_METHOD'] === "GET"){
 	if(empty($_GET['search'])){
 		$titleErr = "Please enter a title";
+		$_SESSION['blank'] = $titleErr;
+		header('location: index.php');
 	}else{
 		$title = $_GET['search'];
-		$mtTitle = addPlus($_GET['search']);
+		$mtTitle = addPlus($title);
 		$vTitle = $title;
 		$mtApi = getImdb($mtTitle, $ApiKey);
 		$vgApi = findGame($vTitle);
-		if($title != $api['Title'] && $title != $vgApi->name){
+		if($mtApi['Title'] == $title && $vgApi-> != $vTitle){
 			$titleErr = "Please enter a valid Movie, Tv or video game title";
 			$_SESSION['error'] = $titleErr;
 			header('location: index.php');
@@ -54,7 +59,7 @@ if(isset($_GET['searchBtn'])){
 				}
 			}else($title == $vgApi->name){
 				$sql3 = "SELECT title FROM videogames WHERE title = '$title'";
-				if($db->query($sql3)){
+				if($db->query($sql3) === TRUE){
 					$_SESSION['searchResults'] = $vgApi;
 					$_SESSION['mediaName'] = $_GET['search'];
 					header('location: searchAllResults.php');
@@ -70,5 +75,7 @@ if(isset($_GET['searchBtn'])){
 			}
 		}
 	}
+  }
 }
+
 ?>

@@ -32,7 +32,7 @@ function getPoster($title, $ApiKey){
 	return json_decode($json, TRUE);
 }
 
-$data = getImdbRecord("Breaking+Bad", "99000d3e");
+$data = getImdbRecord("Grand+Theft+Auto+IV", "99000d3e");
 
 //echo "<pre>";
 //print_r($data);

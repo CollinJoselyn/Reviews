@@ -69,8 +69,10 @@ require_once 'dbconnection.php';
       <div class="col-lg-12 text-center">
         <h1>Search</h1>
         <form action="searchAll.php" method="get">
-          <input type="text" name="search" value="movies, games, TV">
+          <input type="text" name="search" value="">
           <input type="submit" value="Search" name="searchBtn">
+          <span><?php echo $_SESSION['error']; ?></span>
+          <span><?php echo $_SESSION['blank']; ?></span>
         </form>
         </div>
     </div>

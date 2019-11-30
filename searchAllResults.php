@@ -102,12 +102,12 @@ $mediaName = $_SESSION['mediaName'];
          echo '</ul>';
         }else{
           echo '<img style=" " src="'$vgPoster'" alt="Movie Poster">';
-          echo '<li>' .'Title:' .$gameInfo->name .'</li>'
+          echo '<li>' .'Title:' .$gameInfo->name .'</li>';
          echo '<li>' .'Release Date:' .$gameInfo->released .'</li>';
-         echo '<li>' .'Description:' .$gameInfo->description_raw .'</li>;'
+         echo '<li>' .'Description:' .$gameInfo->description_raw .'</li>;';
          echo '<li>' .'Publisher:' .$gameInfo->publishers{'0'}->{'name'} .'</li>';
          echo '<li>' .'ESRB Rating:' .$gameInfo->esrb_rating->name .'</li>';
-         echo '<li>' .'User Rating:' .'</li>'
+         echo '<li>' .'User Rating:' .'</li>';
         }
          ?>
         
