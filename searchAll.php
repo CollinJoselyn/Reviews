@@ -39,6 +39,7 @@ if(isset($_GET['searchBtn'])){
 				$sql = "SELECT title FROM moviestv WHERE title = '$title'";
 				if($db->query($sql) === TRUE){
 					$_SESSION['searchResults'] = $mtApi;
+					$_SESSION['mediaName'] = $_GET['search'];
 					header('location: searchAllResults.php');
 				}else{
 					$imdbID = $data2['imdbID'];
@@ -47,12 +48,15 @@ if(isset($_GET['searchBtn'])){
 					$type = $data2['Type'];
 					$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$mtTitle', '$type')";
 					$db->query($sql2);
+					$_SESSION['searchResults'] = $mtApi;
+					$_SESSION['mediaName'] = $_GET['search'];
 					header('location: searchAllResults.php');
 				}
 			}else($title == $vgApi->name){
 				$sql3 = "SELECT title FROM videogames WHERE title = '$title'";
 				if($db->query($sql3)){
 					$_SESSION['searchResults'] = $vgApi;
+					$_SESSION['mediaName'] = $_GET['search'];
 					header('location: searchAllResults.php');
 				}else{
 					$gameID = $gameResults->id;
@@ -60,6 +64,7 @@ if(isset($_GET['searchBtn'])){
 					$releaseDate = $gameResults->released;
 					$sql4 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
 					$_SESSION['searchResults'] = $vgApi;
+					$_SESSION['mediaName'] = $_GET['search'];
 					header('location: searchAllResults.php');
 				}
 			}
