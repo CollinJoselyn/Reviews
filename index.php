@@ -68,7 +68,7 @@ require_once 'dbconnection.php';
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1>Search</h1>
-        <form>
+        <form action="searchAll.php" method="get">
           <input type="text" name="search" value="movies, games, TV">
           <input type="submit" value="Search" name="searchBtn">
         </form>
