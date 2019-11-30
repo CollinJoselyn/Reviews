@@ -34,7 +34,6 @@ if(isset($_GET['tvSearchBtn'])){
 			if($tvTitleCheck != $tvResults['Title'] || $tvResults['Type'] != "series"){
 				$tvTitleErr = "Please enter a valid TV show title";
 				$_SESSION['tTitleErr'] = $tvTitleErr;
-				$_SESSION['debug'] = $tvTitle;
 				header('location: tv.php');
 			}else{
 				$tt = $_GET['tvTitle'];
