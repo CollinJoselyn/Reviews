@@ -2,6 +2,7 @@
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
+include 'gamesApi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +87,7 @@ $mediaName = $_SESSION['mediaName'];
     <div class="row">
       <div class="moviePoster">
         <?php
-        if($mediaName == $mtInfo['Title']){
+        if($mediaName === $mtInfo['Title']){
           echo '<img style=" " src="'$mtPoster'" alt="Movie Poster">';
           echo  '<ul class="movieInfo">';
          echo '<li>' .'Title:' . $movieInfo['Title'] . '</li>';

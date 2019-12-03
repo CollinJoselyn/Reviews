@@ -4,6 +4,9 @@ require_once 'dbconnection.php';
 include 'imbdAPI.php';
 include 'gamesApi.php';
 
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+
 function addPlus($string){
 	return str_replace(" ", "+", $string);
 }
@@ -15,67 +18,77 @@ function test_input($data) {
   return $data;
 }
 
-$title = "";
+/*$title = "";
 $titleErr = "";
 $api = "";
 $_SESSION['searchResults'] = "";
 $_SESSION['error'] = "";
 $mtApi = getImdb($title, $ApiKey);
-$vgApi = findGame($title);
-
+$vgApi = findGame($title);*/
+$movieTitle = "";
+$movieTitleErr = "";
+$mTitle = "";
+$data2 = getImdbRecord($mTitle, "99000d3e");
+$poster = getPoster($mTitle, "99000d3e");
+$_SESSION['mTitle'] = "";
+$_SESSION['titleErr'] = "";
+$sql = "SELECT title FROM moviestv WHERE title = '$movieTitle'";
+$gameTitle = "";
+$gameTitleErr = "";
+$_SESSION['gameInfo'] = "";
+$_SESSION['gameErr'] = "";
+$sql2 = "SELECT title FROM videogames WHERE title = '$gameTitle'";
+$_SESSION['mediaName'] = $_GET['search'];
 if(isset($_GET['searchBtn'])){
-   if($_SERVER['REQUEST_METHOD'] === "GET"){
-	if(empty($_GET['search'])){
-		$titleErr = "Please enter a title";
-		$_SESSION['blank'] = $titleErr;
-		header('location: index.php');
-	}else{
-		$title = $_GET['search'];
-		$mtTitle = addPlus($title);
-		$vTitle = $title;
-		$mtApi = getImdb($mtTitle, $ApiKey);
-		$vgApi = findGame($vTitle);
-		if($mtApi['Title'] == $title && $vgApi-> != $vTitle){
-			$titleErr = "Please enter a valid Movie, Tv or video game title";
-			$_SESSION['error'] = $titleErr;
-			header('location: index.php');
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		if(empty($_GET['search'])){
+
 		}else{
-			if($title == $mtApi['Title']){
-				$sql = "SELECT title FROM moviestv WHERE title = '$title'";
-				if($db->query($sql) === TRUE){
-					$_SESSION['searchResults'] = $mtApi;
-					$_SESSION['mediaName'] = $_GET['search'];
-					header('location: searchAllResults.php');
-				}else{
-					$imdbID = $data2['imdbID'];
-					$year = $data2['Year'];
-					$mtTitle = $data2['Title'];
-					$type = $data2['Type'];
-					$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$mtTitle', '$type')";
-					$db->query($sql2);
-					$_SESSION['searchResults'] = $mtApi;
-					$_SESSION['mediaName'] = $_GET['search'];
-					header('location: searchAllResults.php');
-				}
-			}else($title == $vgApi->name){
-				$sql3 = "SELECT title FROM videogames WHERE title = '$title'";
-				if($db->query($sql3) === TRUE){
-					$_SESSION['searchResults'] = $vgApi;
-					$_SESSION['mediaName'] = $_GET['search'];
+			$mTitle = addPlus($_GET['search']);
+			$data2 = getImdbRecord($mTitle, $ApiKey);
+			$poster = getPoster($mTitle, $ApiKey);
+			if($data2['Title'] != $_GET['search']){
+				//$movieTitleErr = "Please enter a valid title";
+				//$_SESSION['titleErr'] = $movieTitleErr;
+				//header('location: index.php');
+				$gameTitle = $_GET['search'];
+			$gameResults = findGame($gameTitle);
+			if($gameTitle != $gameResults->name){
+				$gameTitleErr = 'Please enter a valid game title';
+				$_SESSION['gameErr'] = $gameTitleErr;
+				header('location: index.php');
+			}else{
+				$_SESSION['searchResults'] = $gameResults;
+				if($db->query($sql2) === TRUE){
 					header('location: searchAllResults.php');
 				}else{
 					$gameID = $gameResults->id;
 					$gTitle = $gameResults->name;
 					$releaseDate = $gameResults->released;
-					$sql4 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
-					$_SESSION['searchResults'] = $vgApi;
-					$_SESSION['mediaName'] = $_GET['search'];
+					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
+					$db->query($sql2);
 					header('location: searchAllResults.php');
 				}
+				
+			}
+			}else{
+				$_SESSION['mTitle'] = $data2;
+				if($db->query($sql) === TRUE){
+					header('location: searchAllResults.php');
+				}else{
+					$imdbID = $data2['imdbID'];
+					$year = $data2['Year'];
+					$title = $data2['Title'];
+					$type = $data2['Type'];
+					$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
+					$db->query($sql2);
+					header('location: searchAllResults.php');
+
+				}		
+				
 			}
 		}
 	}
-  }
 }
 
 ?>

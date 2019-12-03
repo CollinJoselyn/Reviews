@@ -1,6 +1,9 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
 ?>
 <!DOCTYPE html>
 <html lang="en">
