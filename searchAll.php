@@ -28,8 +28,8 @@ $vgApi = findGame($title);*/
 $movieTitle = "";
 $movieTitleErr = "";
 $mTitle = "";
-$data2 = getImdbRecord($mTitle, "99000d3e");
-$poster = getPoster($mTitle, "99000d3e");
+$data2 = getImdbRecord($mTitle, $ApiKey);
+$poster = getPoster($mTitle, $ApiKey);
 $_SESSION['mTitle'] = "";
 $_SESSION['titleErr'] = "";
 $sql = "SELECT title FROM moviestv WHERE title = '$movieTitle'";
@@ -58,7 +58,7 @@ if(isset($_GET['searchBtn'])){
 				$_SESSION['gameErr'] = $gameTitleErr;
 				header('location: index.php');
 			}else{
-				$_SESSION['searchResults'] = $gameResults;
+				$_SESSION['vgSearchResults'] = $gameResults;
 				if($db->query($sql2) === TRUE){
 					header('location: searchAllResults.php');
 				}else{
@@ -72,7 +72,7 @@ if(isset($_GET['searchBtn'])){
 				
 			}
 			}else{
-				$_SESSION['mTitle'] = $data2;
+				$_SESSION['mtSearchResults'] = $data2;
 				if($db->query($sql) === TRUE){
 					header('location: searchAllResults.php');
 				}else{

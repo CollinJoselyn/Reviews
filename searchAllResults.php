@@ -22,10 +22,10 @@ include 'gamesApi.php';
 </head>
 
 <?php
-$mtPoster = $_SESSION['searchResults']['Poster'];
-$vgPoster = $_SESSION['searchResults']->background_image;
-$mtInfo = $_SESSION['searchResults'];
-$vgInfo = $_SESSION['searchResults'];
+$mtPoster = $_SESSION['mtSearchResults']['Poster'];
+$vgPoster = $_SESSION['vgSearchResults']->background_image;
+$mtInfo = $_SESSION['mtSearchResults'];
+$vgInfo = $_SESSION['vgSearchResults'];
 $mediaName = $_SESSION['mediaName'];
 
 ?>
@@ -88,26 +88,26 @@ $mediaName = $_SESSION['mediaName'];
       <div class="moviePoster">
         <?php
         if($mediaName === $mtInfo['Title']){
-          echo '<img style=" " src="'$mtPoster'" alt="Movie Poster">';
-          echo  '<ul class="movieInfo">';
-         echo '<li>' .'Title:' . $movieInfo['Title'] . '</li>';
-         echo '<li>' .'Year:' .$movieInfo['Year'] .'</li>';
-         echo '<li>' .'Rated:' .$movieInfo['Rated'] .'</li>';
-         echo '<li>' .'Runtime:' .$movieInfo['Runtime'] .'</li>';
-         echo '<li>' .'Genre:'  .$movieInfo['Genre'] .'</li>';
-         echo '<li>' .'Director:' .$movieInfo['Director'] .'</li>';
-         echo '<li>' .'Writer:' .$movieInfo['Writer'] .'</li>';
-         echo '<li>' .'Actors:' .$movieInfo['Actors'] .'</li>';
-         echo '<li>' .'Plot:'  .$movieInfo['Plot']  .'</li>';
+         echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'Title:' . $mtInfo['Title'] . '</li>';
+         echo '<li>' .'Year:' .$mtInfo['Year'] .'</li>';
+         echo '<li>' .'Rated:' .$mtInfo['Rated'] .'</li>';
+         echo '<li>' .'Runtime:' .$mtInfo['Runtime'] .'</li>';
+         echo '<li>' .'Genre:'  .$mtInfo['Genre'] .'</li>';
+         echo '<li>' .'Director:' .$mtInfo['Director'] .'</li>';
+         echo '<li>' .'Writer:' .$mtInfo['Writer'] .'</li>';
+         echo '<li>' .'Actors:' .$mtInfo['Actors'] .'</li>';
+         echo '<li>' .'Plot:'  .$mtInfo['Plot']  .'</li>';
          echo '<li>' .'User Rating:' .'</li>';
          echo '</ul>';
         }else{
-          echo '<img style=" " src="'$vgPoster'" alt="Movie Poster">';
-          echo '<li>' .'Title:' .$gameInfo->name .'</li>';
-         echo '<li>' .'Release Date:' .$gameInfo->released .'</li>';
-         echo '<li>' .'Description:' .$gameInfo->description_raw .'</li>;';
-         echo '<li>' .'Publisher:' .$gameInfo->publishers{'0'}->{'name'} .'</li>';
-         echo '<li>' .'ESRB Rating:' .$gameInfo->esrb_rating->name .'</li>';
+         echo '<img style="height: 500px; width: 400px;" src="' .$vgPoster .'" alt="Movie Poster">';
+         echo '<li>' .'Title:' .$vgInfo->name .'</li>';
+         echo '<li>' .'Release Date:' .$vgInfo->released .'</li>';
+         echo '<li>' .'Description:' .$vgInfo->description_raw .'</li>;';
+         echo '<li>' .'Publisher:' .$vgInfo->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'ESRB Rating:' .$vgInfo->esrb_rating->name .'</li>';
          echo '<li>' .'User Rating:' .'</li>';
         }
          ?>
