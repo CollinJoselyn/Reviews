@@ -49,7 +49,7 @@ function test_input($data) {
   return $data;
 }
 
-$sql = "SELECT username, password FROM user WHERE username = '$username' AND password = '$password'";
+$sql = "SELECT username, password, userID FROM user WHERE username = '$username' AND password = '$password'";
 if(isset($_POST['signinbtn'])){
 $result = $db->query($sql);
 if ($result->num_rows > 0) {
@@ -57,8 +57,10 @@ if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
         $inputUser = $row["username"];
         $inputPass = $row["password"];
+        $userID = $row['userID'];
         if($inputUser == $username && $inputPass == $password){
           $_SESSION['username'] = $username;
+          $_SESSION['userID'] = $userID;
           header('location: userHomePage.php');
         }else{
           echo "invalid";

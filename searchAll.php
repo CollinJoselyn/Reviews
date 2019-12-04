@@ -65,8 +65,8 @@ if(isset($_GET['searchBtn'])){
 					$gameID = $gameResults->id;
 					$gTitle = $gameResults->name;
 					$releaseDate = $gameResults->released;
-					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
-					$db->query($sql2);
+					$sql3 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
+					$db->query($sql3);
 					header('location: searchAllResults.php');
 				}
 				

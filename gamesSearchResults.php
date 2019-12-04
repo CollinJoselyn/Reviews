@@ -23,7 +23,7 @@ include 'imbdAPI.php';
 <?php
 $poster = $_SESSION['gameInfo']->background_image;
 $gameInfo = $_SESSION['gameInfo'];
-
+$_SESSION['type'] = "videoGame";
 ?>
 
 

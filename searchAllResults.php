@@ -27,6 +27,7 @@ $vgPoster = $_SESSION['vgSearchResults']->background_image;
 $mtInfo = $_SESSION['mtSearchResults'];
 $vgInfo = $_SESSION['vgSearchResults'];
 $mediaName = $_SESSION['mediaName'];
+$_SESSION['type'] = "";
 
 ?>
 
@@ -88,6 +89,7 @@ $mediaName = $_SESSION['mediaName'];
       <div class="moviePoster">
         <?php
         if($mediaName === $mtInfo['Title']){
+         $_SESSION['type'] = "movieTV"
          echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'Title:' . $mtInfo['Title'] . '</li>';
@@ -102,6 +104,7 @@ $mediaName = $_SESSION['mediaName'];
          echo '<li>' .'User Rating:' .'</li>';
          echo '</ul>';
         }else{
+          $_SESSION['type'] = "videoGame";
          echo '<img style="height: 500px; width: 400px;" src="' .$vgPoster .'" alt="Movie Poster">';
          echo '<li>' .'Title:' .$vgInfo->name .'</li>';
          echo '<li>' .'Release Date:' .$vgInfo->released .'</li>';

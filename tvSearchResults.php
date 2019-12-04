@@ -23,7 +23,7 @@ include 'imbdAPI.php';
 <?php
 $poster = $_SESSION['tTitle']['Poster'];
 $tvInfo = $_SESSION['tTitle'];
-
+$_SESSION['type'] = "movieTv";
 ?>
 
 
