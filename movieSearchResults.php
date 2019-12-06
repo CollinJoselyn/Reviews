@@ -123,6 +123,7 @@ echo $_SESSION['type'];
       </ul>
       <br>
       <textarea rows="10" cols="105" name="writtenReview"></textarea><br><br>
+      <input type="hidden" name="prevPage" value="movieSearchResults.php">
       <input type="submit" name="reviewBtn" value="submit">
     </form>
     </div>

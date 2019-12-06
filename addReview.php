@@ -3,59 +3,90 @@ session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
 include 'gamesApi.php';
+
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
 ?>
 
 
 <?php
-
+$prev = $_POST['prevPage'];
 $rating = "";
 $review = "";
 $error = "";
 $tID = "";
 $title = "";
 $user = "";
-$sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
-$sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+$moviePage = $_SESSION['mTitle'];
+$tvPage = $_SESSION['tTitle'];
+$indexMT = $_SESSION['mtSearchResults'];
+$indexVG = $_SESSION['vgSearchResults'];
+$vgPage = $_SESSION['gameInfo'];
+$contentType = $_SESSION['type'];
+
 if(isset($_POST['reviewBtn'])){
-	if(isset($_SESSION['username'])){
-	if(empty($_POST['writtenReview']) || empty($_POST['number'])){
-		$error = "Please choose a rating and type a review";
-		$_SESSION['reviewError'] = $error;
-	}else{
-		$rating = $_POST['number'];
-		$review = $_POST['writtenReview'];
-		$user = $_SESSION['userID'];
-		if($_SESSION['type'] === "movieTV"){
-			if($_SESSION['mTitle']){
-				$tID = $_SESSION['mTitle']['imdbID'];
-				$title = $_SESSION['mTitle']['Title'];
-				$db->query($sql);
-			}elseif($_SESSION['tTitle']){
-				$tID = $_SESSION['tTitle']['imdbID'];
-				$title = $_SESSION['tTitle']['Title'];
-				$db->query($sql);
-			}elseif($_SESSION['mtSearchResults']){
-				$tID = $_SESSION['mtSearchResults']['imdbID'];
-				$title = $_SESSION['mtSearchResults']['Title'];
-				$db->query($sql);
-			}	
-		
-	}else($_SESSION['type'] === "videoGame"){
-		if($_SESSION['vgSearchResults']){
-			$tID = $_SESSION['vgSearchResults']->id;
-			$title = $_SESSION['vgSearchResults']->name;
-			$db->query($sql2);
-		}else($_SESSION['gameInfo']){
-			$tID = $_SESSION['gameInfo']->id;
-			$title = $_SESSION['gameInfo']->name;
-			$db->query($sql2);
+	if($_SERVER['REQUEST_METHOD'] == "POST"){
+		if(empty($_POST['writtenReview'])){
+			echo "Write something";
+		}else{
+			if(isset($_SESSION['username'])){
+				if($contentType == "movieTV"){
+					if(isset($moviePage)){
+						$review = $_POST['writtenReview'];
+			            $title = $moviePage['Title'];
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $moviePage['imdbID'];
+			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql);
+			            echo "Mission Accomplish moviePage";
+					}elseif(isset($tvPage)){
+						$review = $_POST['writtenReview'];
+			            $title = $tvPage['Title'];
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $tvPage['imdbID'];
+			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql);
+			            echo "Mission Accomplish tvPage";
+					}elseif(isset($indexMT)){
+						$review = $_POST['writtenReview'];
+			            $title = $indexMT['Title'];
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $indexMT['imdbID'];
+			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql);
+			            echo "Mission Accomplish indexMT";
+			            echo $title;
+			            echo $tID;
+					}
+				}elseif($contentType == "videoGame"){
+					if(isset($indexVG)){
+						$review = $_POST['writtenReview'];
+			            $title = $indexVG->name;
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $indexVG->id;
+			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql2);
+			            echo "Mission Accomplish indexVG";
+					}elseif(isset($vgPage)){
+						$review = $_POST['writtenReview'];
+			            $title = $vgPage->name;
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $vgPage->id;
+			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql2);
+			            echo "Mission Accomplish vgPage";
+					}
+				}
+			}else{
+				echo "sign in please";
+			}
 		}
 	}
-	}
-  }else{
-  	$_SESSION['reviewError'] = "You must login to leave a review";
-  	echo 'Sign in Please';
-  }
 }
 
 ?>

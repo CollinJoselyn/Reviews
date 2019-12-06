@@ -89,7 +89,7 @@ $_SESSION['type'] = "";
       <div class="moviePoster">
         <?php
         if($mediaName === $mtInfo['Title']){
-         $_SESSION['type'] = "movieTV"
+         $_SESSION['type'] = "movieTV";
          echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'Title:' . $mtInfo['Title'] . '</li>';
@@ -125,23 +125,24 @@ $_SESSION['type'] = "";
       <div class="col-lg-12 text-center">
       <h3>Leave a Rating</h3>
     </div>
-      <form>
+      <form action="addReview.php" method="POST">
       <ul class="ratingScale">
         <li>Lowest</li>
-        <li><button name="one" value="1">1</button></li>
-        <li><button name="two" value="2">2</button></li>
-        <li><button name="three" value="3">3</button></li>
-        <li><button name="four" value="4">4</button></li>
-        <li><button name="five" value="5">5</button></li>
-        <li><button name="six" value="6">6</button></li>
-        <li><button name="seven" value="7">7</button></li>
-        <li><button name="eight" value="8">8</button></li>
-        <li><button name="nine" value="9">9</button></li>
-        <li><button name="ten" value="10">10</button></li>
+        <li><input type="radio" name="number" value="1">1</li>
+        <li><input type="radio" name="number" value="2">2</li>
+        <li><input type="radio" name="number" value="3">3</li>
+        <li><input type="radio" name="number" value="4">4</li>
+        <li><input type="radio" name="number" value="5">5</li>
+        <li><input type="radio" name="number" value="6">6</li>
+        <li><input type="radio" name="number" value="7">7</li>
+        <li><input type="radio" name="number" value="8">8</li>
+        <li><input type="radio" name="number" value="9">9</li>
+        <li><input type="radio" name="number" value="10">10</li>
         <li>Highest</li>
       </ul>
       <br>
       <textarea rows="10" cols="105" name="writtenReview"></textarea><br><br>
+      <input type="hidden" name="prevPage" value="searchAllResults.php">
       <input type="submit" name="reviewBtn" value="submit">
     </form>
     </div>
