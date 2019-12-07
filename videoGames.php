@@ -69,12 +69,21 @@ $highest3 = findGame("The Last of Us");
           <li class="nav-item">
             <a class="nav-link" href="#">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="signIn.php">Sign In</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="createAccount.php">Create Account</a>
-          </li>
+          <?php if(isset($_SESSION['username'])){
+           echo '<li class="nav-item">';
+           echo  '<a class="nav-link" href="signOut.php">' .'Sign out' .'</a>';
+           echo '</li>';}else{
+           echo '<li class="nav-item">';
+           echo  '<a class="nav-link" href="signIn.php">' .'Sign In' .'</a>';
+           echo '</li>';
+           } ?>
+           <?php 
+           if(isset($_SESSION['username'])){
+
+           }else{
+            echo '<li class="nav-item">';
+            echo '<a class="nav-link" href="createAccount.php">' .'Create Account' .'</a>';
+            echo '</li>'; }?>
           <?php if(isset($_SESSION['username'])){
             echo '<li class="nav-item">';
             echo '<a class="nav-link" href="userHomePage.php">';

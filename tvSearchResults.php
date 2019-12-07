@@ -57,7 +57,7 @@ $_SESSION['type'] = "movieTV";
           </li>
           <?php if(isset($_SESSION['username'])){
            echo '<li class="nav-item">';
-           echo  '<a class="nav-link" href="signIn.php">' .'Sign out' .'</a>';
+           echo  '<a class="nav-link" href="signOut.php">' .'Sign out' .'</a>';
            echo '</li>';}else{
            echo '<li class="nav-item">';
            echo  '<a class="nav-link" href="signIn.php">' .'Sign In' .'</a>';
