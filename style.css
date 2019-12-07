@@ -32,3 +32,12 @@ span.search {
 	padding: 20px;
 }
 
+.reviewDisplay {
+	list-style: none;
+}
+
+.reviewDisplay li {
+	display: inline-block;
+	padding: 15px;
+}
+
