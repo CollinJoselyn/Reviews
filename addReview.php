@@ -31,7 +31,7 @@ if(isset($_POST['reviewBtn'])){
 		}else{
 			if(isset($_SESSION['username'])){
 				if($contentType == "movieTV"){
-					if(isset($moviePage)){
+					if(isset($moviePage) && $moviePage['Title'] == $_SESSION['mediaName']){
 						$review = $_POST['writtenReview'];
 			            $title = $moviePage['Title'];
 			            $user = $_SESSION['userID'];
@@ -39,6 +39,7 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $moviePage['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
+			            unset($moviePage);
 			            echo "Mission Accomplish moviePage";
 					}elseif(isset($tvPage)){
 						$review = $_POST['writtenReview'];
@@ -48,6 +49,7 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $tvPage['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
+			            unset($tvPage);
 			            echo "Mission Accomplish tvPage";
 					}elseif(isset($indexMT)){
 						$review = $_POST['writtenReview'];
@@ -60,6 +62,7 @@ if(isset($_POST['reviewBtn'])){
 			            echo "Mission Accomplish indexMT";
 			            echo $title;
 			            echo $tID;
+			            unset($indexMT);
 					}
 				}elseif($contentType == "videoGame"){
 					if(isset($indexVG)){
@@ -71,6 +74,7 @@ if(isset($_POST['reviewBtn'])){
 			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql2);
 			            echo "Mission Accomplish indexVG";
+			            unset($indexVG);
 					}elseif(isset($vgPage)){
 						$review = $_POST['writtenReview'];
 			            $title = $vgPage->name;
@@ -80,6 +84,7 @@ if(isset($_POST['reviewBtn'])){
 			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql2);
 			            echo "Mission Accomplish vgPage";
+			            unset($vgPage);
 					}
 				}
 			}else{

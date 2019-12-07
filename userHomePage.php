@@ -67,6 +67,9 @@ session_start();
   
   <?php echo "<h1> Welcome " .$_SESSION['username']. " To Dashboard </h1>"; ?>
 <h2><a href="signOut.php">Logout</a></h2>
+<?php
+print_r($_SESSION);
+?>
 
 
 
