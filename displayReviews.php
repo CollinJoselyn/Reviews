@@ -18,26 +18,28 @@ $vgPage = $_SESSION['gameInfo'];
 //}
 ?>
 
-<div class="container">
-    <div class="row">
-      <div class="col-lg-12 text-center">
+
         <?php
+        
+        echo '<div class="col-lg-12 text-center">';
         if(isset($moviePage) && $moviePage['Title'] == $_SESSION['mediaName']){
           $title1 = $moviePage['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title1 .'</h1>';
+          echo '<br>';
           echo '</div>';
           $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
           LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title1'";
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
-              echo '<ul class="reviewDisplay">';
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
               echo '<li>' .$row['username'] .'</li>';
               echo '<li>' .$row['rating'] .'</li>';
-              echo '</ul>';
-              echo '</div>';
               echo '<p>' .$row['writtenReview'] .' moviePage' .'</p>';
-              echo '</div>'; 
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
             }
           }
         }elseif(isset($tvPage) && $tvPage['Title'] == $_SESSION['mediaName']){
@@ -49,13 +51,14 @@ $vgPage = $_SESSION['gameInfo'];
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
-              echo '<ul class="reviewDisplay">';
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
               echo '<li>' .$row['username'] .'</li>';
               echo '<li>' .$row['rating'] .'</li>';
-              echo '</ul>';
-              echo '</div>';
               echo '<p>' .$row['writtenReview'] .' tvPage' .'</p>';
-              echo '</div>'; 
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
             }
           }
         }elseif(isset($indexMT) && $indexMT['Title'] == $_SESSION['mediaName']){
@@ -67,13 +70,14 @@ $vgPage = $_SESSION['gameInfo'];
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
-              echo '<ul class="reviewDisplay">';
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
               echo '<li>' .$row['username'] .'</li>';
               echo '<li>' .$row['rating'] .'</li>';
-              echo '</ul>';
-              echo '</div>';
               echo '<p>' .$row['writtenReview'] .'indexMT' .'</p>';
-              echo '</div>'; 
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
             }
           }
         }elseif(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){
@@ -85,13 +89,14 @@ $vgPage = $_SESSION['gameInfo'];
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
-              echo '<ul class="reviewDisplay">';
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
               echo '<li>' .$row['username'] .'</li>';
               echo '<li>' .$row['rating'] .'</li>';
-              echo '</ul>';
-              echo '</div>';
               echo '<p>' .$row['writtenReview'] .'indexVG' .'</p>';
-              echo '</div>'; 
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
             }
           }
         }elseif(isset($vgPage) && $vgPage->name == $_SESSION['mediaName']){
@@ -103,13 +108,14 @@ $vgPage = $_SESSION['gameInfo'];
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
-              echo '<ul class="reviewDisplay">';
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
               echo '<li>' .$row['username'] .'</li>';
               echo '<li>' .$row['rating'] .'</li>';
-              echo '</ul>';
-              echo '</div>';
               echo '<p>' .$row['writtenReview'] .' vgPage' .'</p>';
-              echo '</div>'; 
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
             }
           }
         }

@@ -1,9 +1,6 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
-
-error_reporting(E_ALL);
-ini_set('display_errors', 'On');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +82,7 @@ ini_set('display_errors', 'On');
           <input type="submit" value="Search" name="searchBtn">
           <span><?php echo $_SESSION['error']; ?></span>
           <span><?php echo $_SESSION['blank']; ?></span>
+          <span><?php echo $_SESSION['gameErr'] ?></span>
         </form>
         </div>
     </div>
