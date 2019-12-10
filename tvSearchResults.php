@@ -137,6 +137,10 @@ $_SESSION['type'] = "movieTV";
     </div>
   </div>
 
+  <?php
+  include 'displayReviews.php';
+  ?>
+
   <!--<div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">

@@ -40,7 +40,7 @@ $poster = getPoster($mTitle, "99000d3e");
 $_SESSION['mTitle'] = "";
 $_SESSION['titleErr'] = "";
 $sql = "SELECT title FROM moviestv WHERE title = '$movieTitle'";
-
+$_SESSION['mediaName'] = $_GET['movieTitle'];
 if(isset($_GET['searchMoviesBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		if(empty($_GET['movieTitle'])){

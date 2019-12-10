@@ -20,7 +20,7 @@ $tvResults = getImdbRecord($tvTitle, $ApiKey);
 $poster = getPoster($tvTitle, $ApiKey);
 $_SESSION['tTitle'] = "";
 $_SESSION['tTitleErr'] = "";
-
+$_SESSION['mediaName'] = $_GET['tvTitle'];
 
 if(isset($_GET['tvSearchBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){

@@ -22,12 +22,12 @@ $vgPage = $_SESSION['gameInfo'];
     <div class="row">
       <div class="col-lg-12 text-center">
         <?php
-        if(isset($moviePage)){
-          $title = $moviePage['Title'];
-          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title .'</h1>';
+        if(isset($moviePage) && $moviePage['Title'] == $_SESSION['mediaName']){
+          $title1 = $moviePage['Title'];
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title1 .'</h1>';
           echo '</div>';
           $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
-          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title'";
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title1'";
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
@@ -36,7 +36,79 @@ $vgPage = $_SESSION['gameInfo'];
               echo '<li>' .$row['rating'] .'</li>';
               echo '</ul>';
               echo '</div>';
-              echo '<p>' .$row['writtenReview'] .'</p>';
+              echo '<p>' .$row['writtenReview'] .' moviePage' .'</p>';
+              echo '</div>'; 
+            }
+          }
+        }elseif(isset($tvPage) && $tvPage['Title'] == $_SESSION['mediaName']){
+          $title2 = $tvPage['Title'];
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title2'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<ul class="reviewDisplay">';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '</ul>';
+              echo '</div>';
+              echo '<p>' .$row['writtenReview'] .' tvPage' .'</p>';
+              echo '</div>'; 
+            }
+          }
+        }elseif(isset($indexMT) && $indexMT['Title'] == $_SESSION['mediaName']){
+          $title3 = $indexMT['Title'];
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title3 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title3'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<ul class="reviewDisplay">';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '</ul>';
+              echo '</div>';
+              echo '<p>' .$row['writtenReview'] .'indexMT' .'</p>';
+              echo '</div>'; 
+            }
+          }
+        }elseif(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){
+          $title4 = $indexVG->name;
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title4 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title4'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<ul class="reviewDisplay">';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '</ul>';
+              echo '</div>';
+              echo '<p>' .$row['writtenReview'] .'indexVG' .'</p>';
+              echo '</div>'; 
+            }
+          }
+        }elseif(isset($vgPage) && $vgPage->name == $_SESSION['mediaName']){
+          $title5 = $vgPage->name;
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title5 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title5'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<ul class="reviewDisplay">';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '</ul>';
+              echo '</div>';
+              echo '<p>' .$row['writtenReview'] .' vgPage' .'</p>';
               echo '</div>'; 
             }
           }

@@ -15,6 +15,7 @@ $gameTitleErr = "";
 $_SESSION['gameInfo'] = "";
 $_SESSION['gameErr'] = "";
 $sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
+$_SESSION['mediaName'] = $_GET['gameTitle'];
 if(isset($_GET['gSearchBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		if(empty($_GET['gameTitle'])){
