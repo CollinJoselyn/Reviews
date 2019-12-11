@@ -73,6 +73,27 @@ if(isset($_GET['searchMoviesBtn'])){
 	}
 }
 
+$bTitle = "";
+if(isset($_GET['mPage'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['mPage'];
+		$bTitle = addPlus($_GET['mPage']);
+		$data3 = getImdbRecord($bTitle, $ApiKey);
+		$sqlS = "SELECT title FROM moviestv WHERE title = '$bTitle'";
+		$_SESSION['mPageButton'] = $data3;
+		if($db->query($sqlS) === TRUE){
+			header('location movieSearchResults.php');
+		}else{
+			$imdbID = $data3['imdbID'];
+			$year = $data3['Year'];
+			$title = $data3['Title'];
+			$type = $data3['Type'];
+			$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
+			$db->query($sql2);
+			header('location: movieSearchResults.php');
+		}
+	}
+}
 
 
 ?>

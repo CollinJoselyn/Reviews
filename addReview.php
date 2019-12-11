@@ -23,6 +23,7 @@ $indexMT = $_SESSION['mtSearchResults'];
 $indexVG = $_SESSION['vgSearchResults'];
 $vgPage = $_SESSION['gameInfo'];
 $contentType = $_SESSION['type'];
+$mPageButtons = $_SESSION['mPageButton'];
 
 if(isset($_POST['reviewBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -39,8 +40,9 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $moviePage['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
+			            header('location: movieSearchResults.php');
 			            unset($moviePage);
-					}elseif(isset($tvPage)){
+					}elseif(isset($tvPage) && $tvPage['Title'] == $_SESSION['mediaName']){
 						$review = $_POST['writtenReview'];
 			            $title = $tvPage['Title'];
 			            $user = $_SESSION['userID'];
@@ -48,8 +50,9 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $tvPage['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
+			            header('location: tvSearchResults.php');
 			            unset($tvPage);
-					}elseif(isset($indexMT)){
+					}elseif(isset($indexMT) && $indexMT['Title'] == $_SESSION['mediaName']){
 						$review = $_POST['writtenReview'];
 			            $title = $indexMT['Title'];
 			            $user = $_SESSION['userID'];
@@ -57,7 +60,18 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $indexMT['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
+			            header('location: searchAllResults.php');
 			            unset($indexMT);
+					}elseif(isset($mPageButtons) && $mPageButtons['Title'] == $_SESSION['mediaName']){
+						$review = $_POST['writtenReview'];
+			            $title = $mPageButtons['Title'];
+			            $user = $_SESSION['userID'];
+			            $rating = $_POST['number'];
+			            $tID = $mPageButtons['imdbID'];
+			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
+			            $db->query($sql);
+			            header('location: movieSearchResults.php');
+			            unset($mPageButtons);
 					}
 				}elseif($contentType == "videoGame"){
 					if(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){

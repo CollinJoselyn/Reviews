@@ -114,30 +114,32 @@ $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
       <h1>Recent Releases</h1>
     </div>
     <div class="recentReleases">
+      <form action="searchMovies.php" method="get">
     <ul>
       <img src="<?php echo $recent['Poster']; ?>">
-      <li><?php echo $recent['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent['Title']; ?>"></li><br>
       <img src="<?php echo $recent2['Poster']; ?>">
-      <li><?php echo $recent2['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent2['Title']; ?>"></li><br>
       <img src="<?php echo $recent3['Poster']; ?>">
-      <li><?php echo $recent3['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent3['Title']; ?>"></li><br>
     </ul>
     <ul>
       <img src="<?php echo $recent4['Poster']; ?>">
-      <li><?php echo $recent4['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent4['Title']; ?>"></li><br>
       <img src="<?php echo $recent5['Poster']; ?>">
-      <li><?php echo $recent5['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent5['Title']; ?>"></li><br>
       <img src="<?php echo $recent6['Poster']; ?>">
-      <li><?php echo $recent6['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent6['Title']; ?>"></li><br>
     </ul>
     <ul>
       <img src="<?php echo $recent7['Poster']; ?>">
-      <li><?php echo $recent7['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent7['Title']; ?>"></li><br>
       <img src="<?php echo $recent8['Poster']; ?>">
-      <li><?php echo $recent8['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent8['Title']; ?>"></li><br>
       <img src="<?php echo $recent9['Poster']; ?>">
-      <li><?php echo $recent9['Title']; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $recent9['Title']; ?>"></li><br>
     </ul>
+  </form>
   </div>
     </div>
   </div>
@@ -146,23 +148,25 @@ $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
     <div class="row">
       <div class="hlRatedMovies">
         <h1>Highest Rated</h1>
+        <form action="searchMovies.php" method="get">
         <ol>
           <img src="<?php echo $highest['Poster']; ?>">
-          <li><?php  echo $highest['Title']; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $highest['Title']; ?>"></li><br>
           <img src="<?php echo $highest2['Poster']; ?>">
-          <li><?php  echo $highest2['Title']; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $highest2['Title']; ?>"></li><br>
           <img src="<?php echo $highest3['Poster']; ?>">
-          <li><?php echo $highest3['Title'];  ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $highest3['Title']; ?>"></li><br>
         </ol>
         <h1>Lowest Rated</h1>
         <ol>
           <img src="<?php echo $lowest['Poster']; ?>">
-          <li><?php echo $lowest['Title']; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $lowest['Title']; ?>"></li><br>
           <img src="<?php echo $lowest2['Poster']; ?>">
-          <li><?php echo $lowest2['Title']; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $lowest2['Title']; ?>"></li><br>
           <img src="<?php echo $lowest3['Poster']; ?>">
-          <li><?php echo $lowest3['Title']; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $lowest3['Title']; ?>"></li><br>
         </ol>
+      </form>
       </div>
     </div>
   </div>

@@ -16,6 +16,11 @@ span.search {
 	width: 70px;
 }
 
+.pageButtons {
+	background-color: white;
+	border: none;
+}
+
 .hlRatedMovies {
 	column-count: 2;
 	column-gap: 400px;

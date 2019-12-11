@@ -23,6 +23,8 @@ include 'imbdAPI.php';
 <?php
 $poster = $_SESSION['mTitle']['Poster'];
 $movieInfo = $_SESSION['mTitle'];
+$poster2 = $_SESSION['mPageButton']['Poster'];
+$movieInfo2 = $_SESSION['mPageButton'];
 $_SESSION['type'] = "movieTV";
 ?>
 
@@ -91,20 +93,37 @@ $_SESSION['type'] = "movieTV";
   <div class="container">
     <div class="row">
       <div class="moviePoster">
-        <img style=" " src="<?php echo $poster; ?>" alt="Movie Poster">
-        
-         <ul class="movieInfo">
-         <li>Title: <?php echo $movieInfo['Title']; ?> </li>
-         <li>Year: <?php echo $movieInfo['Year']; ?></li>
-         <li>Rated: <?php echo $movieInfo['Rated']; ?> </li>
-         <li>Runtime: <?php echo $movieInfo['Runtime']; ?> </li>
-         <li>Genre: <?php echo $movieInfo['Genre']; ?> </li>
-         <li>Director: <?php echo $movieInfo['Director']; ?> </li>
-         <li>Writer: <?php echo $movieInfo['Writer']; ?> </li>
-         <li>Actors: <?php echo $movieInfo['Actors']; ?> </li>
-         <li>Plot: <?php echo $movieInfo['Plot']; ?>  </li>
-         <li>User Rating: </li>
-         </ul>
+        <?php
+        if($movieInfo){
+         echo '<img src="' .$poster .'" alt="Movie Poster">';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'Title:' . $movieInfo['Title'] . '</li>';
+         echo '<li>' .'Year:' .$movieInfo['Year'] .'</li>';
+         echo '<li>' .'Rated:' .$movieInfo['Rated'] .'</li>';
+         echo '<li>' .'Runtime:' .$movieInfo['Runtime'] .'</li>';
+         echo '<li>' .'Genre:'  .$movieInfo['Genre'] .'</li>';
+         echo '<li>' .'Director:' .$movieInfo['Director'] .'</li>';
+         echo '<li>' .'Writer:' .$movieInfo['Writer'] .'</li>';
+         echo '<li>' .'Actors:' .$movieInfo['Actors'] .'</li>';
+         echo '<li>' .'Plot:'  .$movieInfo['Plot']  .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+         echo '</ul>';
+       }else{
+        echo '<img src="' .$poster2 .'" alt="Movie Poster">';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'Title:' . $movieInfo2['Title'] . '</li>';
+         echo '<li>' .'Year:' .$movieInfo2['Year'] .'</li>';
+         echo '<li>' .'Rated:' .$movieInfo2['Rated'] .'</li>';
+         echo '<li>' .'Runtime:' .$movieInfo2['Runtime'] .'</li>';
+         echo '<li>' .'Genre:'  .$movieInfo2['Genre'] .'</li>';
+         echo '<li>' .'Director:' .$movieInfo2['Director'] .'</li>';
+         echo '<li>' .'Writer:' .$movieInfo2['Writer'] .'</li>';
+         echo '<li>' .'Actors:' .$movieInfo2['Actors'] .'</li>';
+         echo '<li>' .'Plot:'  .$movieInfo2['Plot']  .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+         echo '</ul>';
+     }
+         ?>
        </div>
     </div>
   </div>
