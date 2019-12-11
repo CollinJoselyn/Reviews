@@ -4,13 +4,27 @@ span.search {
 
 .recentReleases {
 	column-count: 3;
-	column-gap: 300px;
+	column-gap: 200px;
+}
+
+.recentReleases ul {
+	list-style: none;
+}
+
+.recentReleases img {
+	height: 70px;
+	width: 70px;
 }
 
 .hlRatedMovies {
 	column-count: 2;
 	column-gap: 400px;
 	padding-left: 100px;
+}
+
+.hlRatedMovies img {
+	height: 70px;
+	width: 70px;
 }
 
 .moviePoster {

@@ -114,19 +114,28 @@ $highest3 = findGame("The Last of Us");
     </div>
     <div class="recentReleases">
     <ul>
-      <li><?php echo $recent->name; ?></li>
-      <li><?php echo $recent2->name; ?></li>
-      <li><?php echo $recent3->name; ?></li>
+      <img src="<?php echo $recent->background_image; ?>">
+      <li><?php echo $recent->name; ?></li><br>
+      <img src="<?php echo $recent2->background_image; ?>">
+      <li><?php echo $recent2->name; ?></li><br>
+      <img src="<?php echo $recent3->background_image; ?>">
+      <li><?php echo $recent3->name; ?></li><br>
     </ul>
     <ul>
-      <li><?php echo $recent4->name; ?></li>
-      <li><?php echo $recent5->name; ?></li>
-      <li><?php echo $recent6->name; ?></li>
+      <img src="<?php echo $recent4->background_image; ?>">
+      <li><?php echo $recent4->name; ?></li><br>
+      <img src="<?php echo $recent5->background_image; ?>">
+      <li><?php echo $recent5->name; ?></li><br>
+      <img src="<?php echo $recent6->background_image; ?>">
+      <li><?php echo $recent6->name; ?></li><br>
     </ul>
     <ul>
-      <li><?php echo $recent7->name; ?></li>
-      <li><?php echo $recent8->name; ?></li>
-      <li><?php echo $recent9->name; ?></li>
+      <img src="<?php echo $recent7->background_image; ?>">
+      <li><?php echo $recent7->name; ?></li><br>
+      <img src="<?php echo $recent8->background_image; ?>">
+      <li><?php echo $recent8->name; ?></li><br>
+      <img src="<?php echo $recent9->background_image; ?>">
+      <li><?php echo $recent9->name; ?></li><br>
     </ul>
   </div>
     </div>
@@ -137,15 +146,21 @@ $highest3 = findGame("The Last of Us");
       <div class="hlRatedMovies">
         <h1>Highest Rated</h1>
         <ol>
-          <li><?php echo $highest->name; ?></li>
-          <li><?php echo $highest2->name; ?></li>
-          <li><?php echo $highest3->name; ?></li>
+          <img src="<?php echo $highest->background_image; ?>">
+          <li><?php echo $highest->name; ?></li><br>
+          <img src="<?php echo $highest2->background_image; ?>">
+          <li><?php echo $highest2->name; ?></li><br>
+          <img src="<?php echo $highest3->background_image; ?>">
+          <li><?php echo $highest3->name; ?></li><br>
         </ol>
         <h1>Lowest Rated</h1>
         <ol>
-          <li><?php echo $lowest->name; ?></li>
-          <li><?php echo $lowest2->name; ?></li>
-          <li><?php echo $lowest3->name; ?></li>
+          <img src="<?php echo $lowest->background_image; ?>">
+          <li><?php echo $lowest->name; ?></li><br>
+          <img src="<?php echo $lowest2->background_image; ?>">
+          <li><?php echo $lowest2->name; ?></li><br>
+          <img src="<?php echo $lowest3->background_image; ?>">
+          <li><?php echo $lowest3->name; ?></li><br>
         </ol>
       </div>
     </div>

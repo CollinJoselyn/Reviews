@@ -115,19 +115,28 @@ $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
     </div>
     <div class="recentReleases">
     <ul>
-      <li><?php echo $popular['Title']; ?></li>
-      <li><?php echo $popular2['Title']; ?></li>
-      <li><?php echo $popular3['Title']; ?></li>
+      <img src="<?php echo $popular['Poster']; ?>">
+      <li><?php echo $popular['Title']; ?></li><br>
+      <img src="<?php echo $popular2['Poster']; ?>">
+      <li><?php echo $popular2['Title']; ?></li><br>
+      <img src="<?php echo $popular3['Poster']; ?>">
+      <li><?php echo $popular3['Title']; ?></li><br>
     </ul>
     <ul>
-      <li><?php echo $popular4['Title']; ?></li>
-      <li><?php echo $popular5['Title']; ?></li>
-      <li><?php echo $popular6['Title']; ?></li>
+      <img src="<?php echo $popular4['Poster']; ?>">
+      <li><?php echo $popular4['Title']; ?></li><br>
+      <img src="<?php echo $popular5['Poster']; ?>">
+      <li><?php echo $popular5['Title']; ?></li><br>
+      <img src="<?php echo $popular6['Poster']; ?>">
+      <li><?php echo $popular6['Title']; ?></li><br>
     </ul>
     <ul>
-      <li><?php echo $popular7['Title']; ?></li>
-      <li><?php echo $popular8['Title']; ?></li>
-      <li><?php echo $popular9['Title']; ?></li>
+      <img src="<?php echo $popular7['Poster']; ?>">
+      <li><?php echo $popular7['Title']; ?></li><br>
+      <img src="<?php echo $popular8['Poster']; ?>">
+      <li><?php echo $popular8['Title']; ?></li><br>
+      <img src="<?php echo $popular9['Poster']; ?>">
+      <li><?php echo $popular9['Title']; ?></li><br>
     </ul>
   </div>
     </div>
@@ -138,15 +147,21 @@ $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
       <div class="hlRatedMovies">
         <h1>Highest Rated</h1>
         <ol>
-          <li><?php echo $highest['Title']; ?></li>
-          <li><?php echo $highest2['Title']; ?></li>
+          <img src="<?php echo $highest['Poster']; ?>">
+          <li><?php echo $highest['Title']; ?></li><br>
+          <img src="<?php echo $highest2['Poster']; ?>">
+          <li><?php echo $highest2['Title']; ?></li><br>
+          <img src="<?php echo $highest3['Poster']; ?>">
           <li><?php echo $highest3['Title']; ?></li>
         </ol>
         <h1>Lowest Rated</h1>
         <ol>
-          <li><?php echo $lowest['Title']; ?></li>
-          <li><?php echo $lowest2['Title']; ?></li>
-          <li><?php echo $lowest3['Title']; ?></li>
+          <img src="<?php echo $lowest['Poster']; ?>">
+          <li><?php echo $lowest['Title']; ?></li><br>
+          <img src="<?php echo $lowest2['Poster']; ?>">
+          <li><?php echo $lowest2['Title']; ?></li><br>
+          <img src="<?php echo $lowest3['Poster']; ?>">
+          <li><?php echo $lowest3['Title']; ?></li><br>
         </ol>
       </div>
     </div>

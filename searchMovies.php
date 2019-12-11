@@ -35,8 +35,8 @@ function test_input($data) {
 $movieTitle = "";
 $movieTitleErr = "";
 $mTitle = "";
-$data2 = getImdbRecord($mTitle, "99000d3e");
-$poster = getPoster($mTitle, "99000d3e");
+$data2 = getImdbRecord($mTitle, $ApiKey);
+$poster = getPoster($mTitle, $ApiKey);
 $_SESSION['mTitle'] = "";
 $_SESSION['titleErr'] = "";
 $sql = "SELECT title FROM moviestv WHERE title = '$movieTitle'";

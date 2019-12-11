@@ -40,7 +40,6 @@ if(isset($_POST['reviewBtn'])){
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
 			            unset($moviePage);
-			            echo "Mission Accomplish moviePage";
 					}elseif(isset($tvPage)){
 						$review = $_POST['writtenReview'];
 			            $title = $tvPage['Title'];
@@ -50,7 +49,6 @@ if(isset($_POST['reviewBtn'])){
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
 			            unset($tvPage);
-			            echo "Mission Accomplish tvPage";
 					}elseif(isset($indexMT)){
 						$review = $_POST['writtenReview'];
 			            $title = $indexMT['Title'];
@@ -59,13 +57,10 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $indexMT['imdbID'];
 			            $sql = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, titleID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql);
-			            echo "Mission Accomplish indexMT";
-			            echo $title;
-			            echo $tID;
 			            unset($indexMT);
 					}
 				}elseif($contentType == "videoGame"){
-					if(isset($indexVG)){
+					if(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){
 						$review = $_POST['writtenReview'];
 			            $title = $indexVG->name;
 			            $user = $_SESSION['userID'];
@@ -73,7 +68,7 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $indexVG->id;
 			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql2);
-			            echo "Mission Accomplish indexVG";
+			            header('location: searchAllResults.php');
 			            unset($indexVG);
 					}elseif(isset($vgPage)){
 						$review = $_POST['writtenReview'];
@@ -83,7 +78,7 @@ if(isset($_POST['reviewBtn'])){
 			            $tID = $vgPage->id;
 			            $sql2 = "INSERT INTO review (writtenReview, titleOfMedia, userID, rating, gameID) VALUES ('$review', '$title', '$user', '$rating', '$tID')";
 			            $db->query($sql2);
-			            echo "Mission Accomplish vgPage";
+			            header('location: gamesSearchResults.php');
 			            unset($vgPage);
 					}
 				}

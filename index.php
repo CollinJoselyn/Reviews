@@ -79,7 +79,7 @@ require_once 'dbconnection.php';
         <h1>Search</h1>
         <form action="searchAll.php" method="get">
           <input type="text" name="search" value="">
-          <input type="submit" value="Search" name="searchBtn">
+          <input type="submit" value="Search" name="searchBtn"><br>
           <span><?php echo $_SESSION['error']; ?></span>
           <span><?php echo $_SESSION['blank']; ?></span>
           <span><?php echo $_SESSION['gameErr'] ?></span>
