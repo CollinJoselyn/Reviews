@@ -10,6 +10,7 @@ $indexMT = $_SESSION['mtSearchResults'];
 $indexVG = $_SESSION['vgSearchResults'];
 $vgPage = $_SESSION['gameInfo'];
 $mPageButtons = $_SESSION['mPageButton'];
+$tPageButtons = $_SESSION['tPageButton'];
 
 
 //if($results->num_rows > 0){
@@ -121,6 +122,25 @@ $mPageButtons = $_SESSION['mPageButton'];
           }
         }elseif(isset($mPageButtons) && $mPageButtons['Title'] == $_SESSION['mediaName']){
           $title2 = $mPageButtons['Title'];
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title2'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '<p>' .$row['writtenReview'] .' tvPage' .'</p>';
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
+            }
+          }
+        }elseif(isset($tPageButtons) && $tPageButtons['Title'] == $_SESSION['mediaName']){
+          $title2 = $tPageButtons['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
           echo '</div>';
           $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 

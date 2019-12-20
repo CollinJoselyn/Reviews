@@ -56,5 +56,27 @@ if(isset($_GET['tvSearchBtn'])){
 	}
 }
 
+$tTitle = "";
+if(isset($_GET['tvPage'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['tvPage'];
+		$tTitle = addPlus($_GET['tvPage']);
+		$tvInfo = getImdbRecord($tTitle, $ApiKey);
+		$sqlS = "SELECT title FROM moviestv WHERE title = '$tTitle'";
+		$_SESSION['tPageButton'] = $tvInfo;
+		if($db->query($sqlS) === TRUE){
+			header('location: tvSearchResults.php');
+		}else{
+			$imdbID = $tvInfo['imdbID'];
+			$year = $tvInfo['Year'];
+			$title = $tvInfo['Title'];
+			$type = $tvInfo['Type'];
+			$sqlS = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
+			$db->query($sqlS);
+			header('location: tvSearchResults.php');
+		}
+	}
+}
+
 
 ?>

@@ -23,6 +23,8 @@ include 'imbdAPI.php';
 <?php
 $poster = $_SESSION['tTitle']['Poster'];
 $tvInfo = $_SESSION['tTitle'];
+$poster2 = $_SESSION['tPageButton']['Poster'];
+$tvInfo2 = $_SESSION['tPageButton'];
 $_SESSION['type'] = "movieTV";
 ?>
 
@@ -91,20 +93,37 @@ $_SESSION['type'] = "movieTV";
   <div class="container">
     <div class="row">
       <div class="moviePoster">
-        <img style=" " src="<?php echo $poster; ?>" alt="Movie Poster">
-        
-         <ul class="movieInfo">
-         <li>Title: <?php echo $tvInfo['Title']; ?> </li>
-         <li>Year: <?php echo $tvInfo['Year']; ?></li>
-         <li>Rated: <?php echo $tvInfo['Rated']; ?> </li>
-         <li>Runtime: <?php echo $tvInfo['Runtime']; ?> </li>
-         <li>Genre: <?php echo $tvInfo['Genre']; ?> </li>
-         <li>Director: <?php echo $tvInfo['Director']; ?> </li>
-         <li>Writer: <?php echo $tvInfo['Writer']; ?> </li>
-         <li>Actors: <?php echo $tvInfo['Actors']; ?> </li>
-         <li>Plot: <?php echo $tvInfo['Plot']; ?>  </li>
-         <li>User Rating: </li>
-         </ul>
+         <?php
+        if($tvInfo){
+         echo '<img src="' .$poster .'" alt="Movie Poster">';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'Title:' . $tvInfo['Title'] . '</li>';
+         echo '<li>' .'Year:' .$tvInfo['Year'] .'</li>';
+         echo '<li>' .'Rated:' .$tvInfo['Rated'] .'</li>';
+         echo '<li>' .'Runtime:' .$tvInfo['Runtime'] .'</li>';
+         echo '<li>' .'Genre:'  .$tvInfo['Genre'] .'</li>';
+         echo '<li>' .'Director:' .$tvInfo['Director'] .'</li>';
+         echo '<li>' .'Writer:' .$tvInfo['Writer'] .'</li>';
+         echo '<li>' .'Actors:' .$tvInfo['Actors'] .'</li>';
+         echo '<li>' .'Plot:'  .$tvInfo['Plot']  .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+         echo '</ul>';
+       }else{
+        echo '<img src="' .$poster2 .'" alt="Movie Poster">';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'Title:' . $tvInfo2['Title'] . '</li>';
+         echo '<li>' .'Year:' .$tvInfo2['Year'] .'</li>';
+         echo '<li>' .'Rated:' .$tvInfo2['Rated'] .'</li>';
+         echo '<li>' .'Runtime:' .$tvInfo2['Runtime'] .'</li>';
+         echo '<li>' .'Genre:'  .$tvInfo2['Genre'] .'</li>';
+         echo '<li>' .'Director:' .$tvInfo2['Director'] .'</li>';
+         echo '<li>' .'Writer:' .$tvInfo2['Writer'] .'</li>';
+         echo '<li>' .'Actors:' .$tvInfo2['Actors'] .'</li>';
+         echo '<li>' .'Plot:'  .$tvInfo2['Plot']  .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+         echo '</ul>';
+     }
+         ?>
        </div>
     </div>
   </div>
