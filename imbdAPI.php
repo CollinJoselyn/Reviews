@@ -32,11 +32,19 @@ function getPoster($title, $ApiKey){
 	return json_decode($json, TRUE);
 }
 
-$data = getImdbRecord("Grand+Theft+Auto+IV", "99000d3e");
+function getImdbRecord2($ImdbId, $ApiKey)
+{
+    $path = "http://www.omdbapi.com/?s=$ImdbId&apikey=$ApiKey";
+    $json = file_get_contents($path);
+    return json_decode($json, TRUE);
+}
+
+
+//$len = array_count_values($data['Search']);
 
 //echo "<pre>";
-//print_r($data);
+//print_r($data['Search']);
 //echo "</pre>";
-//echo $data['Title'];
-
+//echo sizeof($data['Search'], 0);
+//echo $data['Search'];
 ?>

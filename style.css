@@ -20,6 +20,18 @@ span.search {
 	background-color: white;
 	border: none;
 }
+.resultSection {
+
+}
+
+.resultSection ul {
+	list-style: none;
+}
+
+.resultButtons {
+	background-color: white;
+	border: none;
+}
 
 .hlRatedMovies {
 	column-count: 2;

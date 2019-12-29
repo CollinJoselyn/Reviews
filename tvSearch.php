@@ -13,7 +13,7 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-
+/*
 $tvTitle = "";
 $tvTitleErr = "";
 $tvResults = getImdbRecord($tvTitle, $ApiKey);
@@ -54,13 +54,13 @@ if(isset($_GET['tvSearchBtn'])){
 			}
 		}
 	}
-}
+}  */
 
 $tTitle = "";
-if(isset($_GET['tvPage'])){
+if(isset($_GET['tButtons'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
-		$_SESSION['mediaName'] = $_GET['tvPage'];
-		$tTitle = addPlus($_GET['tvPage']);
+		$_SESSION['mediaName'] = $_GET['tButtons'];
+		$tTitle = addPlus($_GET['tButtons']);
 		$tvInfo = getImdbRecord($tTitle, $ApiKey);
 		$sqlS = "SELECT title FROM moviestv WHERE title = '$tTitle'";
 		$_SESSION['tPageButton'] = $tvInfo;

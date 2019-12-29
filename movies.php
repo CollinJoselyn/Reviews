@@ -100,7 +100,7 @@ $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Movies</h1>
-        <form action="searchMovies.php" method="get">
+        <form action="results.php" method="get">
           Search By Title <input type="text" name="movieTitle"><input type="submit" name="searchMoviesBtn" value="Search">
           <span><?php echo $_SESSION['titleErr'];?></span>
         </form>

@@ -9,7 +9,7 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-
+/*
 $gameTitle = "";
 $gameTitleErr = "";
 $_SESSION['gameInfo'] = "";
@@ -43,7 +43,48 @@ if(isset($_GET['gSearchBtn'])){
 			}
 		}
 	}
-}
+}*/
+$gbTitle = "";
+if(isset($_GET['gamePage'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$gameTitle = $_GET['gamePage'];
+			$gameResults = findGame($gameTitle);
+				$_SESSION['gameInfo'] = $gameResults;
+				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
+				if($db->query($sql) === TRUE){
+					header('location: gamesSearchResults.php');
+				}else{
+					$gameID = $gameResults->id;
+					$gTitle = $gameResults->name;
+					$releaseDate = $gameResults->released;
+					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
+					$db->query($sql2);
+					header('location: gamesSearchResults.php');
+				}
+				
+			}
+	}
+
+	if(isset($_GET['vgButtons'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$gameTitle = $_GET['vgButtons'];
+			$gameResults = findGame($gameTitle);
+				$_SESSION['gameInfo'] = $gameResults;
+				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
+				if($db->query($sql) === TRUE){
+					header('location: gamesSearchResults.php');
+				}else{
+					$gameID = $gameResults->id;
+					$gTitle = $gameResults->name;
+					$releaseDate = $gameResults->released;
+					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
+					$db->query($sql2);
+					header('location: gamesSearchResults.php');
+				}
+				
+			}
+	}
+
 
 
 

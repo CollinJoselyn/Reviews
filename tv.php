@@ -101,7 +101,7 @@ $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">TV</h1>
-        <form action="tvSearch.php" method="get">
+        <form action="results.php" method="get">
           Search By Title <input type="text" name="tvTitle"><input type="submit" value="Search" name="tvSearchBtn">
           <span><?php echo $_SESSION['tTitleErr']; ?></span>
       </div>

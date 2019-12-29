@@ -21,8 +21,8 @@ include 'imbdAPI.php';
 </head>
 
 <?php
-$poster = $_SESSION['mTitle']['Poster'];
-$movieInfo = $_SESSION['mTitle'];
+$poster = $_SESSION['mPageResults']['Poster'];
+$movieInfo = $_SESSION['mPageResults'];
 $poster2 = $_SESSION['mPageButton']['Poster'];
 $movieInfo2 = $_SESSION['mPageButton'];
 $_SESSION['type'] = "movieTV";

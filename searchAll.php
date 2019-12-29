@@ -39,7 +39,7 @@ $_SESSION['gameInfo'] = "";
 $_SESSION['gameErr'] = "";
 $sql2 = "SELECT title FROM videogames WHERE title = '$gameTitle'";
 $_SESSION['mediaName'] = $_GET['search'];
-if(isset($_GET['searchBtn'])){
+if(isset($_GET['rButtons'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		if(empty($_GET['search'])){
 
@@ -90,5 +90,48 @@ if(isset($_GET['searchBtn'])){
 		}
 	}
 }
+
+
+if(isset($_GET['rButtons'])){
+	if($_SERVER['REQUEST_METHOD'] == 'GET'){
+		$_SESSION['mediaName'] = $_GET['rButtons'];
+		$mtTitle = addPlus($_GET['rButtons']);
+		$mtInfo = getImdbRecord($mtTitle, $ApiKey);
+		$sqlS = "SELECT title FROM moviestv WHERE title = '$mtTitle'";
+		$_SESSION['mtSearchResults'] = $mtInfo;
+		if($db->query($sqlS) === TRUE){
+			header('location: searchAllResults.php');
+		}else{
+			$imdbID = $mtInfo['imdbID'];
+			$year = $mtInfo['Year'];
+			$title = $mtInfo['Title'];
+			$type = $mtInfo['Type'];
+			$sqlS = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
+			$db->query($sqlS);
+			header('location: searchAllResults.php');
+		}
+	}
+}
+
+if(isset($_GET['cButtons'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['cButtons'];
+		$gameTitle = $_GET['cButtons'];
+			$gameResults = findGame($gameTitle);
+				$_SESSION['vgSearchResults'] = $gameResults;
+				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
+				if($db->query($sql) === TRUE){
+					header('location: searchAllResults.php');
+				}else{
+					$gameID = $gameResults->id;
+					$gTitle = $gameResults->name;
+					$releaseDate = $gameResults->released;
+					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
+					$db->query($sql2);
+					header('location: searchAllResults.php');
+				}
+				
+			}
+	}
 
 ?>

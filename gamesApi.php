@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use \Curl\Curl;
-
+set_time_limit(0);
 function loadGameData($game) {
   $curl = new Curl();
   $curl->get("https://rawg.io/api/games/{$game->slug}");
@@ -25,7 +25,28 @@ function findGame($name) {
   return null;
 }
 
-$result = findGame("Pulp Fiction");
+function findGames($name) {
+  $curl = new Curl();
+  $curl->get("https://rawg.io/api/games", [
+    'search' => $name,
+    'page_size' => 15,
+  ]);
+  
+  $games = [];
+  
+  foreach($curl->response->results as $game) {
+    $games[] = loadGameData($game);
+  }
+  
+  return $games;
+}
+
+curl_setopt($curl, CURLOPT_TIMEOUT_MS, 2000);
+/*
+for($i = 0; $i < $length; $i++){
+  echo $result[$i]->name;
+  echo '<br>';
+}*/
 /*
 echo '<pre>';
 print_r($result);

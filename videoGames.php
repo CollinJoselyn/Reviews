@@ -99,7 +99,7 @@ $highest3 = findGame("The Last of Us");
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Video Games</h1>
-        <form action="gameSearch.php" method="get">
+        <form action="results.php" method="get">
           Search By Title <input type="text" name="gameTitle"><input type="submit" value="Search" name="gSearchBtn">
           <span><?php echo $_SESSION['gameErr'] ?></span>
         </form>
@@ -113,30 +113,32 @@ $highest3 = findGame("The Last of Us");
       <h1>Recent Releases</h1>
     </div>
     <div class="recentReleases">
+      <form action="gameSearch.php" method="get">
     <ul>
       <img src="<?php echo $recent->background_image; ?>">
-      <li><?php echo $recent->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent->name; ?>"></li><br>
       <img src="<?php echo $recent2->background_image; ?>">
-      <li><?php echo $recent2->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent2->name; ?>"></li><br>
       <img src="<?php echo $recent3->background_image; ?>">
-      <li><?php echo $recent3->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent3->name; ?>"></li><br>
     </ul>
     <ul>
       <img src="<?php echo $recent4->background_image; ?>">
-      <li><?php echo $recent4->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent4->name; ?>"></li><br>
       <img src="<?php echo $recent5->background_image; ?>">
-      <li><?php echo $recent5->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent5->name; ?>"></li><br>
       <img src="<?php echo $recent6->background_image; ?>">
-      <li><?php echo $recent6->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent6->name; ?>"></li><br>
     </ul>
     <ul>
       <img src="<?php echo $recent7->background_image; ?>">
-      <li><?php echo $recent7->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent7->name; ?>"></li><br>
       <img src="<?php echo $recent8->background_image; ?>">
-      <li><?php echo $recent8->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent8->name; ?>"></li><br>
       <img src="<?php echo $recent9->background_image; ?>">
-      <li><?php echo $recent9->name; ?></li><br>
+      <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $recent9->name; ?>"></li><br>
     </ul>
+  </form>
   </div>
     </div>
   </div>
@@ -145,23 +147,25 @@ $highest3 = findGame("The Last of Us");
     <div class="row">
       <div class="hlRatedMovies">
         <h1>Highest Rated</h1>
+        <form action="gameSearch.php" method="get">
         <ol>
           <img src="<?php echo $highest->background_image; ?>">
-          <li><?php echo $highest->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $highest->name; ?>"></li><br>
           <img src="<?php echo $highest2->background_image; ?>">
-          <li><?php echo $highest2->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $highest2->name; ?>"></li><br>
           <img src="<?php echo $highest3->background_image; ?>">
-          <li><?php echo $highest3->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $highest3->name; ?>"></li><br>
         </ol>
         <h1>Lowest Rated</h1>
         <ol>
           <img src="<?php echo $lowest->background_image; ?>">
-          <li><?php echo $lowest->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $lowest->name; ?>"></li><br>
           <img src="<?php echo $lowest2->background_image; ?>">
-          <li><?php echo $lowest2->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $lowest2->name; ?>"></li><br>
           <img src="<?php echo $lowest3->background_image; ?>">
-          <li><?php echo $lowest3->name; ?></li><br>
+          <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $lowest3->name; ?>"></li><br>
         </ol>
+      </form>
       </div>
     </div>
   </div>

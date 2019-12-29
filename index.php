@@ -77,7 +77,7 @@ require_once 'dbconnection.php';
     <div class="row">
       <div class="col-lg-12 text-center">
         <h1>Search</h1>
-        <form action="searchAll.php" method="get">
+        <form action="results.php" method="get">
           <input type="text" name="search" value="">
           <input type="submit" value="Search" name="searchBtn"><br>
           <span><?php echo $_SESSION['error']; ?></span>

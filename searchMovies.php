@@ -31,7 +31,7 @@ function test_input($data) {
   $data = htmlspecialchars($data);
   return $data;
 }
-
+/*
 $movieTitle = "";
 $movieTitleErr = "";
 $mTitle = "";
@@ -41,7 +41,7 @@ $_SESSION['mTitle'] = "";
 $_SESSION['titleErr'] = "";
 $sql = "SELECT title FROM moviestv WHERE title = '$movieTitle'";
 $_SESSION['mediaName'] = $_GET['movieTitle'];
-if(isset($_GET['searchMoviesBtn'])){
+if(isset($_GET['sButtons'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
 		if(empty($_GET['movieTitle'])){
 
@@ -69,6 +69,28 @@ if(isset($_GET['searchMoviesBtn'])){
 				}		
 				
 			}
+		}
+	}
+}*/
+
+$bTitle = "";
+if(isset($_GET['sButtons'])){
+	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['sButtons'];
+		$bTitle = addPlus($_GET['sButtons']);
+		$data3 = getImdbRecord($bTitle, $ApiKey);
+		$sqlS = "SELECT title FROM moviestv WHERE title = '$bTitle'";
+		$_SESSION['mPageResults'] = $data3;
+		if($db->query($sqlS) === TRUE){
+			header('location movieSearchResults.php');
+		}else{
+			$imdbID = $data3['imdbID'];
+			$year = $data3['Year'];
+			$title = $data3['Title'];
+			$type = $data3['Type'];
+			$sql2 = "INSERT INTO moviestv (titleID, year, title, type) VALUES ('$imdbID', '$year', '$title','$type')";
+			$db->query($sql2);
+			header('location: movieSearchResults.php');
 		}
 	}
 }
