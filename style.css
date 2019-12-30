@@ -28,6 +28,11 @@ span.search {
 	list-style: none;
 }
 
+.resultSection img {
+	height: 70px;
+	width: 70px;
+}
+
 .resultButtons {
 	background-color: white;
 	border: none;

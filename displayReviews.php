@@ -4,13 +4,14 @@ require_once 'dbconnection.php';
 ?>
 
 <?php
-$moviePage = $_SESSION['mTitle'];
+$moviePage = $_SESSION['mPageResults'];
 $tvPage = $_SESSION['tTitle'];
 $indexMT = $_SESSION['mtSearchResults'];
 $indexVG = $_SESSION['vgSearchResults'];
 $vgPage = $_SESSION['gameInfo'];
 $mPageButtons = $_SESSION['mPageButton'];
 $tPageButtons = $_SESSION['tPageButton'];
+$gamePageResults = $_SESSION['gameResultsPage'];
 
 
 //if($results->num_rows > 0){
@@ -24,7 +25,7 @@ $tPageButtons = $_SESSION['tPageButton'];
         <?php
         
         echo '<div class="col-lg-12 text-center">';
-        if(isset($moviePage) && $moviePage['Title'] == $_SESSION['mediaName']){
+        if(isset($moviePage) && $moviePage['Title'] === $_SESSION['mediaName']){
           $title1 = $moviePage['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title1 .'</h1>';
           echo '<br>';
@@ -42,9 +43,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($moviePage);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($tvPage) && $tvPage['Title'] == $_SESSION['mediaName']){
+        }elseif(isset($tvPage) && $tvPage['Title'] === $_SESSION['mediaName']){
           $title2 = $tvPage['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
           echo '</div>';
@@ -61,9 +64,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($tvPage);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($indexMT) && $indexMT['Title'] == $_SESSION['mediaName']){
+        }elseif(isset($indexMT) && $indexMT['Title'] === $_SESSION['mediaName']){
           $title3 = $indexMT['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title3 .'</h1>';
           echo '</div>';
@@ -80,9 +85,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($indexMT);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){
+        }elseif(isset($indexVG) && $indexVG->name === $_SESSION['mediaName']){
           $title4 = $indexVG->name;
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title4 .'</h1>';
           echo '</div>';
@@ -99,9 +106,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($indexVG);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($vgPage) && $vgPage->name == $_SESSION['mediaName']){
+        }elseif(isset($vgPage) && $vgPage->name === $_SESSION['mediaName']){
           $title5 = $vgPage->name;
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title5 .'</h1>';
           echo '</div>';
@@ -118,9 +127,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($vgPage);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($mPageButtons) && $mPageButtons['Title'] == $_SESSION['mediaName']){
+        }elseif(isset($mPageButtons) && $mPageButtons['Title'] === $_SESSION['mediaName']){
           $title2 = $mPageButtons['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
           echo '</div>';
@@ -137,9 +148,11 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($mPageButtons);
+              unset($_SESSION['mediaName']);
             }
           }
-        }elseif(isset($tPageButtons) && $tPageButtons['Title'] == $_SESSION['mediaName']){
+        }elseif(isset($tPageButtons) && $tPageButtons['Title'] === $_SESSION['mediaName']){
           $title2 = $tPageButtons['Title'];
           echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title2 .'</h1>';
           echo '</div>';
@@ -156,6 +169,8 @@ $tPageButtons = $_SESSION['tPageButton'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
+              unset($tPageButtons);
+              unset($_SESSION['mediaName']);
             }
           }
         }

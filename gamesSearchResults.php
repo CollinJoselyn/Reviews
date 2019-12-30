@@ -2,6 +2,7 @@
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
+include 'gamesApi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
