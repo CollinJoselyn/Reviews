@@ -77,8 +77,15 @@ session_start();
 <?php else: ?>
 <?php endif ?>
   
-  <?php echo "<h1> Welcome " .$_SESSION['username']. " To Dashboard </h1>"; ?>
-<h2><a href="signOut.php">Logout</a></h2>
+  
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <?php echo "<h1> Welcome " .$_SESSION['username']. "</h1>"; ?>
+        </div>
+        
+    </div>
+  </div>
 
 
 

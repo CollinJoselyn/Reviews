@@ -24,6 +24,8 @@ include 'gamesApi.php';
 <?php
 $poster = $_SESSION['gameInfo']->background_image;
 $gameInfo = $_SESSION['gameInfo'];
+$gameInfo2 = $_SESSION['gamesSearchResults'];
+$poster2 = $_SESSION['gamesSearchResults']->background_image;
 $_SESSION['type'] = "videoGame";
 ?>
 
@@ -92,15 +94,26 @@ $_SESSION['type'] = "videoGame";
   <div class="container">
     <div class="row">
       <div class="moviePoster">
-        <img style="height: 500px; width: 400px;" src="<?php echo $poster; ?>" alt="Game Image">
-        
-         <ul class="movieInfo">
-         <li>Title: <?php echo $gameInfo->name; ?> </li>
-         <li>Release Date: <?php echo $gameInfo->released; ?></li>
-         <li>Description: <?php echo $gameInfo->description_raw; ?></li>
-         <li>Publisher: <?php echo $gameInfo->publishers{'0'}->{'name'}; ?></li>
-         <li>ESRB Rating: <?php echo $gameInfo->esrb_rating->name; ?></li>
-         <li>User Rating: </li>
+        <ul>
+        <?php
+        if($gameInfo){
+         echo '<img style="height: 500px; width: 400px;" src="' .$poster .'" alt="Movie Poster">';
+         echo '<li>' .'Title:' .$gameInfo->name .'</li>';
+         echo '<li>' .'Release Date:' .$gameInfo->released .'</li>';
+         echo '<li>' .'Description:' .$gameInfo->description_raw .'</li>;';
+         echo '<li>' .'Publisher:' .$gameInfo->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'ESRB Rating:' .$gameInfo->esrb_rating->name .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+       }else{
+        echo '<img style="height: 500px; width: 400px;" src="' .$poster2 .'" alt="Movie Poster">';
+         echo '<li>' .'Title:' .$gameInfo2->name .'</li>';
+         echo '<li>' .'Release Date:' .$gameInfo2->released .'</li>';
+         echo '<li>' .'Description:' .$gameInfo2->description_raw .'</li>;';
+         echo '<li>' .'Publisher:' .$gameInfo2->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'ESRB Rating:' .$gameInfo2->esrb_rating->name .'</li>';
+         echo '<li>' .'User Rating:' .'</li>';
+       }
+         ?>
          </ul>
        </div>
     </div>

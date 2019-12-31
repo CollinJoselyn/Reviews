@@ -47,6 +47,7 @@ if(isset($_GET['gSearchBtn'])){
 $gbTitle = "";
 if(isset($_GET['gamePage'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['gamePage'];
 		$gameTitle = $_GET['gamePage'];
 			$gameResults = findGame($gameTitle);
 				$_SESSION['gameInfo'] = $gameResults;
@@ -67,9 +68,10 @@ if(isset($_GET['gamePage'])){
 
 	if(isset($_GET['vgButtons'])){
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
+		$_SESSION['mediaName'] = $_GET['vgButtons'];
 		$gameTitle = $_GET['vgButtons'];
 			$gameResults = findGame($gameTitle);
-				$_SESSION['gameInfo'] = $gameResults;
+				$_SESSION['gamesSearchResults'] = $gameResults;
 				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
 				if($db->query($sql) === TRUE){
 					header('location: gamesSearchResults.php');

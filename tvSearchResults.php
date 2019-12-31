@@ -94,7 +94,7 @@ $_SESSION['type'] = "movieTV";
     <div class="row">
       <div class="moviePoster">
          <?php
-        if($tvInfo){
+        if($tvInfo && $_SESSION['mediaName'] == $tvInfo['Title']){
          echo '<img src="' .$poster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'Title:' . $tvInfo['Title'] . '</li>';
@@ -158,7 +158,7 @@ $_SESSION['type'] = "movieTV";
 
   <?php
   include 'displayReviews.php';
-  ?>
+    ?>
 
   <!--<div class="container">
     <div class="row">

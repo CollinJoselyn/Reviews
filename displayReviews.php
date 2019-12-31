@@ -11,7 +11,7 @@ $indexVG = $_SESSION['vgSearchResults'];
 $vgPage = $_SESSION['gameInfo'];
 $mPageButtons = $_SESSION['mPageButton'];
 $tPageButtons = $_SESSION['tPageButton'];
-$gamePageResults = $_SESSION['gameResultsPage'];
+$gamePageResults = $_SESSION['gamesSearchResults'];
 
 
 //if($results->num_rows > 0){
@@ -170,6 +170,27 @@ $gamePageResults = $_SESSION['gameResultsPage'];
               echo '<hr>';
               echo '</div>';
               unset($tPageButtons);
+              unset($_SESSION['mediaName']);
+            }
+          }
+        }elseif(isset($gamePageResults) && $gamePageResults->name == $_SESSION['mediaName']){
+          $title5 = $gamePageResults->name;
+          echo '<h1 class="mt-5">' .'Reviews for' .' ' .$title5 .'</h1>';
+          echo '</div>';
+          $sql = "SELECT review.rating, review.writtenReview, review.titleOfMedia, user.username FROM review 
+          LEFT JOIN user ON review.userID = user.userID WHERE review.titleOfMedia = '$title5'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
+              echo '<li>' .$row['username'] .'</li>';
+              echo '<li>' .$row['rating'] .'</li>';
+              echo '<p>' .$row['writtenReview'] .' vgPage' .'</p>';
+              echo '</ul>';
+              echo '<hr>';
+              echo '</div>';
+              unset($gamePageResults);
               unset($_SESSION['mediaName']);
             }
           }
