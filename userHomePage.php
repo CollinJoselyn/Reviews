@@ -15,6 +15,7 @@ session_start();
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 
 </head>
 
@@ -83,7 +84,19 @@ session_start();
       <div class="col-lg-12 text-center">
         <?php echo "<h1> Welcome " .$_SESSION['username']. "</h1>"; ?>
         </div>
-        
+        <div class="userPage">
+          <br>
+          <ul>
+        <li><a href="myReviews.php">My Reviews</a></li>
+      </ul>
+      <br>
+      <ul>
+        <li>Manage Account</li>
+        <li><a href="">Change Username</a></li>
+        <li><a href="">Change Password</a></li>
+        <li><a href="">Delete Account</a></li>
+      </ul>
+      </div>
     </div>
   </div>
 

@@ -80,15 +80,27 @@ require_once 'dbconnection.php';
 <?php endif ?>
   
   
-<div class="container">
-    <div class="row">
+
       <div class="col-lg-12 text-center">
         <?php echo "<h1> Reviews From " .$_SESSION['username']. "</h1>"; ?>
         </div>
-        
-      </div>
-    </div>
-  </div>
+        <?php
+          $uid = $_SESSION['userID'];
+          $sql = "SELECT writtenReview, date, titleOfMedia FROM review WHERE userID = '$uid'";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+            while($row = $results->fetch_assoc()){
+              echo '<div class="reviewDisplay">';
+              echo '<ul>';
+              echo '<li>' .$row['date'] .'</li>';
+              echo '<li>' .$row['titleOfMedia'] .'</li>';
+              echo '<p>' .$row['writtenReview'] .'</p>';
+              echo '<hr>';
+              echo '</ul>';
+              echo '</div>';
+            }
+          }
+        ?>
 
 
 

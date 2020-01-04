@@ -43,8 +43,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($moviePage);
-              unset($_SESSION['mediaName']);
+              //unset($moviePage);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($tvPage) && $tvPage['Title'] === $_SESSION['mediaName']){
@@ -64,8 +64,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($tvPage);
-              unset($_SESSION['mediaName']);
+              //unset($tvPage);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($indexMT) && $indexMT['Title'] === $_SESSION['mediaName']){
@@ -85,8 +85,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($indexMT);
-              unset($_SESSION['mediaName']);
+              //unset($indexMT);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($indexVG) && $indexVG->name === $_SESSION['mediaName']){
@@ -106,8 +106,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($indexVG);
-              unset($_SESSION['mediaName']);
+              //unset($indexVG);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($vgPage) && $vgPage->name === $_SESSION['mediaName']){
@@ -127,8 +127,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($vgPage);
-              unset($_SESSION['mediaName']);
+              //unset($vgPage);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($mPageButtons) && $mPageButtons['Title'] === $_SESSION['mediaName']){
@@ -148,8 +148,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($mPageButtons);
-              unset($_SESSION['mediaName']);
+              //unset($mPageButtons);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($tPageButtons) && $tPageButtons['Title'] === $_SESSION['mediaName']){
@@ -169,8 +169,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($tPageButtons);
-              unset($_SESSION['mediaName']);
+              //unset($tPageButtons);
+              //unset($_SESSION['mediaName']);
             }
           }
         }elseif(isset($gamePageResults) && $gamePageResults->name == $_SESSION['mediaName']){
@@ -190,8 +190,8 @@ $gamePageResults = $_SESSION['gamesSearchResults'];
               echo '</ul>';
               echo '<hr>';
               echo '</div>';
-              unset($gamePageResults);
-              unset($_SESSION['mediaName']);
+              //unset($gamePageResults);
+              //unset($_SESSION['mediaName']);
             }
           }
         }
