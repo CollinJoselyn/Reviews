@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+require_once 'inputFilters.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,15 +39,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(empty($_POST["password"])){
     $passwordEr = "Please enter password";
   }else{
-    $password = test_input($_POST["password"]);
+    $pw = test_input($_POST["password"]);
+    $password = filterPassword($pw, $pw, $hashAlgo, $beginSalt, $endSalt);
   }
-}
-
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
 }
 
 $sql = "SELECT username, password, userID FROM user WHERE username = '$username' AND password = '$password'";

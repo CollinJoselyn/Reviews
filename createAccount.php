@@ -1,5 +1,6 @@
 <?php
 require_once 'dbconnection.php';
+require_once 'inputFilters.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +76,7 @@ require_once 'dbconnection.php';
           Password<br>
           <input type="password" name="password"><br><br>
           Confirm Password<br>
-          <input type="password" name="password"><br><br>
+          <input type="password" name="conPassword"><br><br>
           <input type="submit" name="submit" value="Create Account">
       </div>
     </div>
@@ -90,7 +91,8 @@ require_once 'dbconnection.php';
   <?php
 
 $usernameEr = $emailEr = $passwordEr = "";
-$username = $email = $password = "";
+$username = $email = $password = $pwd = "";
+$pw = $_POST['conPassword'];
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(empty($_POST["username"])){
@@ -110,16 +112,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   }else{
     $password = test_input($_POST["password"]);
   }
+
+  if($password != $pw){
+    $passwordEr = "Passwords do not match";
+  }else{
+    $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
+  }
 }
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-
-$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$password', '$email')";
+$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 if(isset($_POST['submit'])){
 if($db->query($sql) === TRUE){
   echo "Account created successfullly!";
