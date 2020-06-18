@@ -158,6 +158,7 @@ $_SESSION['type'] = "movieTV";
 
   <?php
   include 'displayReviews.php';
+  echo $_SESSION['title'];
   ?>
 
   <!--<div class="container">

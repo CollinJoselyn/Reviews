@@ -22,6 +22,7 @@ require_once 'dbconnection.php';
 
 
 
+
 <body>
 
   <!-- Navigation -->
@@ -85,24 +86,46 @@ require_once 'dbconnection.php';
         <?php echo "<h1> Reviews From " .$_SESSION['username']. "</h1>"; ?>
         </div>
         <?php
+          $i = 0;
           $uid = $_SESSION['userID'];
-          $sql = "SELECT writtenReview, date, titleOfMedia FROM review WHERE userID = '$uid'";
+          $sql = "SELECT writtenReview, date, titleOfMedia, reviewID FROM review WHERE userID = '$uid'";
           $results = $db->query($sql);
           if($results->num_rows > 0){
             while($row = $results->fetch_assoc()){
               echo '<div class="reviewDisplay">';
               echo '<ul>';
               echo '<li>' .$row['date'] .'</li>';
-              echo '<li>' .$row['titleOfMedia'] .'</li>';
+              $id+$i = $row['reviewID'];
+              $_SESSION['deletedReviewID'] = $id;
+              echo '<li>' .$row['titleOfMedia'] .'  <button>' .'Edit' .'</button>' .'  <button onclick="deleteReview3()">' .'Delete' .'</button>' .'</li>';
               echo '<p>' .$row['writtenReview'] .'</p>';
+              echo '<p>' .$id+$i .'</p>';
+              $i++;
               echo '<hr>';
               echo '</ul>';
               echo '</div>';
             }
           }
+          //echo '<button type="button" onclick=' .'delete()' .'>' .'Press' .'</button>';
         ?>
+        
+        <script>
 
+        function deleteReview3() {
+    var answer;
+    if(confirm("Are you sure you want to delete this review?")){
+      answer = true;
+      window.location.href="deleteReview.php";
+      alert("Review deleted successfully");
+    }else{
+      answer = false;
+    }
+    
+  }
 
+  
+
+</script>
 
 
   <!-- Bootstrap core JavaScript -->
