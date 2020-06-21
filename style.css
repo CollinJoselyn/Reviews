@@ -86,3 +86,19 @@ span.search {
 .userPage ul {
 	list-style: none;
 }
+
+
+.frontPage {
+	column-count: 3;
+	column-gap: 50px;
+	padding-left: 50px;
+}
+
+.frontPage img {
+	height: 100px;
+	width: 100px;
+}
+
+.frontPage ul {
+	list-style: none;
+}

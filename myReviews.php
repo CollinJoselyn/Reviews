@@ -101,7 +101,7 @@ require_once 'dbconnection.php';
               echo '<ul>';
               $rID = $row['reviewID'];
               echo '<li>' .$row['date'] .'</li>';
-              echo '<li>' .$row['titleOfMedia'] .'  <button>' .'Edit' .'</button>' .'  <button type="submit" value=' .$rID .' name = myR>' .'Delete'.'</button>' .'</li>';
+              echo '<li>' .$row['titleOfMedia'] .'  <button type="submit" value=' .$rID .' name = myR>' .'Delete'.'</button>' .'</li>';
               echo '<p>' .$row['writtenReview'] .'</p>';
               echo '<hr>';
               echo '</ul>';

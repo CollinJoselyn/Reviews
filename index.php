@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once 'dbconnection.php';
+include 'imbdAPI.php';
+include 'gamesApi.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +18,21 @@ require_once 'dbconnection.php';
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 
 </head>
+
+<?php
+$newMovie = getImdbRecord("Bad+Boys+for+Life", $ApiKey);
+$newMovie2 = getImdbRecord("Sonic+the+Hedgehog", $ApiKey);
+$newMovie3 = getImdbRecord("No+Time+to+Die", $ApiKey);
+$newTV = getImdbRecord("Tiger+King", $ApiKey);
+$newTV2 = getImdbRecord("Money+Heist", $ApiKey);
+$newTV3 = getImdbRecord("Better+Call+Saul", $ApiKey);
+$newGame = findGame("The Last of Us Part II");
+$newGame2 = findGame("Doom Eternal");
+$newGame3 = findGame("Predator: Hunting Grounds");
+?>
 
 
 <body>
@@ -91,8 +106,41 @@ require_once 'dbconnection.php';
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Whats New</h1>
-
+        <h1>Whats New</h1> </div>
+        <div class="frontPage">
+          <ul>
+            <h2>Movies</h2><br>
+            <form action="searchMovies.php" method="get">
+            <img src="<?php echo $newMovie['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $newMovie['Title']; ?>"></li><br>
+            <img src="<?php echo $newMovie2['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $newMovie2['Title']; ?>"></li><br>
+            <img src="<?php echo $newMovie3['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $newMovie3['Title']; ?>"></li><br>
+          </form>
+          </ul>
+          <ul>
+            <h2>TV</h2><br>
+            <form action="tvSearch.php" method="get">
+            <img src="<?php echo $newTV['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="tvPage" value="<?php echo $newTV['Title']; ?>"></li><br>
+            <img src="<?php echo $newTV2['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="tvPage" value="<?php echo $newTV2['Title']; ?>"></li><br>
+            <img src="<?php echo $newTV3['Poster']; ?>">
+            <li><input type="submit" class="pageButtons" name="tvPage" value="<?php echo $newTV3['Title']; ?>"></li><br>
+          </form>
+          </ul>
+          <ul>
+            <h2>Video Games</h2><br>
+            <form action="gameSearch.php" method="get">
+            <img src="<?php echo $newGame->background_image; ?>">
+            <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $newGame->name; ?>"></li><br>
+            <img src="<?php echo $newGame2->background_image; ?>">
+            <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $newGame2->name; ?>"></li><br>
+            <img src="<?php echo $newGame3->background_image; ?>">
+            <li><input type="submit" class="pageButtons" name="gamePage" value="<?php echo $newGame3->name; ?>"></li><br>
+          </form>
+          </ul>
         </div>
     </div>
   </div>

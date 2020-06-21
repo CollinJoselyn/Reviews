@@ -92,7 +92,6 @@ session_start();
       <br>
       <ul>
         <li>Manage Account</li>
-        <li><a href="">Change Username</a></li>
         <li><a href="">Change Password</a></li>
         <li><a href="">Delete Account</a></li>
       </ul>
