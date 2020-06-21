@@ -87,46 +87,39 @@ require_once 'dbconnection.php';
         </div>
         <?php
           $i = 0;
+          $k = 0;
+          $_SESSION['did'] = 0;
           $uid = $_SESSION['userID'];
+          $_SESSION['deletedReviewID'] = array();
+          $_SESSION['arrElementNum'] = array();
           $sql = "SELECT writtenReview, date, titleOfMedia, reviewID FROM review WHERE userID = '$uid'";
           $results = $db->query($sql);
           if($results->num_rows > 0){
+            echo '<form action="deleteReview.php" method = "GET" id="myCoolForm">';
             while($row = $results->fetch_assoc()){
               echo '<div class="reviewDisplay">';
               echo '<ul>';
+              $rID = $row['reviewID'];
               echo '<li>' .$row['date'] .'</li>';
-              $id+$i = $row['reviewID'];
-              $_SESSION['deletedReviewID'] = $id+$i;
-              echo '<li>' .$row['titleOfMedia'] .'  <button>' .'Edit' .'</button>' .'  <button onclick=deleteReview3()>' .'Delete' .'</button>' .'</li>';
+              echo '<li>' .$row['titleOfMedia'] .'  <button>' .'Edit' .'</button>' .'  <button type="submit" value=' .$rID .' name = myR>' .'Delete'.'</button>' .'</li>';
               echo '<p>' .$row['writtenReview'] .'</p>';
-              echo '<p>' .$id+$i .'</p>';
-              $i++;
               echo '<hr>';
               echo '</ul>';
               echo '</div>';
             }
+            echo '</form>';
           }
-          //echo '<button type="button" onclick=' .'delete()' .'>' .'Press' .'</button>';
         ?>
+
+        <script type="text/javascript">
+        var el = document.getElementById('myCoolForm');
+
+        el.addEventListener('submit', function(){
+            return confirm('Are you sure you want to delete this review?');
+              }, false);
+
+        </script>
         
-        <script>
-
-        function deleteReview3() {
-    var answer;
-    if(confirm("Are you sure you want to delete this review?")){
-      answer = true;
-      window.location.href="deleteReview.php";
-      alert("Review deleted successfully");
-    }else{
-      answer = false;
-    }
-    
-  }
-
-  
-
-</script>
-
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
