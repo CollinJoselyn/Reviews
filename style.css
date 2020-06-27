@@ -102,3 +102,8 @@ span.search {
 .frontPage ul {
 	list-style: none;
 }
+
+.trending {
+	column-count: 2;
+	column-gap: 50px;
+} 

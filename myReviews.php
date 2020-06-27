@@ -20,7 +20,12 @@ require_once 'dbconnection.php';
 
 </head>
 
-
+<script type="text/javascript">
+function checkForm(e) { 
+   if (!(window.confirm("Do you want to submit the form?"))) 
+     e.returnValue = false; 
+ }
+</script>
 
 
 <body>
@@ -95,7 +100,7 @@ require_once 'dbconnection.php';
           $sql = "SELECT writtenReview, date, titleOfMedia, reviewID FROM review WHERE userID = '$uid'";
           $results = $db->query($sql);
           if($results->num_rows > 0){
-            echo '<form action="deleteReview.php" method = "GET" id="myCoolForm">';
+            echo '<form action="deleteReview.php" method = "GET" id="myCoolForm" onSubmit = "return checkForm(event)">';
             while($row = $results->fetch_assoc()){
               echo '<div class="reviewDisplay">';
               echo '<ul>';
@@ -112,12 +117,13 @@ require_once 'dbconnection.php';
         ?>
 
         <script type="text/javascript">
-        var el = document.getElementById('myCoolForm');
+        //var el = document.getElementById('myCoolForm');
 
-        el.addEventListener('submit', function(){
-            return confirm('Are you sure you want to delete this review?');
-              }, false);
+        //el.addEventListener('submit', function(){
+            //return confirm('Are you sure you want to delete this review?');
+              //}, false);
 
+        
         </script>
         
 

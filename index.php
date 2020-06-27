@@ -32,6 +32,7 @@ $newTV3 = getImdbRecord("Better+Call+Saul", $ApiKey);
 $newGame = findGame("The Last of Us Part II");
 $newGame2 = findGame("Doom Eternal");
 $newGame3 = findGame("Predator: Hunting Grounds");
+
 ?>
 
 
@@ -148,9 +149,16 @@ $newGame3 = findGame("Predator: Hunting Grounds");
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Trending Reviews</h1>
-
-        </div>
+        <h1>Trending Reviews</h1></div>
+          <?php
+          $sql = "SELECT * FROM review WHERE reviewID = 19 AND reviewID = 27 AND reviewID = 33";
+          $results = $db->query($sql);
+          if($results->num_rows > 0){
+          while($row = $results->fetch_assoc()){
+                
+            }
+          }
+          ?>
     </div>
   </div>
 
