@@ -22,7 +22,7 @@ require_once 'dbconnection.php';
 
 <script type="text/javascript">
 function checkForm(e) { 
-   if (!(window.confirm("Do you want to submit the form?"))) 
+   if (!(window.confirm("Are you sure you want to delete this review?"))) 
      e.returnValue = false; 
  }
 </script>

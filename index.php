@@ -151,11 +151,17 @@ $newGame3 = findGame("Predator: Hunting Grounds");
       <div class="col-lg-12 text-center">
         <h1>Trending Reviews</h1></div>
           <?php
-          $sql = "SELECT * FROM review WHERE reviewID = 19 AND reviewID = 27 AND reviewID = 33";
+          $sql = "SELECT * FROM review WHERE reviewID = 19 OR reviewID = 27 OR reviewID = 33";
           $results = $db->query($sql);
           if($results->num_rows > 0){
           while($row = $results->fetch_assoc()){
-                
+                echo '<div class = "trending">';
+                echo '<ul>';
+                echo '<li>' .$row["titleOfMedia"] .'</li>';
+                echo '<li>' .$row["writtenReview"] .'</li>';
+                echo '<li>' .$row["rating"] .'</li>';
+                echo '</ul>';
+                echo '</div>';
             }
           }
           ?>
