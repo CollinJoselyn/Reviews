@@ -17,15 +17,17 @@ $error = "";
 $tID = "";
 $title = "";
 $user = "";
-$moviePage = $_SESSION['mTitle'];
+//$moviePage = $_SESSION['mTitle'];
+$moviePage = $_SESSION['mPageResults'];
 $tvPage = $_SESSION['tTitle'];
 $indexMT = $_SESSION['mtSearchResults'];
 $indexVG = $_SESSION['vgSearchResults'];
 $vgPage = $_SESSION['gameInfo'];
 $contentType = $_SESSION['type'];
 $mPageButtons = $_SESSION['mPageButton'];
-$tPageButtons = $_SESSION['tPageButtons'];
+$tPageButtons = $_SESSION['tPageButton'];
 $gamesSearchResults = $_SESSION['gamesSearchResults'];
+print_r($tvPage);
 
 if(isset($_POST['reviewBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
