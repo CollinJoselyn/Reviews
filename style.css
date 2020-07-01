@@ -104,10 +104,13 @@ span.search {
 }
 
 .trending {
-	column-count: 1;
-	column-gap: 100px;
+	column-count: 2;
 } 
 
 .trending ul {
 	list-style: none;
+}
+
+.tab {
+	margin-left: 40px;
 }
