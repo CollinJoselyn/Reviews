@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'dbconnection.php';
+require_once 'inputFilters.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,24 +84,30 @@ session_start();
 <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <?php echo "<h1> Welcome " .$_SESSION['username']. "</h1>"; ?>
-        </div>
-        <div class="userPage">
-          <br>
-          <ul>
-        <li><a href="myReviews.php">My Reviews</a></li>
-      </ul>
-      <br>
-      <ul>
-        <li>Manage Account</li>
-        <li><a href="changePassword.php">Change Password</a></li>
-        <li><a href="">Delete Account</a></li>
-      </ul>
-      </div>
+       <h1>Change Password</h1><br>
+      
+      <form method="post" class="changePasswordForm" action="<?php echo htmlspecialchars["PHP_SELF"]; ?>">
+        Old Password <input type="text" name="oldPassword"><br><br>
+        New Password <input type="text" name="newPassword"><br><br>
+        Confirm New Password <input type="text" name="confirmPassword"><br><br>
+        <input type="submit" name="submit" value="Submit">
+      </form></div>
     </div>
   </div>
 
+  <?php
 
+  if($_SERVER["REQUEST_METHOD"] == "post"){
+    if(isset($_POST['submit'])){
+      if(empty($_POST['oldPassword']) || empty($_POST['newPassword']) || empty($_POST['confirmPassword'])){
+        echo 'Please fill all fields';
+      }else{
+        
+      }
+    }
+  }
+
+  ?>
 
 
   <!-- Bootstrap core JavaScript -->

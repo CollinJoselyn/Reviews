@@ -114,3 +114,7 @@ span.search {
 .tab {
 	margin-left: 40px;
 }
+
+.changePasswordForm {
+	vertical-align: center;
+}
