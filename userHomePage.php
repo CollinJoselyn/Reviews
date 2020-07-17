@@ -93,7 +93,7 @@ session_start();
       <ul>
         <li>Manage Account</li>
         <li><a href="changePassword.php">Change Password</a></li>
-        <li><a href="">Delete Account</a></li>
+        <li><a href="deleteAccount.php">Delete Account</a></li>
       </ul>
       </div>
     </div>

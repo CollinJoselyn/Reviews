@@ -21,6 +21,12 @@ require_once 'inputFilters.php';
 
 </head>
 
+<script type="text/javascript">
+function checkForm(e) { 
+   if (!(window.confirm("Are you sure you want to delete your account?"))) 
+     e.returnValue = false; 
+ }
+</script>
 
 
 <body>
@@ -88,11 +94,26 @@ require_once 'inputFilters.php';
       </div>
       <p>We are sad to see you go.</p>
       <p>Are you sure you want to delete your account?</p>
-      <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"
+      <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" onSubmit = "return checkForm(event)">
+        <br><input type="submit" value="Yes Delete My Account" name="deleteAccount">
+      </form>
     </div>
   </div>
 
+  <?php
+  $uid = $_SESSION['userID'];
 
+  if($_SERVER['REQUEST_METHOD'] == 'GET'){
+    if(isset($_GET['deleteAccount'])){
+      $sql = "DELETE FROM review WHERE userID = '$uid'";
+      $db->query($sql);
+      $sql2 = "DELETE FROM user WHERE userID = '$uid';";
+      $db->query($sql2);
+      session_destroy();
+      header('location: index.php');
+    }
+  }
+  ?>
 
 
   <!-- Bootstrap core JavaScript -->
