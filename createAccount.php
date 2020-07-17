@@ -19,7 +19,58 @@ require_once 'inputFilters.php';
 
 </head>
 
+ <?php
 
+$usernameEr = $emailEr = $passwordEr = "";
+$username = $email = $password = $pwd = "";
+$pw = $_POST['conPassword'];
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+  if(empty($_POST["username"])){
+    $usernameEr = "Please enter a username";
+  }else{
+    $username = test_input($_POST["username"]);
+  }
+
+  if(empty($_POST["email"])){
+    $emailEr = "Please enter an email";
+  }else{
+    $email = test_input($_POST["email"]);
+  }
+
+  if(empty($_POST["password"])){
+    $passwordEr = "Please enter a password";
+  }else{
+    $password = test_input($_POST["password"]);
+  }
+
+  if($password != $pw){
+    $passwordEr2 = "Passwords do not match";
+  }else{
+    $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
+  }
+if($username != "" && $pwd != "" && $email != ""){
+$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
+if($db->query($sql) === TRUE){
+  $_SESSION['username'] = $username;
+  header('location: userHomePage.php');
+}else{
+  echo "Error: " .$sql . "<br>" . $db->error;
+}
+}
+}else{
+  echo 'Please fill in all fields';
+}
+//$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
+//if(isset($_POST['submit'])){
+//if($db->query($sql) === TRUE){
+  //$_SESSION['username'] = $username;
+  //header('location: userHomePage.php');
+//}else{
+  //echo "Error: " .$sql . "<br>" . $db->error;
+//}
+//}
+?>
 
 
 <body>
@@ -70,13 +121,13 @@ require_once 'inputFilters.php';
         <h1 class="mt-5">Create Account</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
           Username<br>
-          <input type="text" name="username"><br><br>
+          <input type="text" name="username" value="<?php echo $username; ?>"><span class="errorMsg"><?php echo  $usernameEr?></span><br><br>
           Email<br>
-          <input type="text" name="email"><br><br>
+          <input type="text" name="email" value="<?php echo $email; ?>"><span class="errorMsg"><?php echo  $emailEr?></span><br><br>
           Password<br>
-          <input type="password" name="password"><br><br>
+          <input type="password" name="password" value="<?php echo $password; ?>"><span class="errorMsg"><?php echo  $passwordEr?></span><span class="errorMsg"><?php echo  $usernameEr2?></span><br><br>
           Confirm Password<br>
-          <input type="password" name="conPassword"><br><br>
+          <input type="password" name="conPassword" value="<?php echo $pwd; ?>"><br><br>
           <input type="submit" name="submit" value="Create Account">
       </div>
     </div>
@@ -88,47 +139,7 @@ require_once 'inputFilters.php';
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <?php
-
-$usernameEr = $emailEr = $passwordEr = "";
-$username = $email = $password = $pwd = "";
-$pw = $_POST['conPassword'];
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-  if(empty($_POST["username"])){
-    $usernameEr = "Please enter a username";
-  }else{
-    $username = test_input($_POST["username"]);
-  }
-
-  if(empty($_POST["email"])){
-    $emailEr = "Please enter an email";
-  }else{
-    $email = test_input($_POST["email"]);
-  }
-
-  if(empty($_POST["password"])){
-    $passwordEr = "Please enter a password";
-  }else{
-    $password = test_input($_POST["password"]);
-  }
-
-  if($password != $pw){
-    $passwordEr = "Passwords do not match";
-  }else{
-    $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
-  }
-}
-
-$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
-if(isset($_POST['submit'])){
-if($db->query($sql) === TRUE){
-  echo "Account created successfullly!";
-}else{
-  echo "Error: " .$sql . "<br>" . $db->error;
-}
-}
-?>
+ 
 
 </body>
 

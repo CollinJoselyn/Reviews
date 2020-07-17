@@ -118,3 +118,7 @@ span.search {
 .changePasswordForm {
 	vertical-align: center;
 }
+
+.errorMsg {
+	color: #FF0000;
+}
