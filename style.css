@@ -119,6 +119,10 @@ span.search {
 	vertical-align: center;
 }
 
-.errorMsg {
-	color: #FF0000;
+.createAccount {
+	
+}
+
+.createAccount span {
+	position: fixed;
 }

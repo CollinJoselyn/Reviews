@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'dbconnection.php';
 require_once 'inputFilters.php';
 ?>
@@ -16,16 +17,17 @@ require_once 'inputFilters.php';
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
 
 </head>
 
  <?php
 
-$usernameEr = $emailEr = $passwordEr = "";
+$usernameEr = $emailEr = $passwordEr = $emailEr2 = $passwordEr2 = $passwordEr3 = $usernameEr3 = "";
 $username = $email = $password = $pwd = "";
 $pw = $_POST['conPassword'];
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
   if(empty($_POST["username"])){
     $usernameEr = "Please enter a username";
   }else{
@@ -44,12 +46,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
     $password = test_input($_POST["password"]);
   }
 
+  if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    $emailEr2 = "Please enter a valid email";
+  }
+
   if($password != $pw){
     $passwordEr2 = "Passwords do not match";
   }else{
     $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
   }
+
+  $sqlUN = "SELECT username FROM user WHERE username = '$username'";
+
 if($username != "" && $pwd != "" && $email != ""){
+  if($db->query($sqlUN) === TRUE){
+  if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){
 $sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 if($db->query($sql) === TRUE){
   $_SESSION['username'] = $username;
@@ -57,10 +68,16 @@ if($db->query($sql) === TRUE){
 }else{
   echo "Error: " .$sql . "<br>" . $db->error;
 }
+}else{
+  $passwordEr3 = "Password doesn't meet complexity requirements";
 }
 }else{
-  echo 'Please fill in all fields';
+  $usernameEr3 = "That usename already exits. Please choose another username";
 }
+}
+}
+//Password#2 for the collin4 account 
+
 //$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 //if(isset($_POST['submit'])){
 //if($db->query($sql) === TRUE){
@@ -120,15 +137,21 @@ if($db->query($sql) === TRUE){
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Create Account</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+          <div class="createAccount">
           Username<br>
-          <input type="text" name="username" value="<?php echo $username; ?>"><span class="errorMsg"><?php echo  $usernameEr?></span><br><br>
+          <input type="text" name="username" value="<?php echo $username; ?>">
+          <span  style="color:red;"><?php echo  $usernameEr .$usernameEr3?></span><br><br>
           Email<br>
-          <input type="text" name="email" value="<?php echo $email; ?>"><span class="errorMsg"><?php echo  $emailEr?></span><br><br>
+          <input type="text" name="email" value="<?php echo $email; ?>">
+          <span style="color:red;"><?php echo  $emailEr2?></span><br><br>
           Password<br>
-          <input type="password" name="password" value="<?php echo $password; ?>"><span class="errorMsg"><?php echo  $passwordEr?></span><span class="errorMsg"><?php echo  $usernameEr2?></span><br><br>
+          <input type="password" name="password" value="<?php echo $password; ?>">
+          <span style="color:red;"><?php echo  $passwordEr .$passwordEr3?></span>
+          <span style="color:red;"><?php echo  $usernameEr2?></span><span></span><br><br>
           Confirm Password<br>
           <input type="password" name="conPassword" value="<?php echo $pwd; ?>"><br><br>
           <input type="submit" name="submit" value="Create Account">
+          </div>
       </div>
     </div>
   </div>
