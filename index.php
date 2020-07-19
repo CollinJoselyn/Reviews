@@ -92,7 +92,7 @@ $newGame3 = findGame("Predator: Hunting Grounds");
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Search</h1>
+        <br><h1>Search</h1>
         <form action="results.php" method="get">
           <input type="text" name="search" value="">
           <input type="submit" value="Search" name="searchBtn"><br>
@@ -107,7 +107,7 @@ $newGame3 = findGame("Predator: Hunting Grounds");
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Whats New</h1> </div>
+        <h1>Whats New</h1><br><br> </div>
         <div class="frontPage">
           <ul>
             <h2>Movies</h2><br>

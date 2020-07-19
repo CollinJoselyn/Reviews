@@ -91,12 +91,13 @@ span.search {
 .frontPage {
 	column-count: 3;
 	column-gap: 50px;
-	padding-left: 50px;
+	padding-left: 120px;
+	font-size: 20px;
 }
 
 .frontPage img {
-	height: 100px;
-	width: 100px;
+	height: 110px;
+	width: 110px;
 }
 
 .frontPage ul {

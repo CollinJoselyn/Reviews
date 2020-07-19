@@ -103,6 +103,7 @@ if(isset($_GET['mPage'])){
 		$data3 = getImdbRecord($bTitle, $ApiKey);
 		$sqlS = "SELECT title FROM moviestv WHERE title = '$bTitle'";
 		$_SESSION['mPageButton'] = $data3;
+		unset($_SESSION['mPageResults']);
 		if($db->query($sqlS) === TRUE){
 			header('location movieSearchResults.php');
 		}else{
