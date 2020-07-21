@@ -95,25 +95,49 @@ $_SESSION['type'] = "movieTV";
       <div class="moviePoster">
         <?php
 
-        $rating = 0;
-        $rating2 = 0;
+        $rating;
+        $rating2;
+        $noReview = "";
         $id = $movieInfo['imdbID'];
+        $id2 = $movieInfo2['imdbID'];
         $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
         $results = $db->query($sqlRating);
-        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id2'";
         $results2 = $db->query($sqlRating2);
+        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'";
+        $results3 = $db->query($sql3);
+        $sql4 = "SELECT rating FROM review WHERE titleID = '$id2'";
+        $results4 = $db->query($sql4);
 
+        if($results3->num_rows > 0){
         if($results->num_rows > 0){
           while($row = $results->fetch_assoc()){
-            $rating = $row['avg'];
+            if(is_null($row['avg'])){
+              $rating = "No reviews yet";
+            }else{
+              $rating = $row['avg'];
+            }
           }
         }
+      }else{
+        //$rating = "No reviews yet";
+        $noReview = " People have reviewed this title";
+      }
 
+        if($results4->num_rows > 0){
         if($results2->num_rows > 0){
           while($row = $results2->fetch_assoc()){
-            $rating2 = $row['avg'];
+            if(is_null($row['avg'])){
+              $rating2 = " People have reviewed the title";
+            }else{
+              $rating2 = $row['avg'];
+            }
           }
         }
+      }else{
+        //$rating2 = "No reviews yet";
+        $noReview = " People have reviewed this title";
+      }
 
         if($movieInfo){
          echo '<img src="' .$poster .'" alt="Movie Poster">';
@@ -127,7 +151,7 @@ $_SESSION['type'] = "movieTV";
          echo '<li>' .'Writer: ' .$movieInfo['Writer'] .'</li>';
          echo '<li>' .'Actors: ' .$movieInfo['Actors'] .'</li>';
          echo '<li>' .'Plot: '  .$movieInfo['Plot']  .'</li>';
-         echo '<li>' .'User Rating: ' .floatval($rating) .'</li>';
+         echo '<li>' .'User Rating: ' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
        }else{
         echo '<img src="' .$poster2 .'" alt="Movie Poster">';
@@ -141,7 +165,7 @@ $_SESSION['type'] = "movieTV";
          echo '<li>' .'Writer: ' .$movieInfo2['Writer'] .'</li>';
          echo '<li>' .'Actors: ' .$movieInfo2['Actors'] .'</li>';
          echo '<li>' .'Plot: '  .$movieInfo2['Plot']  .'</li>';
-         echo '<li>' .'User Rating: ' .floatval($rating2) .'</li>';
+         echo '<li>' .'User Rating: ' .round($rating2, 1) .$noReview .'</li>';
          echo '</ul>';
      }
          ?>

@@ -97,6 +97,52 @@ $_SESSION['type'] = "";
     <div class="row">
       <div class="moviePoster">
         <?php
+
+        $rating;
+        $rating2;
+        $noReview = "";
+        $noReview2 = "";
+        $id = $mtInfo['imdbID'];
+        $id2 = $vgInfo->id;
+        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
+        $results = $db->query($sqlRating);
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id2'";
+        $results2 = $db->query($sqlRating2);
+        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'";
+        $results3 = $db->query($sql3);
+        $sql4 = "SELECT rating FROM review WHERE gameID = '$id2'";
+        $results4 = $db->query($sql4);
+
+        if($results3->num_rows > 0){
+        if($results->num_rows > 0){
+          while($row = $results->fetch_assoc()){
+            if(is_null($row['avg'])){
+              $rating = "No reviews yet";
+            }else{
+              $rating = $row['avg'];
+            }
+          }
+        }
+      }else{
+        //$rating = "No reviews yet";
+        $noReview = " People have reviewed this title";
+      }
+
+        if($results4->num_rows > 0){
+        if($results2->num_rows > 0){
+          while($row = $results2->fetch_assoc()){
+            if(is_null($row['avg'])){
+              $rating2 = " People have reviewed the title";
+            }else{
+              $rating2 = $row['avg'];
+            }
+          }
+        }
+      }else{
+        //$rating2 = "No reviews yet";
+        $noReview2 = " People have reviewed this title";
+      }
+
         if($mediaName === $mtInfo['Title']){
          $_SESSION['type'] = "movieTV";
          echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
@@ -110,7 +156,7 @@ $_SESSION['type'] = "";
          echo '<li>' .'Writer:' .$mtInfo['Writer'] .'</li>';
          echo '<li>' .'Actors:' .$mtInfo['Actors'] .'</li>';
          echo '<li>' .'Plot:'  .$mtInfo['Plot']  .'</li>';
-         echo '<li>' .'User Rating:' .'</li>';
+         echo '<li>' .'User Rating:' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
         }else{
           $_SESSION['type'] = "videoGame";
@@ -120,7 +166,7 @@ $_SESSION['type'] = "";
          echo '<li>' .'Description:' .$vgInfo->description_raw .'</li>;';
          echo '<li>' .'Publisher:' .$vgInfo->publishers{'0'}->{'name'} .'</li>';
          echo '<li>' .'ESRB Rating:' .$vgInfo->esrb_rating->name .'</li>';
-         echo '<li>' .'User Rating:' .'</li>';
+         echo '<li>' .'User Rating:' .round($rating2, 1) .$noReview2 .'</li>';
         }
          ?>
         

@@ -72,6 +72,7 @@ if(isset($_GET['gamePage'])){
 		$gameTitle = $_GET['vgButtons'];
 			$gameResults = findGame($gameTitle);
 				$_SESSION['gamesSearchResults'] = $gameResults;
+				unset($_SESSION['gameInfo']);
 				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
 				if($db->query($sql) === TRUE){
 					header('location: gamesSearchResults.php');
