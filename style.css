@@ -5,6 +5,7 @@ span.search {
 .recentReleases {
 	column-count: 3;
 	column-gap: 200px;
+	font-size: 20px;
 }
 
 .recentReleases ul {
@@ -12,8 +13,23 @@ span.search {
 }
 
 .recentReleases img {
-	height: 70px;
-	width: 70px;
+	height: 110px;
+	width: 110px;
+}
+
+.recentReleasesGames {
+	column-count: 3;
+	column-gap: 80px;
+	font-size: 20px;
+}
+
+.recentReleasesGames ul {
+	list-style: none;
+}
+
+.recentReleasesGames img {
+	height: 100px;
+	width: 100px;
 }
 
 .pageButtons {
@@ -21,7 +37,7 @@ span.search {
 	border: none;
 }
 .resultSection {
-
+	font-size: 20px;
 }
 
 .resultSection ul {
@@ -29,8 +45,8 @@ span.search {
 }
 
 .resultSection img {
-	height: 70px;
-	width: 70px;
+	height: 110px;
+	width: 110px;
 }
 
 .resultButtons {
@@ -42,11 +58,12 @@ span.search {
 	column-count: 2;
 	column-gap: 400px;
 	padding-left: 100px;
+	font-size: 20px;
 }
 
 .hlRatedMovies img {
-	height: 70px;
-	width: 70px;
+	height: 110px;
+	width: 110px;
 }
 
 .moviePoster {
@@ -57,6 +74,11 @@ span.search {
 
 .movieInfo {
 	list-style: none;
+}
+
+.movieInfo span{
+	font-weight: bold;
+	text-decoration: underline;
 }
 
 .ratingScale {
@@ -126,4 +148,28 @@ span.search {
 
 .createAccount span {
 	position: fixed;
+}
+
+.vgResults *{
+	
+
+}
+
+.col-container {
+  display: table;
+  table-layout: fixed;
+}
+
+.col {
+  display: table-cell;
+  width: auto;
+  height: auto;
+  vertical-align: top;
+}
+
+@media only screen and (max-width: 600px) {
+  .col { 
+    display: block;
+    width: 100%;
+  }
 }

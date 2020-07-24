@@ -14,6 +14,14 @@ include 'gamesApi.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <style>
+
+  * {
+    box-sizing: border-box;
+  }
+
+  </style>
+
   <title>Reviews</title>
 
   <!-- Bootstrap core CSS -->
@@ -86,15 +94,16 @@ $_SESSION['type'] = "videoGame";
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
+        <br>
         <h1>Search Results</h1>
         </div>
     </div>
   </div>
   <br>
-  <div class="container">
-    <div class="row">
-      <div class="moviePoster">
-        <ul>
+  <div class="container">  
+    <div class="row">  
+      <div class="vgResults">
+        
         <?php
 
         $rating;
@@ -142,31 +151,49 @@ $_SESSION['type'] = "videoGame";
       }
 
         if($gameInfo){
+          echo '<div class="col-container">';
+          echo '<div class="col">';
          echo '<img style="height: 500px; width: 400px;" src="' .$poster .'" alt="Movie Poster">';
-         echo '<li>' .'Title:' .$gameInfo->name .'</li>';
-         echo '<li>' .'Release Date:' .$gameInfo->released .'</li>';
-         echo '<li>' .'Description:' .$gameInfo->description_raw .'</li>;';
-         echo '<li>' .'Publisher:' .$gameInfo->publishers{'0'}->{'name'} .'</li>';
-         echo '<li>' .'ESRB Rating:' .$gameInfo->esrb_rating->name .'</li>';
-         echo '<li>' .'User Rating:' .round($rating, 1) .$noReview.'</li>';
+         echo '</div>';
+         echo '<div class="col">';
+         echo '<ul class = "movieInfo">';
+         echo '<li>' .'<span>' .'Title: ' .'</span>' .$gameInfo->name .'</li>';
+         echo '<li>' .'<span>' .'Release Date: ' .'</span>' .$gameInfo->released .'</li>';
+         echo '<li>' .'<span>' .'Description: ' .'</span>' .$gameInfo->description_raw .'</li>';
+         echo '<li>' .'<span>' .'Publisher: ' .'</span>' .$gameInfo->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'<span>' .'ESRB Rating: ' .'</span>' .$gameInfo->esrb_rating->name .'</li>';
+         echo '<li>' .'<span>' .'User Rating: ' .'</span>' .round($rating, 1) .$noReview.'</li>';
+         echo '</ul>';
+         echo '</div>';
+         echo '</div>';
        }else{
+        echo '<div class="col-container">';
+        echo '<div class="col">';
         echo '<img style="height: 500px; width: 400px;" src="' .$poster2 .'" alt="Movie Poster">';
-         echo '<li>' .'Title:' .$gameInfo2->name .'</li>';
-         echo '<li>' .'Release Date:' .$gameInfo2->released .'</li>';
-         echo '<li>' .'Description:' .$gameInfo2->description_raw .'</li>;';
-         echo '<li>' .'Publisher:' .$gameInfo2->publishers{'0'}->{'name'} .'</li>';
-         echo '<li>' .'ESRB Rating:' .$gameInfo2->esrb_rating->name .'</li>';
-         echo '<li>' .'User Rating:' .round($rating2, 1) .$noReview .'</li>';
+        echo '</div>';
+        echo '<div class="col">';
+        echo '<ul class = "movieInfo">';
+         echo '<li>' .'<span>' .'Title: ' .'</span>' .$gameInfo2->name .'</li>';
+         echo '<li>' .'<span>' .'Release Date: ' .'</span>' .$gameInfo2->released .'</li>';
+         echo '<li>' .'<span>' .'Description: ' .'</span>' .$gameInfo2->description_raw .'</li>';
+         echo '<li>' .'<span>' .'Publisher: ' .'</span>' .$gameInfo2->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'<span>' .'ESRB Rating: ' .'</span>' .$gameInfo2->esrb_rating->name .'</li>';
+         echo '<li>' .'<span>' .'User Rating: ' .'</span>' .round($rating2, 1) .$noReview.'</li>';
+         echo '</ul>';
+         echo '</div>';
+         echo '</div>';
        }
          ?>
-         </ul>
+         
+       
        </div>
-    </div>
-  </div>
+    </div> 
+  </div>  
 <br> 
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
+        <br>
       <h3>Leave a Rating</h3>
     </div>
       <form action="addReview.php" method="POST">

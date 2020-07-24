@@ -83,6 +83,8 @@ function addPlus($string){
 
 <div class="container">
     <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1>Results</h1></div>
     	<div class="resultSection">
     	
     	<ul>
@@ -104,7 +106,7 @@ function addPlus($string){
               $length = count($results);
               $glength = count($gameResult);
               echo '<form action="searchAll.php" method="get">';
-              echo '<h2>' .'Results' .'</h2>';
+              //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Movies and TV' .'</h2>';
               for($i = 0; $i < $length; $i++){
                 $titles = $results[$i]['Title'];
@@ -137,14 +139,14 @@ function addPlus($string){
               $results = $data['Search'];
               $length = count($results);
               echo '<form action="searchMovies.php" method="get">';
-              echo '<h2>' .'Results' .'</h2>';
-              echo '<br>' .'<h2>' .'Movies' .'</h2>';
+              //echo '<h2>' .'Results' .'</h2>';
+              echo '<br>' .'<h2>' .'Movies' .'</h2>' .'<br>';
               for($i = 0; $i < $length; $i++){
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
               echo '<img src=' .$poster .'>';
               echo "<li>" .'<input type = "submit" name = "sButtons" class = "resultButtons" value="' .$titles. '"/>';
-              echo '</li>';
+              echo '</li>' .'<br>';
               }
               echo '</ul>';
               echo '</form>';
@@ -162,14 +164,14 @@ function addPlus($string){
               $results = $data['Search'];
               $length = count($results);
               echo '<form action="tvSearch.php" method="get">';
-              echo '<h2>' .'Results' .'</h2>';
-              echo '<br>' .'<h2>' .'TV Shows' .'</h2>';
+              //echo '<h2>' .'Results' .'</h2>';
+              echo '<br>' .'<h2>' .'TV Shows' .'</h2>' .'<br>';
               for($i = 0; $i < $length; $i++){
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
               echo '<img src=' .$poster .'>';
               echo "<li>" .'<input type = "submit" name = "tButtons" class = "resultButtons" value="' .$titles. '"/>';
-              echo '</li>';
+              echo '</li>' .'<br>';
               }
               echo '</ul>';
               echo '</form>';
@@ -185,14 +187,14 @@ function addPlus($string){
               $gameResult = findGames($_GET['gameTitle']);
               $glength = count($gameResult);
               echo '<form action="gameSearch.php" method="get">';
-              echo '<h2>' .'Results' .'</h2>';
-              echo '<br>' .'<h2>' .'Video Games' .'</h2>';
+              //echo '<h2>' .'Results' .'</h2>';
+              echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
               for($i = 0; $i < $glength; $i++){
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
                 echo '<img src=' .$poster .'>';
                 echo "<li>" .'<input type = "submit" name = "vgButtons" class = "resultButtons" value="' .$gResult. '"/>';
-                echo '</li>';
+                echo '</li>' .'<br>';
               }
               echo '</ul>';
               echo '</form>';

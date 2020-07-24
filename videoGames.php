@@ -110,9 +110,9 @@ $highest3 = findGame("The Last of Us");
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <h1>Recent Releases</h1>
+      <br><h1>Recent Releases</h1><br>
     </div>
-    <div class="recentReleases">
+    <div class="recentReleasesGames">
       <form action="gameSearch.php" method="get">
     <ul>
       <img src="<?php echo $recent->background_image; ?>">

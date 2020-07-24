@@ -111,7 +111,7 @@ $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <h1>Recent Releases</h1>
+      <br><h1>Recent Releases</h1>
     </div>
     <div class="recentReleases">
       <form action="searchMovies.php" method="get">

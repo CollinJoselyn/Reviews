@@ -48,14 +48,15 @@ for($i = 0; $i < $length; $i++){
   echo '<br>';
 }*/
 /*
+$result = findGame("The Last of Us Part II");
 echo '<pre>';
 print_r($result);
-echo '</pre>';
+echo '</pre>'; 
 if($result){
   echo 'It is true';
 }else{
   echo 'it is false';
-}*/
+} */
 //echo $result->name;
 //echo $result->background_image;
 ?>
