@@ -90,13 +90,14 @@ function checkForm(e) {
 <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2>Delete Account</h2>
-      </div>
-      <p>We are sad to see you go.</p>
-      <p>Are you sure you want to delete your account?</p>
+        <br><h2>Delete Account</h2><br>
+        <p>We are sad to see you go.
+      Are you sure you want to delete your account?</p>
+      
       <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" onSubmit = "return checkForm(event)">
         <br><input type="submit" value="Yes Delete My Account" name="deleteAccount">
       </form>
+      </div>
     </div>
   </div>
 
@@ -115,6 +116,7 @@ function checkForm(e) {
   }
   ?>
 
+  <a href="userHomePage.php" class="backButton"><img src="arrow.jpg">Back</a>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>

@@ -40,6 +40,9 @@ $recent9 = getImdbRecord("It+Chapter+Two", $ApiKey);
 
 $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
 
+unset($_SESSION['notSignIn']);
+unset($_SESSION['previousPage2']);
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
 ?>
 
 <body>
@@ -102,16 +105,20 @@ $hPoster = getPoster("The+Big+Lebowski", $ApiKey);
         <h1 class="mt-5">Movies</h1>
         <form action="results.php" method="get">
           Search By Title <input type="text" name="movieTitle"><input type="submit" name="searchMoviesBtn" value="Search">
-          <span><?php echo $_SESSION['titleErr'];?></span>
+          <span style="color:red;position:absolute;"><?php echo $_SESSION['blank'];?></span>
         </form>
       </div>
     </div>
   </div>
 
+  <?php
+  unset($_SESSION['blank']);
+  ?>
+
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <br><h1>Recent Releases</h1>
+      <br><h1>Recent Releases</h1><br>
     </div>
     <div class="recentReleases">
       <form action="searchMovies.php" method="get">

@@ -35,6 +35,8 @@ $gameInfo = $_SESSION['gameInfo'];
 $gameInfo2 = $_SESSION['gamesSearchResults'];
 $poster2 = $_SESSION['gamesSearchResults']->background_image;
 $_SESSION['type'] = "videoGame";
+unset($_SESSION['previousPage']);
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
 ?>
 
 
@@ -214,10 +216,13 @@ $_SESSION['type'] = "videoGame";
       <br>
       <textarea rows="10" cols="105" name="writtenReview"></textarea><br><br>
       <input type="hidden" name="prevPage" value="gameSearchResults.php">
-      <input type="submit" name="reviewBtn" value="submit">
+      <input type="submit" name="reviewBtn" value="submit"><span style="color:red;position:absolute;"><?php echo $_SESSION['notSignIn'];?></span>
     </form>
     </div>
   </div>
+
+  <br>
+  <a href="<?php echo $_SESSION['previousPage2']; ?>" class="backButton"><img src="arrow.jpg">Back</a>
 
   <?php
   include 'displayReviews.php';

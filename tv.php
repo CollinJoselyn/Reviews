@@ -39,8 +39,9 @@ $lowest = getImdbRecord("For+Better+or+Worse", $ApiKey);
 $lowest2 = getImdbRecord("Fred:+the+Show", $ApiKey);
 $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
 
-
-
+unset($_SESSION['notSignIn']);
+unset($_SESSION['previousPage2']);
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
 ?>
 
 <body>
@@ -102,16 +103,21 @@ $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">TV</h1>
         <form action="results.php" method="get">
-          Search By Title <input type="text" name="tvTitle"><input type="submit" value="Search" name="tvSearchBtn"></form>
-          <span><?php echo $_SESSION['tTitleErr']; ?></span>
+          Search By Title <input type="text" name="tvTitle"><input type="submit" value="Search" name="tvSearchBtn">
+          <span style="color:red;position:absolute;"><?php echo $_SESSION['blank']; ?></span>
+        </form>
       </div>
     </div>
   </div>
 
+  <?php
+  unset($_SESSION['blank']);
+  ?>
+
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <h1>Popular TV Shows</h1>
+      <br><h1>Popular TV Shows</h1><br>
     </div>
     <div class="recentReleases">
       <form action="tvSearch.php" method="get">

@@ -90,6 +90,7 @@ function checkForm(e) {
       <div class="col-lg-12 text-center">
         <?php echo "<h1> Reviews From " .$_SESSION['username']. "</h1>"; ?>
         </div>
+
         <?php
           $i = 0;
           $k = 0;
@@ -116,15 +117,7 @@ function checkForm(e) {
           }
         ?>
 
-        <script type="text/javascript">
-        //var el = document.getElementById('myCoolForm');
-
-        //el.addEventListener('submit', function(){
-            //return confirm('Are you sure you want to delete this review?');
-              //}, false);
-
-        
-        </script>
+        <a href="userHomePage.php" class="backButton"><img src="arrow.jpg">Back</a>
         
 
   <!-- Bootstrap core JavaScript -->

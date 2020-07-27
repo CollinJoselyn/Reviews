@@ -39,6 +39,9 @@ $highest = findGame("Grand Theft Auto: San Andreas");
 $highest2 = findGame("MVP Baseball 2005");
 $highest3 = findGame("The Last of Us");
 
+unset($_SESSION['notSignIn']);
+unset($_SESSION['previousPage2']);
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
 ?>
 
 <body>
@@ -101,7 +104,7 @@ $highest3 = findGame("The Last of Us");
         <h1 class="mt-5">Video Games</h1>
         <form action="results.php" method="get">
           Search By Title <input type="text" name="gameTitle"><input type="submit" value="Search" name="gSearchBtn">
-          <span><?php echo $_SESSION['gameErr'] ?></span>
+          <span style="color:red;position:absolute;"><?php echo $_SESSION['blank'] ?></span>
         </form>
       </div>
     </div>

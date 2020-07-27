@@ -14,6 +14,11 @@ include 'gamesApi.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <style>
+   * {
+    box-sizing: border-box;
+  }
+  </style>
   <title>Reviews</title>
 
   <!-- Bootstrap core CSS -->
@@ -95,7 +100,7 @@ $_SESSION['type'] = "";
   <br>
   <div class="container">
     <div class="row">
-      <div class="moviePoster">
+      
         <?php
 
         $rating;
@@ -145,28 +150,36 @@ $_SESSION['type'] = "";
 
         if($mediaName === $mtInfo['Title']){
          $_SESSION['type'] = "movieTV";
+         echo '<div class="moviePoster">';
          echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
-         echo '<li>' .'Title:' . $mtInfo['Title'] . '</li>';
-         echo '<li>' .'Year:' .$mtInfo['Year'] .'</li>';
-         echo '<li>' .'Rated:' .$mtInfo['Rated'] .'</li>';
-         echo '<li>' .'Runtime:' .$mtInfo['Runtime'] .'</li>';
-         echo '<li>' .'Genre:'  .$mtInfo['Genre'] .'</li>';
-         echo '<li>' .'Director:' .$mtInfo['Director'] .'</li>';
-         echo '<li>' .'Writer:' .$mtInfo['Writer'] .'</li>';
-         echo '<li>' .'Actors:' .$mtInfo['Actors'] .'</li>';
-         echo '<li>' .'Plot:'  .$mtInfo['Plot']  .'</li>';
-         echo '<li>' .'User Rating:' .round($rating, 1) .$noReview .'</li>';
+         echo '<li>' .'<span>' .'Title:' .'</span>' . $mtInfo['Title']  .'</li>';
+         echo '<li>' .'<span>' .'Year:' .'</span>' .$mtInfo['Year'] .'</li>';
+         echo '<li>' .'<span>' .'Rated:' .'</span>' .$mtInfo['Rated'] .'</li>';
+         echo '<li>' .'<span>' .'Runtime:' .'</span>' .$mtInfo['Runtime'] .'</li>';
+         echo '<li>' .'<span>' .'Genre:'  .'</span>' .$mtInfo['Genre'] .'</li>';
+         echo '<li>' .'<span>' .'Director:' .'</span>' .$mtInfo['Director'] .'</li>';
+         echo '<li>' .'<span>' .'Writer:' .'</span>' .$mtInfo['Writer'] .'</li>';
+         echo '<li>' .'<span>' .'Actors:' .'</span>' .$mtInfo['Actors'] .'</li>';
+         echo '<li>' .'<span>' .'Plot:'  .'</span>' .$mtInfo['Plot']  .'</li>';
+         echo '<li>' .'<span>' .'User Rating:' .'</span>' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
         }else{
+          echo '<div class="vgResults">';
+          echo '<div class="col-container">';
+          echo '<div class="col">';
           $_SESSION['type'] = "videoGame";
          echo '<img style="height: 500px; width: 400px;" src="' .$vgPoster .'" alt="Movie Poster">';
-         echo '<li>' .'Title:' .$vgInfo->name .'</li>';
-         echo '<li>' .'Release Date:' .$vgInfo->released .'</li>';
-         echo '<li>' .'Description:' .$vgInfo->description_raw .'</li>;';
-         echo '<li>' .'Publisher:' .$vgInfo->publishers{'0'}->{'name'} .'</li>';
-         echo '<li>' .'ESRB Rating:' .$vgInfo->esrb_rating->name .'</li>';
-         echo '<li>' .'User Rating:' .round($rating2, 1) .$noReview2 .'</li>';
+         echo '</div>';
+         echo  '<ul class="movieInfo">';
+         echo '<li>' .'<span>' .'Title:' .'</span>' .$vgInfo->name .'</li>';
+         echo '<li>' .'<span>' .'Release Date:' .'</span>' .$vgInfo->released .'</li>';
+         echo '<li>' .'<span>' .'Description:' .'</span>' .$vgInfo->description_raw .'</li>;';
+         echo '<li>' .'<span>' .'Publisher:' .'</span>' .$vgInfo->publishers{'0'}->{'name'} .'</li>';
+         echo '<li>' .'<span>' .'ESRB Rating:' .'</span>' .$vgInfo->esrb_rating->name .'</li>';
+         echo '<li>' .'<span>' .'User Rating:' .'</span>' .round($rating2, 1) .$noReview2 .'</li>';
+         echo '</ul>';
+         echo '</div>';
         }
          ?>
         
@@ -202,6 +215,9 @@ $_SESSION['type'] = "";
     </form>
     </div>
   </div>
+
+  <br>
+  <a href="index.php" class="backButton"><img src="arrow.jpg">Back</a>
 
   <?php
   include 'displayReviews.php';

@@ -27,6 +27,8 @@ include 'gamesApi.php';
 function addPlus($string){
     return str_replace(" ", "+", $string);
   }
+
+
 ?>
 
 <body>
@@ -96,7 +98,10 @@ function addPlus($string){
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['search'])){
               //error message back to original page
+              $_SESSION['blank'] = "Please enter a title";
+              header('location: index.php');
             }else{
+              unset($_SESSION['blank']);
               $mvtString = addPlus($_GET['search']);
               $data = getImdbRecord2($mvtString, $ApiKey);
               $gameResult = findGames($_GET['search']);
@@ -107,21 +112,21 @@ function addPlus($string){
               $glength = count($gameResult);
               echo '<form action="searchAll.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
-              echo '<br>' .'<h2>' .'Movies and TV' .'</h2>';
+              echo '<br>' .'<h2>' .'Movies and TV' .'</h2>' .'<br>';
               for($i = 0; $i < $length; $i++){
                 $titles = $results[$i]['Title'];
                 $poster = $results[$i]['Poster'];
                 echo '<img src=' .$poster .'>';
                 echo "<li>" .'<input type = "submit" name = "rButtons" class = "resultButtons" value="' .$titles. '"/>';
-                echo '</li>';
+                echo '</li>' .'<br>';
               }
-              echo '<br>' .'<h2>' .'Video Games' .'</h2>';
+              echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
               for($i = 0; $i < $glength; $i++){
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
                 echo '<img src=' .$poster .'>';
                 echo "<li>" .'<input type = "submit" name = "cButtons" class = "resultButtons" value="' .$gResult. '"/>';
-                echo '</li>';
+                echo '</li>' .'<br>';
               }
               echo '</ul>';
               echo '</form>';
@@ -133,7 +138,10 @@ function addPlus($string){
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['movieTitle'])){
               //error message back to original page
+              $_SESSION['blank'] = "Please enter a title";
+              header('location: movies.php');
             }else{
+              unset($_SESSION['blank']);
               $mvtString = addPlus($_GET['movieTitle']);
               $data = getImdbRecord2($mvtString, $ApiKey);
               $results = $data['Search'];
@@ -158,7 +166,10 @@ function addPlus($string){
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['tvTitle'])){
               //error message back to original page
+              $_SESSION['blank'] = "Please enter a title";
+              header('location: tv.php');
             }else{
+              unset($_SESSION['blank']);
               $mvtString = addPlus($_GET['tvTitle']);
               $data = getImdbRecord2($mvtString, $ApiKey);
               $results = $data['Search'];
@@ -183,7 +194,10 @@ function addPlus($string){
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['gameTitle'])){
               //error message back to original page
+              $_SESSION['blank'] = "Please enter a title";
+              header('location: videoGames.php');
             }else{
+              unset($_SESSION['blank']);
               $gameResult = findGames($_GET['gameTitle']);
               $glength = count($gameResult);
               echo '<form action="gameSearch.php" method="get">';

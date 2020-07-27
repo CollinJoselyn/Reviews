@@ -33,6 +33,8 @@ $newGame = findGame("The Last of Us Part II");
 $newGame2 = findGame("Doom Eternal");
 $newGame3 = findGame("Predator: Hunting Grounds");
 
+unset($_SESSION['previousPage2']);
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
 ?>
 
 
@@ -95,14 +97,15 @@ $newGame3 = findGame("Predator: Hunting Grounds");
         <br><h1>Search</h1>
         <form action="results.php" method="get">
           <input type="text" name="search" value="">
-          <input type="submit" value="Search" name="searchBtn"><br>
-          <span><?php echo $_SESSION['error']; ?></span>
-          <span><?php echo $_SESSION['blank']; ?></span>
+          <input type="submit" value="Search" name="searchBtn"><span style="color:red;position:absolute;"><?php echo $_SESSION['blank']; ?></span><br>
           <span><?php echo $_SESSION['gameErr'] ?></span>
         </form>
         </div>
     </div>
   </div>
+  <?php
+  unset($_SESSION['blank']);
+  ?>
 <br><br><br>
   <div class="container">
     <div class="row">

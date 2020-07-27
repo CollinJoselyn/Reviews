@@ -24,7 +24,7 @@ require_once 'inputFilters.php';
 <?php
 
 
-$usernameEr = $passwordEr = "";
+$usernameEr = $passwordEr = $unpwER = "";
 $username = $password = "";
 
 $_SESSION['username'] = $_POST["username"];
@@ -58,11 +58,11 @@ if ($result->num_rows > 0) {
           $_SESSION['userID'] = $userID;
           header('location: userHomePage.php');
         }else{
-          echo "invalid";
+          $unpwER = "Username or Password is incorrect";
         }
     }
 } else {
-    echo "0 results";
+    $unpwER = "Username or Password is incorrect";
 }
 }
 
@@ -114,9 +114,9 @@ if ($result->num_rows > 0) {
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Sign In</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-          Username <input type="text" name="username"><br><br>
-          Password <input type="password" name="password"><br><br>
-          <input type="submit" name="signinbtn" value="Sign In">
+          Username <input type="text" name="username"><span style="color:red;"><?php echo $usernameEr;?></span><br><br>
+          Password <input type="password" name="password"><span style="color:red;"><?php echo $passwordEr; ?></span><br><br>
+          <input type="submit" name="signinbtn" value="Sign In"><span style="color:red;position: absolute;"><?php echo $unpwER; ?></span>
       </div>
     </div>
   </div>

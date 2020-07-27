@@ -21,7 +21,46 @@ require_once 'inputFilters.php';
 
 </head>
 
+<?php
 
+  $oldPassword = test_Input($_POST['oldPassword']);
+  $newPassword = test_Input($_POST['newPassword']);
+  $confirmPassword = test_Input($_POST['confirmPassword']);
+  $username = $_SESSION['username'];
+  $emptyErr = $matchErr = $oldPassErr = "";
+
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if(isset($_POST['submit'])){
+      if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
+        $emptyErr = 'Please fill all fields';
+      }else{
+        $oldPassword2 = filterPassword($oldPassword, $oldPassword, $hashAlgo, $beginSalt, $endSalt);
+        $newPassword2 = filterPassword($newPassword, $newPassword, $hashAlgo, $beginSalt, $endSalt);
+        $confirmPassword2 = filterPassword($confirmPassword, $confirmPassword, $hashAlgo, $beginSalt, $endSalt);
+
+        $sql = "SELECT password FROM user WHERE username = '$username'";
+        $results = $db->query($sql);
+        if($results->num_rows > 0){
+          //echo '<h1>' .'Here again 4' .'</h1>';
+          while($row = $results->fetch_assoc()){
+            //$passwordFromDb = filterPassword($row['password'], $row['password'], $hashAlgo, $beginSalt, $endSalt);
+            $passwordFromDb = $row['password'];
+            if($passwordFromDb != $oldPassword2){
+              $oldPassErr = 'old password is incorrect';
+            }elseif($newPassword2 != $confirmPassword2){
+              $matchErr = 'new password and confirm password do not match';
+            }else{
+              $sql2 = "UPDATE user SET password = '$newPassword2' WHERE username = '$username'";
+              $db->query($sql2);
+              header('location: userHomePage.php');
+            }
+          }
+        }
+      }
+    }
+  }
+
+  ?>
 
 <body>
 
@@ -87,56 +126,16 @@ require_once 'inputFilters.php';
        <h1>Change Password</h1><br>
       
       <form method="POST" class="changePasswordForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-        Old Password <input type="password" name="oldPassword"><br><br>
+        Old Password <input type="password" name="oldPassword"><span style="color:red;position:absolute;"><?php echo $oldPassErr; ?></span><br><br>
         New Password <input type="password" name="newPassword"><br><br>
         Confirm New Password <input type="password" name="confirmPassword"><br><br>
-        <input type="submit" name="submit" value="Submit">
+        <input type="submit" name="submit" value="Submit"><span style="color:red;position:absolute;"><?php echo $emptyErr .$matchErr; ?></span>
       </form></div>
     </div>
   </div>
 
-  <?php
-
-  $oldPassword = test_Input($_POST['oldPassword']);
-  $newPassword = test_Input($_POST['newPassword']);
-  $confirmPassword = test_Input($_POST['confirmPassword']);
-  $username = $_SESSION['username'];
-
-  if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['submit'])){
-      if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
-        echo 'Please fill all fields';
-      }else{
-        $oldPassword2 = filterPassword($oldPassword, $oldPassword, $hashAlgo, $beginSalt, $endSalt);
-        $newPassword2 = filterPassword($newPassword, $newPassword, $hashAlgo, $beginSalt, $endSalt);
-        $confirmPassword2 = filterPassword($confirmPassword, $confirmPassword, $hashAlgo, $beginSalt, $endSalt);
-
-        $sql = "SELECT password FROM user WHERE username = '$username'";
-        $results = $db->query($sql);
-        if($results->num_rows > 0){
-          //echo '<h1>' .'Here again 4' .'</h1>';
-          while($row = $results->fetch_assoc()){
-            //$passwordFromDb = filterPassword($row['password'], $row['password'], $hashAlgo, $beginSalt, $endSalt);
-            $passwordFromDb = $row['password'];
-            if($passwordFromDb != $oldPassword2){
-              echo 'old password is incorrect';
-              echo '<br>' .$oldPassword;
-              echo '<br>' .$oldPassword2;
-              echo '<br>' .$passwordFromDb;
-            }elseif($newPassword2 != $confirmPassword2){
-              echo 'new password and confirm password do not match';
-            }else{
-              $sql2 = "UPDATE user SET password = '$newPassword2' WHERE username = '$username'";
-              $db->query($sql2);
-              header('location: userHomePage.php');
-            }
-          }
-        }
-      }
-    }
-  }
-
-  ?>
+  <a href="userHomePage.php" class="backButton"><img src="arrow.jpg">Back</a>
+  
 
 
   <!-- Bootstrap core JavaScript -->

@@ -121,7 +121,10 @@ if(isset($_POST['reviewBtn'])){
 					}
 				}
 			}else{
-				echo "sign in please";
+				//send error message if user isn't signed in
+				$_SESSION['notSignIn'] = "You must be signed in to leave a review";
+				$previousPage = $_SESSION['previousPage'];
+				header('location:' .$previousPage);
 			}
 		}
 	}
