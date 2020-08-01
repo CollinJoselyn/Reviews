@@ -30,6 +30,12 @@ include 'gamesApi.php';
 </head>
 
 <?php
+
+if($_SESSION['noRatingReview'] == true){
+echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
+$_SESSION['noRatingReview'] = false;
+}
+
 $poster = $_SESSION['gameInfo']->background_image;
 $gameInfo = $_SESSION['gameInfo'];
 $gameInfo2 = $_SESSION['gamesSearchResults'];
@@ -45,13 +51,13 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -59,7 +65,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           <li class="nav-item">
             <a class="nav-link" href="movies.php">Movies</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="videoGames.php">Video Games</a>
           </li>
           <li class="nav-item">
@@ -214,7 +220,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         <li>Highest</li>
       </ul>
       <br>
-      <textarea rows="10" cols="105" name="writtenReview"></textarea><br><br>
+      <textarea rows="10" cols="105" name="writtenReview"></textarea><span style="color:red;position:absolute;"><?php echo $_SESSION['emptyReview']; ?></span><br><br>
       <input type="hidden" name="prevPage" value="gameSearchResults.php">
       <input type="submit" name="reviewBtn" value="submit"><span style="color:red;position:absolute;"><?php echo $_SESSION['notSignIn'];?></span>
     </form>

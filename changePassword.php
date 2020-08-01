@@ -52,6 +52,7 @@ require_once 'inputFilters.php';
             }else{
               $sql2 = "UPDATE user SET password = '$newPassword2' WHERE username = '$username'";
               $db->query($sql2);
+              $_SESSION['passChange'] = true;
               header('location: userHomePage.php');
             }
           }
@@ -67,7 +68,7 @@ require_once 'inputFilters.php';
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -136,7 +137,6 @@ require_once 'inputFilters.php';
 
   <a href="userHomePage.php" class="backButton"><img src="arrow.jpg">Back</a>
   
-
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>

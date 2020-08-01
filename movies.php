@@ -50,19 +50,17 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.php">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
           <li class="nav-item">
-            <a class="nav-link" href="movies.php">Movies</a>
+            <a class="nav-link" href="index.php">Home</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="movies.php">Movies<span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="videoGames.php">Video Games</a>
@@ -102,7 +100,8 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1 class="mt-5">Movies</h1>
+        <p style="font-family: mv boli;font-size:60px;">Reviews</p><br>
+        <h1 class="mt-5">Movies</h1><br>
         <form action="results.php" method="get">
           Search By Title <input type="text" name="movieTitle"><input type="submit" name="searchMoviesBtn" value="Search">
           <span style="color:red;position:absolute;"><?php echo $_SESSION['blank'];?></span>
@@ -118,7 +117,7 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-      <br><h1>Recent Releases</h1><br>
+      <br><br><h1>Recent Releases</h1><br>
     </div>
     <div class="recentReleases">
       <form action="searchMovies.php" method="get">
@@ -154,7 +153,7 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <div class="container">
     <div class="row">
       <div class="hlRatedMovies">
-        <h1>Highest Rated</h1>
+        <h1>Highest Rated</h1><br>
         <form action="searchMovies.php" method="get">
         <ol>
           <img src="<?php echo $highest['Poster']; ?>">
@@ -164,7 +163,7 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
           <img src="<?php echo $highest3['Poster']; ?>">
           <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $highest3['Title']; ?>"></li><br>
         </ol>
-        <h1>Lowest Rated</h1>
+        <h1>Lowest Rated</h1><br>
         <ol>
           <img src="<?php echo $lowest['Poster']; ?>">
           <li><input type="submit" class="pageButtons" name="mPage" value="<?php echo $lowest['Title']; ?>"></li><br>

@@ -36,24 +36,48 @@ function addPlus($string){
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <?php 
+          if(isset($_GET['searchBtn'])){
+            echo '<li class="nav-item active">';
+          }else{
+            echo '<li class="nav-item">';
+          }
+          ?>
             <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
+          <?php 
+          if(isset($_GET['searchMoviesBtn'])){
+            echo '<li class="nav-item active">';
+          }else{
+            echo '<li class="nav-item">';
+          }
+          ?>
             <a class="nav-link" href="movies.php">Movies</a>
           </li>
-          <li class="nav-item">
+          <?php 
+          if(isset($_GET['gSearchBtn'])){
+            echo '<li class="nav-item active">';
+          }else{
+            echo '<li class="nav-item">';
+          }
+          ?>
             <a class="nav-link" href="videoGames.php">Video Games</a>
           </li>
-          <li class="nav-item">
+          <?php 
+          if(isset($_GET['tvSearchBtn'])){
+            echo '<li class="nav-item active">';
+          }else{
+            echo '<li class="nav-item">';
+          }
+          ?>
             <a class="nav-link" href="tv.php">TV</a>
           </li>
           <li class="nav-item">
@@ -86,7 +110,7 @@ function addPlus($string){
 <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h1>Results</h1></div>
+        <br><h1>Results</h1></div>
     	<div class="resultSection">
     	
     	<ul>
@@ -113,6 +137,9 @@ function addPlus($string){
               echo '<form action="searchAll.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Movies and TV' .'</h2>' .'<br>';
+              if($length < 1){
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['search'] .'</em>' .' in movies and tv. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+              }else{
               for($i = 0; $i < $length; $i++){
                 $titles = $results[$i]['Title'];
                 $poster = $results[$i]['Poster'];
@@ -120,7 +147,13 @@ function addPlus($string){
                 echo "<li>" .'<input type = "submit" name = "rButtons" class = "resultButtons" value="' .$titles. '"/>';
                 echo '</li>' .'<br>';
               }
+            }
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
+              if($glength < 1){
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['search'] .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>';
+                echo '<br>' .'<br>';
+                echo '<a href="index.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+              }else{
               for($i = 0; $i < $glength; $i++){
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
@@ -128,6 +161,7 @@ function addPlus($string){
                 echo "<li>" .'<input type = "submit" name = "cButtons" class = "resultButtons" value="' .$gResult. '"/>';
                 echo '</li>' .'<br>';
               }
+            }
               echo '</ul>';
               echo '</form>';
             }
@@ -149,6 +183,11 @@ function addPlus($string){
               echo '<form action="searchMovies.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Movies' .'</h2>' .'<br>';
+              if($length < 1){
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['movieTitle'] .'</em>' .' in movies. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>'; 
+                echo '<br>' .'<br>';
+                echo '<a href="movies.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+              }else{
               for($i = 0; $i < $length; $i++){
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
@@ -156,6 +195,7 @@ function addPlus($string){
               echo "<li>" .'<input type = "submit" name = "sButtons" class = "resultButtons" value="' .$titles. '"/>';
               echo '</li>' .'<br>';
               }
+            }
               echo '</ul>';
               echo '</form>';
             }
@@ -177,6 +217,11 @@ function addPlus($string){
               echo '<form action="tvSearch.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'TV Shows' .'</h2>' .'<br>';
+              if($length < 1){
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['tvTitle'] .'</em>' .' in tv shows. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+                echo '<br>' .'<br>';
+                echo '<a href="tv.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+              }else{
               for($i = 0; $i < $length; $i++){
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
@@ -184,6 +229,7 @@ function addPlus($string){
               echo "<li>" .'<input type = "submit" name = "tButtons" class = "resultButtons" value="' .$titles. '"/>';
               echo '</li>' .'<br>';
               }
+            }
               echo '</ul>';
               echo '</form>';
             }
@@ -203,6 +249,11 @@ function addPlus($string){
               echo '<form action="gameSearch.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
+              if($glength < 1){
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['gameTitle'] .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+                echo '<br>' .'<br>';
+                echo '<a href="videoGames.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+              }else{
               for($i = 0; $i < $glength; $i++){
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
@@ -210,6 +261,7 @@ function addPlus($string){
                 echo "<li>" .'<input type = "submit" name = "vgButtons" class = "resultButtons" value="' .$gResult. '"/>';
                 echo '</li>' .'<br>';
               }
+            }
               echo '</ul>';
               echo '</form>';
             }

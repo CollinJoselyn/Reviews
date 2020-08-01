@@ -34,7 +34,7 @@ function checkForm(e) {
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -111,6 +111,8 @@ function checkForm(e) {
       $sql2 = "DELETE FROM user WHERE userID = '$uid';";
       $db->query($sql2);
       session_destroy();
+      session_start();
+      $_SESSION['delAccount'] = true;
       header('location: index.php');
     }
   }

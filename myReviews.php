@@ -21,6 +21,7 @@ require_once 'dbconnection.php';
 </head>
 
 <script type="text/javascript">
+
 function checkForm(e) { 
    if (!(window.confirm("Are you sure you want to delete this review?"))) 
      e.returnValue = false; 
@@ -33,7 +34,7 @@ function checkForm(e) {
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -107,7 +108,7 @@ function checkForm(e) {
               echo '<ul>';
               $rID = $row['reviewID'];
               echo '<li>' .$row['date'] .'</li>';
-              echo '<li>' .$row['titleOfMedia'] .'  <button type="submit" value=' .$rID .' name = myR>' .'Delete'.'</button>' .'</li>';
+              echo '<li>' .'<em>' .$row['titleOfMedia'] .'</em>' .'  <button type="submit" value=' .$rID .' name = myR>' .'Delete'.'</button>' .'</li>';
               echo '<p>' .$row['writtenReview'] .'</p>';
               echo '<hr>';
               echo '</ul>';

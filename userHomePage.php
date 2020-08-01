@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'dbconnection.php';
+require_once 'inputFilters.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,21 +20,37 @@ session_start();
   <link href="style.css" rel="stylesheet">
 
 </head>
+<?php
+if($_SESSION['passChange'] == true){
+echo '<script type="text/javascript">alert("Password changed successfully!");</script>';
+$_SESSION['passChange'] = false;
+}
+?>
 
+<?php 
+$username = $_SESSION['username'];
+$sql = "SELECT userID FROM user WHERE username = '$username'";
+$result = $db->query($sql);
 
+if($result->num_rows > 0){
+  while($row = $result->fetch_assoc()){
+    $_SESSION['userID'] = $row['userID'];
+  }
+}
+?>
 
 <body>
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -65,7 +83,7 @@ session_start();
             echo '<a class="nav-link" href="createAccount.php">' .'Create Account' .'</a>';
             echo '</li>'; }?>
           <?php if(isset($_SESSION['username'])){
-            echo '<li class="nav-item">';
+            echo '<li class="nav-item active">';
             echo '<a class="nav-link" href="userHomePage.php">';
             echo $_SESSION['username'] . '</a>' . '</li>'; }; ?>
         </ul>

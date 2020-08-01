@@ -12,6 +12,10 @@ span.search {
 	list-style: none;
 }
 
+.recentReleases li {
+	text-decoration: underline;
+}
+
 .recentReleases img {
 	height: 110px;
 	width: 110px;
@@ -25,6 +29,10 @@ span.search {
 
 .recentReleasesGames ul {
 	list-style: none;
+}
+
+.recentReleasesGames li {
+	text-decoration: underline;
 }
 
 .recentReleasesGames img {
@@ -42,6 +50,10 @@ span.search {
 
 .resultSection ul {
 	list-style: none;
+}
+
+.resultSection li {
+	text-decoration: underline;
 }
 
 .resultSection img {
@@ -64,6 +76,10 @@ span.search {
 .hlRatedMovies img {
 	height: 110px;
 	width: 110px;
+}
+
+.hlRatedMovies li {
+	text-decoration: underline;
 }
 
 .moviePoster {
@@ -125,6 +141,10 @@ span.search {
 
 .frontPage ul {
 	list-style: none;
+}
+
+.frontPage li {
+	text-decoration: underline;
 }
 
 .trending {

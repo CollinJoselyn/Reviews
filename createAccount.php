@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
   $sqlUN = "SELECT username FROM user WHERE username = '$username'";
 
 if($username != "" && $pwd != "" && $email != ""){
-  if($db->query($sqlUN) === TRUE){
+  if($db->query($sqlUN) == TRUE){
   if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){
 $sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 if($db->query($sql) === TRUE){
@@ -95,13 +95,13 @@ if($db->query($sql) === TRUE){
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="index.php">Home
               <span class="sr-only">(current)</span>
             </a>
@@ -121,7 +121,7 @@ if($db->query($sql) === TRUE){
           <li class="nav-item">
             <a class="nav-link" href="signIn.php">Sign In</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="createAccount.php">Create Account</a>
           </li>
         </ul>

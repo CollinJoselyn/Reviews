@@ -23,6 +23,12 @@ include 'gamesApi.php';
 </head>
 
 <?php
+
+if($_SESSION['delAccount'] == true){
+echo '<script type="text/javascript">alert("Account deleted successfully!");</script>';
+$_SESSION['delAccount'] = false;
+}
+
 $newMovie = getImdbRecord("Bad+Boys+for+Life", $ApiKey);
 $newMovie2 = getImdbRecord("Sonic+the+Hedgehog", $ApiKey);
 $newMovie3 = getImdbRecord("No+Time+to+Die", $ApiKey);
@@ -43,7 +49,7 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
     <div class="container">
-      <a class="navbar-brand" href="#">Reviews</a>
+      <a class="navbar-brand" href="index.php">Reviews</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -94,9 +100,10 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
+        <p style="font-family: mv boli;font-size:60px;">Reviews</p><br>
         <br><h1>Search</h1>
         <form action="results.php" method="get">
-          <input type="text" name="search" value="">
+          Search by Title<input type="text" name="search" value="">
           <input type="submit" value="Search" name="searchBtn"><span style="color:red;position:absolute;"><?php echo $_SESSION['blank']; ?></span><br>
           <span><?php echo $_SESSION['gameErr'] ?></span>
         </form>
@@ -155,15 +162,16 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
         <h1>Trending Reviews</h1></div>
           <?php
           $sql = "SELECT review.reviewID, review.titleOfMedia, review.writtenReview, review.rating, user.username 
-          FROM review INNER JOIN user ON review.userID = user.userID WHERE reviewID = 19 OR reviewID = 26 OR reviewID = 27 OR reviewID = 33";
+          FROM review INNER JOIN user ON review.userID = user.userID WHERE reviewID = 19 OR reviewID = 26 OR reviewID = 27 OR reviewID = 33 
+          OR reviewID = 41 OR reviewID = 42";
           $results = $db->query($sql);
           if($results->num_rows > 0){
             echo '<div class = "trending">';
           while($row = $results->fetch_assoc()){
                 echo '<ul>' .'<br>';
-                echo '<li>' .$row["username"] .'</li>';
-                echo '<li>' .$row["titleOfMedia"] .'<span class="tab"' .'</span>' .$row["rating"] .'/10' .'</li>';
-                echo '<li>' .$row["writtenReview"] .'</li>';
+                echo '<li>' .'<span style="font-family:Arial Rounded MT Bold;">' .$row["username"] .'</span>' .'</li>';
+                echo '<li>' .'<em>'.$row["titleOfMedia"] .'</em>'.'<span class="tab"' .'</span>' .$row["rating"] .'/10' .'</li>';
+                echo '<li>' .'<span style="font-family:lucida sans typewriter;">' .$row["writtenReview"] .'</span>' .'</li>';
                 echo '</ul>';
             }
             echo '</div>';

@@ -31,8 +31,10 @@ print_r($tvPage);
 
 if(isset($_POST['reviewBtn'])){
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
-		if(empty($_POST['writtenReview'])){
-			echo "Write something";
+		if(empty($_POST['writtenReview']) || empty($_POST['number'])){
+			$_SESSION['noRatingReview'] = true;
+			$back = $_SESSION['previousPage'];
+			header('location:' .$back);
 		}else{
 			if(isset($_SESSION['username'])){
 				if($contentType == "movieTV"){
