@@ -23,7 +23,7 @@ require_once 'inputFilters.php';
 
  <?php
 
-$usernameEr = $emailEr = $passwordEr = $emailEr2 = $passwordEr2 = $passwordEr3 = $usernameEr3 = "";
+$usernameEr = $emailEr = $passwordEr = $emailEr2 = $passwordEr2 = $passwordEr3 = $usernameEr3 = $failed = "";
 $username = $email = $password = $pwd = "";
 $pw = $_POST['conPassword'];
 
@@ -74,6 +74,9 @@ if($db->query($sql) === TRUE){
 }else{
   $usernameEr3 = "That usename already exits. Please choose another username";
 }
+}else{
+  $failed = "Account creation failed. Please make sure your password meets the complexity requirements 
+  and make sure you choose a username that is not already taken.";
 }
 }
 //Password#2 for the collin4 account 
@@ -147,10 +150,11 @@ if($db->query($sql) === TRUE){
           Password<br>
           <input type="password" name="password" value="<?php echo $password; ?>">
           <span style="color:red;"><?php echo  $passwordEr .$passwordEr3?></span>
-          <span style="color:red;"><?php echo  $usernameEr2?></span><span></span><br><br>
+          <span style="color:red;"><?php echo  $usernameEr2?></span><span></span>
+          <p>Must be at least 8 characters in length.</p></p> Must contain a number, special character and a capital letter</p>
           Confirm Password<br>
           <input type="password" name="conPassword" value="<?php echo $pwd; ?>"><br><br>
-          <input type="submit" name="submit" value="Create Account">
+          <input type="submit" name="submit" value="Create Account"><span style="color:red;"><?php echo $failed; ?></span>
           </div>
       </div>
     </div>

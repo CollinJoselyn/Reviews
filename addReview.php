@@ -3,6 +3,7 @@ session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
 include 'gamesApi.php';
+include 'inputFilters.php';
 
 //error_reporting(E_ALL);
 //ini_set('display_errors', 'On');
@@ -39,7 +40,8 @@ if(isset($_POST['reviewBtn'])){
 			if(isset($_SESSION['username'])){
 				if($contentType == "movieTV"){
 					if(isset($moviePage) && $moviePage['Title'] == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $moviePage['Title'];
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -49,7 +51,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: movieSearchResults.php');
 			            unset($moviePage);
 					}elseif(isset($tvPage) && $tvPage['Title'] == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $tvPage['Title'];
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -59,7 +62,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: tvSearchResults.php');
 			            unset($tvPage);
 					}elseif(isset($indexMT) && $indexMT['Title'] == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $indexMT['Title'];
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -69,7 +73,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: searchAllResults.php');
 			            unset($indexMT);
 					}elseif(isset($mPageButtons) && $mPageButtons['Title'] == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $mPageButtons['Title'];
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -79,7 +84,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: movieSearchResults.php');
 			            unset($mPageButtons);
 					}elseif(isset($tPageButtons) && $tPageButtons['Title'] == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $tPageButtons['Title'];
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -91,7 +97,8 @@ if(isset($_POST['reviewBtn'])){
 					}
 				}elseif($contentType == "videoGame"){
 					if(isset($indexVG) && $indexVG->name == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $indexVG->name;
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -101,7 +108,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: searchAllResults.php');
 			            unset($indexVG);
 					}elseif(isset($vgPage) && $vgPage->name == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $vgPage->name;
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -111,7 +119,8 @@ if(isset($_POST['reviewBtn'])){
 			            header('location: gamesSearchResults.php');
 			            unset($vgPage);
 					}elseif(isset($gamesSearchResults) && $gamesSearchResults->name == $_SESSION['mediaName']){
-						$review = $_POST['writtenReview'];
+						$rvw = $_POST['writtenReview'];
+						$review = test_Input($rvw);
 			            $title = $gamesSearchResults->name;
 			            $user = $_SESSION['userID'];
 			            $rating = $_POST['number'];
@@ -124,7 +133,7 @@ if(isset($_POST['reviewBtn'])){
 				}
 			}else{
 				//send error message if user isn't signed in
-				$_SESSION['notSignIn'] = "You must be signed in to leave a review";
+				$_SESSION['isSignedIn'] = false;
 				$previousPage = $_SESSION['previousPage'];
 				header('location:' .$previousPage);
 			}

@@ -3,6 +3,7 @@ session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
 include 'gamesApi.php';
+include 'inputFilters.php';
 ?>
 
 <!DOCTYPE html>
@@ -22,14 +23,6 @@ include 'gamesApi.php';
   <link href="style.css" rel="stylesheet">
 
 </head>
-
-<?php
-function addPlus($string){
-    return str_replace(" ", "+", $string);
-  }
-
-
-?>
 
 <body>
 
@@ -126,19 +119,20 @@ function addPlus($string){
               header('location: index.php');
             }else{
               unset($_SESSION['blank']);
-              $mvtString = addPlus($_GET['search']);
+              $indexSearch = test_input($_GET['search']);
+              $mvtString = addPlus($indexSearch);
               $data = getImdbRecord2($mvtString, $ApiKey);
-              $gameResult = findGames($_GET['search']);
+              $gameResult = findGames($indexSearch);
               $results = $data['Search'];
-              $gameResult = findGames($_GET['search']);
-              $gameResult = findGames($_GET['search']);
+              $gameResult = findGames($indexSearch);
+              $gameResult = findGames($indexSearch);
               $length = count($results);
               $glength = count($gameResult);
               echo '<form action="searchAll.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Movies and TV' .'</h2>' .'<br>';
               if($length < 1){
-                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['search'] .'</em>' .' in movies and tv. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in movies and tv. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
               }else{
               for($i = 0; $i < $length; $i++){
                 $titles = $results[$i]['Title'];
@@ -150,7 +144,7 @@ function addPlus($string){
             }
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
               if($glength < 1){
-                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['search'] .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>';
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>';
                 echo '<br>' .'<br>';
                 echo '<a href="index.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
               }else{
@@ -176,7 +170,8 @@ function addPlus($string){
               header('location: movies.php');
             }else{
               unset($_SESSION['blank']);
-              $mvtString = addPlus($_GET['movieTitle']);
+              $indexSearch = test_input($_GET['movieTitle']);
+              $mvtString = addPlus($indexSearch);
               $data = getImdbRecord2($mvtString, $ApiKey);
               $results = $data['Search'];
               $length = count($results);
@@ -184,7 +179,7 @@ function addPlus($string){
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Movies' .'</h2>' .'<br>';
               if($length < 1){
-                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['movieTitle'] .'</em>' .' in movies. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>'; 
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in movies. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>'; 
                 echo '<br>' .'<br>';
                 echo '<a href="movies.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
               }else{
@@ -210,7 +205,8 @@ function addPlus($string){
               header('location: tv.php');
             }else{
               unset($_SESSION['blank']);
-              $mvtString = addPlus($_GET['tvTitle']);
+              $indexSearch = test_input($_GET['tvTitle']);
+              $mvtString = addPlus($indexSearch);
               $data = getImdbRecord2($mvtString, $ApiKey);
               $results = $data['Search'];
               $length = count($results);
@@ -218,7 +214,7 @@ function addPlus($string){
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'TV Shows' .'</h2>' .'<br>';
               if($length < 1){
-                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['tvTitle'] .'</em>' .' in tv shows. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in tv shows. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
                 echo '<br>' .'<br>';
                 echo '<a href="tv.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
               }else{
@@ -244,13 +240,14 @@ function addPlus($string){
               header('location: videoGames.php');
             }else{
               unset($_SESSION['blank']);
-              $gameResult = findGames($_GET['gameTitle']);
+              $indexSearch = test_input($_GET['gameTitle']);
+              $gameResult = findGames($indexSearch);
               $glength = count($gameResult);
               echo '<form action="gameSearch.php" method="get">';
               //echo '<h2>' .'Results' .'</h2>';
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
               if($glength < 1){
-                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$_GET['gameTitle'] .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
+                echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
                 echo '<br>' .'<br>';
                 echo '<a href="videoGames.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
               }else{

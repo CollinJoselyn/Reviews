@@ -27,12 +27,25 @@ include 'gamesApi.php';
 </head>
 
 <?php
+
+if($_SESSION['isSignedIn'] == false){
+echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
+$_SESSION['isSignedIn'] = true;
+}
+
+if($_SESSION['noRatingReview'] == true){
+echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
+$_SESSION['noRatingReview'] = false;
+}
+
 $mtPoster = $_SESSION['mtSearchResults']['Poster'];
 $vgPoster = $_SESSION['vgSearchResults']->background_image;
 $mtInfo = $_SESSION['mtSearchResults'];
 $vgInfo = $_SESSION['vgSearchResults'];
 $mediaName = $_SESSION['mediaName'];
 $_SESSION['type'] = "";
+unset($_SESSION['previousPage']);
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
 
 ?>
 

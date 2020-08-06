@@ -115,6 +115,11 @@ function checkForm(e) {
               echo '</div>';
             }
             echo '</form>';
+          }else{
+            echo '<div class="col-lg-12 text-center">';
+            echo '<br>' .'<br>';
+            echo '<h2>' .'No reviews yet.' .'</h2>';
+            echo '</div>';
           }
         ?>
 

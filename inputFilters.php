@@ -13,6 +13,10 @@ function test_input($data) {
   return $data;
 }
 
+function addPlus($string){
+    return str_replace(" ", "+", $string);
+}
+
 function filterPassword($password, $passwordConfirm, $hashAlgo, $beginSalt, $endSalt){
 	if($password != $passwordConfirm){
 		return false;

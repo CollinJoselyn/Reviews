@@ -31,6 +31,11 @@ include 'gamesApi.php';
 
 <?php
 
+if($_SESSION['isSignedIn'] == false){
+echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
+$_SESSION['isSignedIn'] = true;
+}
+
 if($_SESSION['noRatingReview'] == true){
 echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
 $_SESSION['noRatingReview'] = false;
@@ -220,9 +225,9 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         <li>Highest</li>
       </ul>
       <br>
-      <textarea rows="10" cols="105" name="writtenReview"></textarea><span style="color:red;position:absolute;"><?php echo $_SESSION['emptyReview']; ?></span><br><br>
+      <textarea rows="10" cols="105" name="writtenReview"></textarea><br><br>
       <input type="hidden" name="prevPage" value="gameSearchResults.php">
-      <input type="submit" name="reviewBtn" value="submit"><span style="color:red;position:absolute;"><?php echo $_SESSION['notSignIn'];?></span>
+      <input type="submit" name="reviewBtn" value="submit">
     </form>
     </div>
   </div>
