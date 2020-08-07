@@ -27,9 +27,9 @@ echo '<script type="text/javascript">alert("Please write a review and leave a ra
 $_SESSION['noRatingReview'] = false;
 }
 
-if($_SESSION['isSignedIn'] == false){
+if($_SESSION['isSignedIn'] == 0){
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
-$_SESSION['isSignedIn'] = true;
+$_SESSION['isSignedIn'] = 1;
 }
 
 $poster = $_SESSION['tTitle']['Poster'];
@@ -67,9 +67,6 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="tv.php">TV</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
           </li>
           <?php if(isset($_SESSION['username'])){
            echo '<li class="nav-item">';

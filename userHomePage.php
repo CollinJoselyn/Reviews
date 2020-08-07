@@ -64,9 +64,6 @@ if($result->num_rows > 0){
           <li class="nav-item">
             <a class="nav-link" href="tv.php">TV</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
           <?php if(isset($_SESSION['username'])){
            echo '<li class="nav-item">';
            echo  '<a class="nav-link" href="signOut.php">' .'Sign out' .'</a>';
@@ -101,18 +98,13 @@ if($result->num_rows > 0){
     <div class="row">
       <div class="col-lg-12 text-center">
         <?php echo "<h1> Welcome " .$_SESSION['username']. "</h1>"; ?>
-        </div>
+        <br><br><h3>Manage Account</h3><br>
+        
         <div class="userPage">
-          <br>
-          <ul>
-        <li><a href="myReviews.php">My Reviews</a></li>
-      </ul>
-      <br>
-      <ul>
-        <li>Manage Account</li>
-        <li><a href="changePassword.php">Change Password</a></li>
-        <li><a href="deleteAccount.php">Delete Account</a></li>
-      </ul>
+        <a href="myReviews.php">My Reviews</a><br><br>
+        <a href="changePassword.php">Change Password</a><br><br>
+        <a href="deleteAccount.php">Delete Account</a>
+        </div>
       </div>
     </div>
   </div>

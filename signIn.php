@@ -93,9 +93,6 @@ if ($result->num_rows > 0) {
           <li class="nav-item">
             <a class="nav-link" href="tv.php">TV</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
           <li class="nav-item active">
             <a class="nav-link" href="signIn.php">Sign In</a>
           </li>
@@ -114,8 +111,8 @@ if ($result->num_rows > 0) {
       <div class="col-lg-12 text-center">
         <h1 class="mt-5">Sign In</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-          Username <input type="text" name="username"><span style="color:red;"><?php echo $usernameEr;?></span><br><br>
-          Password <input type="password" name="password"><span style="color:red;"><?php echo $passwordEr; ?></span><br><br>
+          Username <input type="text" name="username"><span style="color:red;position:absolute;"><?php echo $usernameEr;?></span><br><br>
+          Password <input type="password" name="password"><span style="color:red;position:absolute;"><?php echo $passwordEr; ?></span><br><br>
           <input type="submit" name="signinbtn" value="Sign In"><span style="color:red;position: absolute;"><?php echo $unpwER; ?></span>
       </div>
     </div>

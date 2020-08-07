@@ -43,6 +43,7 @@ span.search {
 .pageButtons {
 	background-color: white;
 	border: none;
+	text-decoration: underline;
 }
 .resultSection {
 	font-size: 20px;
@@ -64,6 +65,7 @@ span.search {
 .resultButtons {
 	background-color: white;
 	border: none;
+	text-decoration: underline;
 }
 
 .hlRatedMovies {
@@ -116,14 +118,7 @@ span.search {
 }
 
 .userPage {
-	column-count: 2;
-	column-gap: 500px;
-	padding-left: 100px;
-}
-
-.userPage ul {
-	list-style: none;
-	font-size: 20px;
+	font-size: 25px;
 }
 
 

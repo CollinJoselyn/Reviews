@@ -88,9 +88,6 @@ require_once 'inputFilters.php';
           <li class="nav-item">
             <a class="nav-link" href="tv.php">TV</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
           <?php if(isset($_SESSION['username'])){
            echo '<li class="nav-item">';
            echo  '<a class="nav-link" href="signOut.php">' .'Sign out' .'</a>';

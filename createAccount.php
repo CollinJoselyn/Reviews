@@ -59,7 +59,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
   $sqlUN = "SELECT username FROM user WHERE username = '$username'";
 
 if($username != "" && $pwd != "" && $email != ""){
-  if($db->query($sqlUN) == TRUE){
+  if($db->query($sqlUN) === TRUE){
   if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){
 $sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 if($db->query($sql) === TRUE){
@@ -117,9 +117,6 @@ if($db->query($sql) === TRUE){
           </li>
           <li class="nav-item">
             <a class="nav-link" href="tv.php">TV</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="signIn.php">Sign In</a>

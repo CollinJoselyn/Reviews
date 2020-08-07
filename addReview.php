@@ -133,7 +133,7 @@ if(isset($_POST['reviewBtn'])){
 				}
 			}else{
 				//send error message if user isn't signed in
-				$_SESSION['isSignedIn'] = false;
+				$_SESSION['isSignedIn'] = 0;
 				$previousPage = $_SESSION['previousPage'];
 				header('location:' .$previousPage);
 			}
