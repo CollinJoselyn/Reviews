@@ -27,9 +27,9 @@ echo '<script type="text/javascript">alert("Please write a review and leave a ra
 $_SESSION['noRatingReview'] = false;
 }
 
-if($_SESSION['isSignedIn'] == 0){
+if($_SESSION['isSignedIn'] === 'no'){
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
-$_SESSION['isSignedIn'] = 1;
+$_SESSION['isSignedIn'] = 'yes';
 }
 
 $poster = $_SESSION['tTitle']['Poster'];

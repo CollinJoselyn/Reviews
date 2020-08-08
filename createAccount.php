@@ -46,9 +46,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
     $password = test_input($_POST["password"]);
   }
 
-  if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-    $emailEr2 = "Please enter a valid email";
-  }
+  //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    //$emailEr2 = "Please enter a valid email";
+  //}
 
   if($password != $pw){
     $passwordEr2 = "Passwords do not match";
@@ -56,10 +56,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
     $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
   }
 
+  //code to check if username already exits
   $sqlUN = "SELECT username FROM user WHERE username = '$username'";
-
+  $result = $db->query($sqlUN);
+  $unCheck = "";
+  if($result->num_rows > 0){
+    while($row = $result->fetch_assoc()){
+      $unCheck = $row['username'];
+    }
+  }
+  //end of code to check if usename already exits
+if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+    
 if($username != "" && $pwd != "" && $email != ""){
-  if($db->query($sqlUN) === TRUE){
+  if($username != $unCheck){
+    
   if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){
 $sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
 if($db->query($sql) === TRUE){
@@ -77,6 +88,9 @@ if($db->query($sql) === TRUE){
 }else{
   $failed = "Account creation failed. Please make sure your password meets the complexity requirements 
   and make sure you choose a username that is not already taken.";
+}
+}else{
+  $emailEr2 = "Please enter a valid email";
 }
 }
 //Password#2 for the collin4 account 
