@@ -35,6 +35,7 @@ $_SESSION['username'] = $_POST["username"];  //set the username session variable
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(empty($_POST["username"])){
     $usernameEr = "Please enter username"; //error message if username field is empty
+    unset($_SESSION['username']);
   }else{
     $username = test_input($_POST["username"]);  //filter the username input
   }
@@ -62,10 +63,12 @@ if ($result->num_rows > 0) {
           header('location: userHomePage.php'); //send the user to the user home page
         }else{
           $unpwER = "Username or Password is incorrect"; //error message
+          unset($_SESSION['username']);
         }
     }
 } else {
     $unpwER = "Username or Password is incorrect"; //error message
+    unset($_SESSION['username']);
 }
 }
 
