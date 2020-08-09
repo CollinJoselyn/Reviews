@@ -163,8 +163,11 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //set the previousPage session
 
         if($mediaName === $mtInfo['Title']){ //if media name is a movie/tv show
          $_SESSION['type'] = "movieTV";
-         echo '<div class="moviePoster">';
-         echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
+         echo '<div class="vgResults">';
+         echo '<div class="col-container">';
+          echo '<div class="col">';
+         echo '<img style="height: 500px; width: 400px;" src="' .$mtPoster .'" alt="Movie Poster">';
+         echo '</div>';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span>' .'Title:' .'</span>' . $mtInfo['Title']  .'</li>';
          echo '<li>' .'<span>' .'Year:' .'</span>' .$mtInfo['Year'] .'</li>';
@@ -176,6 +179,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //set the previousPage session
          echo '<li>' .'<span>' .'Actors:' .'</span>' .$mtInfo['Actors'] .'</li>';
          echo '<li>' .'<span>' .'Plot:'  .'</span>' .$mtInfo['Plot']  .'</li>';
          echo '<li>' .'<span>' .'User Rating:' .'</span>' .round($rating, 1) .$noReview .'</li>';
+         echo '</ul>';
          echo '</ul>';
         }else{ //if it is a video game
           echo '<div class="vgResults">';

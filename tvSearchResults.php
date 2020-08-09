@@ -17,6 +17,14 @@ include 'imbdAPI.php';
   <meta name="description" content="">
   <meta name="author" content="">
 
+  <style>
+
+  * {
+    box-sizing: border-box;
+  }
+
+  </style>
+
   <title>Reviews</title>
 
   <!-- Bootstrap core CSS -->
@@ -110,7 +118,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previousPage sessio
   <br>
   <div class="container">
     <div class="row">
-      <div class="moviePoster">
+      <div class="vgResults">
          <?php
         $rating;
         $rating2;
@@ -157,7 +165,10 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previousPage sessio
       }
 
         if($tvInfo && $_SESSION['mediaName'] == $tvInfo['Title']){ //displays the tv show data from the title the user clicked on in tv.php page
-         echo '<img src="' .$poster .'" alt="Movie Poster">';
+          echo '<div class="col-container">';
+          echo '<div class="col">';
+         echo '<img style="height: 500px; width: 400px;" src="' .$poster .'" alt="Movie Poster">';
+         echo '</div>';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$tvInfo['Title'] . '</li>';
          echo '<li>' .'<span> ' .'Year:  ' .'</span>' .' ' .$tvInfo['Year'] .'</li>';
@@ -170,8 +181,13 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previousPage sessio
          echo '<li>' .'<span> ' .'Plot:  ' .'</span>'  .' ' .$tvInfo['Plot']  .'</li>';
          echo '<li>' .'<span> ' .'User Rating:  ' .'</span>' .' ' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
+         echo '</div>';
+         echo '</div>';
        }else{ //displays the data for the tv show that the user searched for on tv.php
-        echo '<img src="' .$poster2 .'" alt="Movie Poster">';
+        echo '<div class="col-container">';
+          echo '<div class="col">';
+        echo '<img style="height: 500px; width: 400px;" src="' .$poster2 .'" alt="Movie Poster">';
+        echo '</div>';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$tvInfo2['Title'] . '</li>';
          echo '<li>' .'<span> ' .'Year:  ' .'</span>' .' ' .$tvInfo2['Year'] .'</li>';
@@ -184,6 +200,8 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previousPage sessio
          echo '<li>' .'<span> ' .'Plot:  ' .'</span>'  .' ' .$tvInfo2['Plot']  .'</li>';
          echo '<li>' .'<span> ' .'User Rating:  ' .'</span>' .' ' .round($rating2, 1) .$noReview .'</li>';
          echo '</ul>';
+         echo '</div>';
+         echo '</div>';
      }
          ?>
        </div>
