@@ -1,4 +1,8 @@
 <?php
+/*
+This page displays the data for the movie the user searched for on movies.php page. Also displays data for 
+the movie titles the user clicked on in movies.php and index.php
+*/
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
@@ -21,24 +25,27 @@ include 'imbdAPI.php';
 </head>
 
 <?php
-
+//Checks isSignedIn session variable to see if it equals 'no'.
 if($_SESSION['isSignedIn'] === 'no'){
+  //pop up error message telling user they have to be signed in to leave a review
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
 $_SESSION['isSignedIn'] = 'yes';
 }
 
+//This checks to see if the noRatingReview session variable is true. If user doesn't write both a review and leave a rating
 if($_SESSION['noRatingReview'] == true){
+ //pop up to inform user they must write a review and leave a rating.
 echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
 $_SESSION['noRatingReview'] = false;
 }
 
-$poster = $_SESSION['mPageResults']['Poster'];
-$movieInfo = $_SESSION['mPageResults'];
-$poster2 = $_SESSION['mPageButton']['Poster'];
-$movieInfo2 = $_SESSION['mPageButton'];
-$_SESSION['type'] = "movieTV";
-unset($_SESSION['previousPage']);
-$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
+$poster = $_SESSION['mPageResults']['Poster']; //gets the movie poster
+$movieInfo = $_SESSION['mPageResults']; //contains movie data from the title the user searched for on movies.php; Movies.php -> results.php -> searchMovies.php
+$poster2 = $_SESSION['mPageButton']['Poster']; //gets the movie poster
+$movieInfo2 = $_SESSION['mPageButton']; //contains movie data from the title the user clicked on in the movies.php page
+$_SESSION['type'] = "movieTV"; //type is movie and tv
+unset($_SESSION['previousPage']); //unsets the previous page session variable
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previous page session variable to this page 
 
 ?>
 
@@ -109,15 +116,15 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         $rating;
         $rating2;
         $noReview = "";
-        $id = $movieInfo['imdbID'];
-        $id2 = $movieInfo2['imdbID'];
-        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
+        $id = $movieInfo['imdbID']; //get the id for the title the user searched for on movies.php
+        $id2 = $movieInfo2['imdbID']; //get the id for the title the user clicked on in the movies.php page
+        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'"; //get the average rating for the title the user searched for on movies.php
         $results = $db->query($sqlRating);
-        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id2'";
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id2'"; //get the average rating for the title the user clicked on in the movies.php page
         $results2 = $db->query($sqlRating2);
-        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'";
+        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'"; //gets the rating for the title the user searched for on movies.php
         $results3 = $db->query($sql3);
-        $sql4 = "SELECT rating FROM review WHERE titleID = '$id2'";
+        $sql4 = "SELECT rating FROM review WHERE titleID = '$id2'"; //gets the rating for the title the user clicked on in the movies.php page
         $results4 = $db->query($sql4);
 
         if($results3->num_rows > 0){
@@ -131,7 +138,6 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           }
         }
       }else{
-        //$rating = "No reviews yet";
         $noReview = " People have reviewed this title";
       }
 
@@ -146,11 +152,10 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           }
         }
       }else{
-        //$rating2 = "No reviews yet";
         $noReview = " People have reviewed this title";
       }
 
-        if($movieInfo){
+        if($movieInfo){ //displays data for the title the user searched for on movies.php
          echo '<img src="' .$poster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$movieInfo['Title'] . '</li>';
@@ -164,7 +169,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
          echo '<li>' .'<span> ' .'Plot:  ' .'</span>'  .' ' .$movieInfo['Plot']  .'</li>';
          echo '<li>' .'<span> ' .'User Rating:  ' .'</span>' .' ' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
-       }else{
+       }else{ //displays data for the title the user clicked on in the movies.php page
         echo '<img src="' .$poster2 .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$movieInfo2['Title'] . '</li>';

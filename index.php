@@ -23,15 +23,16 @@ include 'gamesApi.php';
 </head>
 
 <?php
-
+//checks to see if the delAccount variable is active. If it is the it will display a pop up saying there account is deleted
 if($_SESSION['delAccount'] == true){
-echo '<script type="text/javascript">alert("Account deleted successfully!");</script>';
-$_SESSION['delAccount'] = false;
+echo '<script type="text/javascript">alert("Account deleted successfully!");</script>'; //pop up message
+$_SESSION['delAccount'] = false; //sets the delAccount to false
 }
 
+//These variables get the data for the tv shows, movies and video games displayed on this page.
 $newMovie = getImdbRecord("Bad+Boys+for+Life", $ApiKey);
 $newMovie2 = getImdbRecord("Sonic+the+Hedgehog", $ApiKey);
-$newMovie3 = getImdbRecord("No+Time+to+Die", $ApiKey);
+$newMovie3 = getImdbRecord("Jaws", $ApiKey);
 $newTV = getImdbRecord("Tiger+King", $ApiKey);
 $newTV2 = getImdbRecord("Money+Heist", $ApiKey);
 $newTV3 = getImdbRecord("Better+Call+Saul", $ApiKey);
@@ -39,8 +40,8 @@ $newGame = findGame("The Last of Us Part II");
 $newGame2 = findGame("Doom Eternal");
 $newGame3 = findGame("Predator: Hunting Grounds");
 
-unset($_SESSION['previousPage2']);
-$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
+unset($_SESSION['previousPage2']); //unset the previousPage2 session variable
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF']; //set the previousPage session variable to this page
 ?>
 
 
@@ -158,6 +159,7 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
       <div class="col-lg-12 text-center">
         <h1>Trending Reviews</h1></div>
           <?php
+          //Pulls some reviews from the database to display under the trending reviews section
           $sql = "SELECT review.reviewID, review.titleOfMedia, review.writtenReview, review.rating, user.username 
           FROM review INNER JOIN user ON review.userID = user.userID WHERE reviewID = 19 OR reviewID = 26 OR reviewID = 27 OR reviewID = 33 
           OR reviewID = 41 OR reviewID = 42";

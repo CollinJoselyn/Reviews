@@ -1,4 +1,7 @@
 <?php
+/*
+This page is for account creation.
+*/
 session_start();
 require_once 'dbconnection.php';
 require_once 'inputFilters.php';
@@ -23,37 +26,33 @@ require_once 'inputFilters.php';
 
  <?php
 
-$usernameEr = $emailEr = $passwordEr = $emailEr2 = $passwordEr2 = $passwordEr3 = $usernameEr3 = $failed = "";
+$usernameEr = $emailEr = $passwordEr = $emailEr2 = $passwordEr2 = $passwordEr3 = $usernameEr3 = $failed = ""; //error message variables
 $username = $email = $password = $pwd = "";
 $pw = $_POST['conPassword'];
 
-if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
-  if(empty($_POST["username"])){
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){ //checks to see if POST is being used and it the user clicked the submit button
+  if(empty($_POST["username"])){ //if the username field is empty
     $usernameEr = "Please enter a username";
   }else{
-    $username = test_input($_POST["username"]);
+    $username = test_input($_POST["username"]); //filter the input
   }
 
-  if(empty($_POST["email"])){
+  if(empty($_POST["email"])){ //if the email field is empty
     $emailEr = "Please enter an email";
   }else{
-    $email = test_input($_POST["email"]);
+    $email = test_input($_POST["email"]); //filter the input
   }
 
-  if(empty($_POST["password"])){
+  if(empty($_POST["password"])){ //if the password field is empty
     $passwordEr = "Please enter a password";
   }else{
-    $password = test_input($_POST["password"]);
+    $password = test_input($_POST["password"]); //filter the input
   }
 
-  //if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-    //$emailEr2 = "Please enter a valid email";
-  //}
-
-  if($password != $pw){
+  if($password != $pw){ //if passwords don't match
     $passwordEr2 = "Passwords do not match";
-  }else{
-    $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt);
+  }else{ //if they do, then translate it to its hash value
+    $pwd = filterPassword($password, $pw, $hashAlgo, $beginSalt, $endSalt); 
   }
 
   //code to check if username already exits
@@ -66,44 +65,33 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit']) == true){
     }
   }
   //end of code to check if usename already exits
-if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+if(filter_var($email, FILTER_VALIDATE_EMAIL)){ //checks to see if email is valid
     
-if($username != "" && $pwd != "" && $email != ""){
-  if($username != $unCheck){
+if($username != "" && $pwd != "" && $email != ""){ //checks to see if all fields are filled out
+  if($username != $unCheck){//check to see if the username they type already exits
     
-  if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){
+  if(strlen($password) >= 8 && preg_match("#[0-9]+#", $password) && preg_match("#[A-Z]+#", $password) && preg_match("#\W+#", $password)){ //checks password complexity
 $sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
-if($db->query($sql) === TRUE){
+if($db->query($sql) === TRUE){ //if the sql statement above executes succussfully
   $_SESSION['username'] = $username;
-  header('location: userHomePage.php');
+  header('location: userHomePage.php'); //send user to the user home page
 }else{
   echo "Error: " .$sql . "<br>" . $db->error;
 }
-}else{
+}else{ //if password doesn't meet complexity requirements
   $passwordEr3 = "Password doesn't meet complexity requirements";
 }
-}else{
+}else{ //if username already exits
   $usernameEr3 = "That usename already exits. Please choose another username";
 }
-}else{
+}else{ //if not all fields are filled out
   $failed = "Account creation failed. Please make sure your password meets the complexity requirements 
   and make sure you choose a username that is not already taken.";
 }
-}else{
+}else{ //if email is not valid
   $emailEr2 = "Please enter a valid email";
 }
 }
-//Password#2 for the collin4 account 
-
-//$sql = "INSERT INTO user (username, password, email) VALUES ('$username', '$pwd', '$email')";
-//if(isset($_POST['submit'])){
-//if($db->query($sql) === TRUE){
-  //$_SESSION['username'] = $username;
-  //header('location: userHomePage.php');
-//}else{
-  //echo "Error: " .$sql . "<br>" . $db->error;
-//}
-//}
 ?>
 
 

@@ -1,4 +1,7 @@
 <?php
+/*
+This page is for user to change their password.
+*/
 session_start();
 require_once 'dbconnection.php';
 require_once 'inputFilters.php';
@@ -23,17 +26,18 @@ require_once 'inputFilters.php';
 
 <?php
 
-  $oldPassword = test_Input($_POST['oldPassword']);
-  $newPassword = test_Input($_POST['newPassword']);
-  $confirmPassword = test_Input($_POST['confirmPassword']);
-  $username = $_SESSION['username'];
-  $emptyErr = $matchErr = $oldPassErr = "";
+  $oldPassword = test_Input($_POST['oldPassword']); //filters input
+  $newPassword = test_Input($_POST['newPassword']); //filters input
+  $confirmPassword = test_Input($_POST['confirmPassword']); //filters input
+  $username = $_SESSION['username']; //get the username from the username session variable
+  $emptyErr = $matchErr = $oldPassErr = "";  //error message variables
 
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(isset($_POST['submit'])){
-      if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){
+    if(isset($_POST['submit'])){ //checks if user hits the submit button
+      if(empty($oldPassword) || empty($newPassword) || empty($confirmPassword)){ //if any of the fields are empty, send error message
         $emptyErr = 'Please fill all fields';
       }else{
+        //these variables translate the password to the hash
         $oldPassword2 = filterPassword($oldPassword, $oldPassword, $hashAlgo, $beginSalt, $endSalt);
         $newPassword2 = filterPassword($newPassword, $newPassword, $hashAlgo, $beginSalt, $endSalt);
         $confirmPassword2 = filterPassword($confirmPassword, $confirmPassword, $hashAlgo, $beginSalt, $endSalt);
@@ -41,19 +45,17 @@ require_once 'inputFilters.php';
         $sql = "SELECT password FROM user WHERE username = '$username'";
         $results = $db->query($sql);
         if($results->num_rows > 0){
-          //echo '<h1>' .'Here again 4' .'</h1>';
           while($row = $results->fetch_assoc()){
-            //$passwordFromDb = filterPassword($row['password'], $row['password'], $hashAlgo, $beginSalt, $endSalt);
             $passwordFromDb = $row['password'];
-            if($passwordFromDb != $oldPassword2){
+            if($passwordFromDb != $oldPassword2){ //if the old password is incorrect
               $oldPassErr = 'old password is incorrect';
-            }elseif($newPassword2 != $confirmPassword2){
+            }elseif($newPassword2 != $confirmPassword2){ //if the new password and confirm password entries don't match
               $matchErr = 'new password and confirm password do not match';
             }else{
-              $sql2 = "UPDATE user SET password = '$newPassword2' WHERE username = '$username'";
+              $sql2 = "UPDATE user SET password = '$newPassword2' WHERE username = '$username'"; //query to update password
               $db->query($sql2);
               $_SESSION['passChange'] = true;
-              header('location: userHomePage.php');
+              header('location: userHomePage.php'); //send user back to userHomePage.php
             }
           }
         }

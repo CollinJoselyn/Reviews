@@ -1,15 +1,23 @@
 <?php
+/*
+This script is for pulling data from the rawg api. This api gives 
+the video game data for the site.
+*/
+
 
 require __DIR__ . '/vendor/autoload.php';
 
 use \Curl\Curl;
-set_time_limit(0);
+set_time_limit(0); //This disables the loading time limit.
+
+//This function is used to load game data.
 function loadGameData($game) {
   $curl = new Curl();
   $curl->get("https://rawg.io/api/games/{$game->slug}");
   return $curl->response;
 }
 
+//This function searches the rawg api for a single game by title. 
 function findGame($name) {
   $curl = new Curl();
   $curl->get("https://rawg.io/api/games", [
@@ -25,6 +33,7 @@ function findGame($name) {
   return null;
 }
 
+//This searches the rawg api for games by title. This will return multiple results.
 function findGames($name) {
   $curl = new Curl();
   $curl->get("https://rawg.io/api/games", [
@@ -41,22 +50,5 @@ function findGames($name) {
   return $games;
 }
 
-curl_setopt($curl, CURLOPT_TIMEOUT_MS, 2000);
-/*
-for($i = 0; $i < $length; $i++){
-  echo $result[$i]->name;
-  echo '<br>';
-}*/
-/*
-$result = findGame("The Last of Us Part II");
-echo '<pre>';
-print_r($result);
-echo '</pre>'; 
-if($result){
-  echo 'It is true';
-}else{
-  echo 'it is false';
-} */
-//echo $result->name;
-//echo $result->background_image;
+curl_setopt($curl, CURLOPT_TIMEOUT_MS, 2000); 
 ?>

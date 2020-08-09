@@ -1,4 +1,7 @@
 <?php
+/*
+This is the sign in page. Here the user can sign into their account.
+*/
 session_start();
 require_once 'dbconnection.php';
 require_once 'inputFilters.php';
@@ -24,28 +27,28 @@ require_once 'inputFilters.php';
 <?php
 
 
-$usernameEr = $passwordEr = $unpwER = "";
+$usernameEr = $passwordEr = $unpwER = ""; //error message variables
 $username = $password = "";
 
-$_SESSION['username'] = $_POST["username"];
+$_SESSION['username'] = $_POST["username"];  //set the username session variable to the username
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
   if(empty($_POST["username"])){
-    $usernameEr = "Please enter username";
+    $usernameEr = "Please enter username"; //error message if username field is empty
   }else{
-    $username = test_input($_POST["username"]);
+    $username = test_input($_POST["username"]);  //filter the username input
   }
 
   if(empty($_POST["password"])){
-    $passwordEr = "Please enter password";
+    $passwordEr = "Please enter password"; //error message if password field is empty
   }else{
-    $pw = test_input($_POST["password"]);
-    $password = filterPassword($pw, $pw, $hashAlgo, $beginSalt, $endSalt);
+    $pw = test_input($_POST["password"]); //filter the password input
+    $password = filterPassword($pw, $pw, $hashAlgo, $beginSalt, $endSalt); //translate the password to the hash value
   }
 }
 
-$sql = "SELECT username, password, userID FROM user WHERE username = '$username' AND password = '$password'";
-if(isset($_POST['signinbtn'])){
+$sql = "SELECT username, password, userID FROM user WHERE username = '$username' AND password = '$password'";  //pull username, password, and id from database
+if(isset($_POST['signinbtn'])){ //if user clicks the sign in button
 $result = $db->query($sql);
 if ($result->num_rows > 0) {
     // output data of each row
@@ -53,16 +56,16 @@ if ($result->num_rows > 0) {
         $inputUser = $row["username"];
         $inputPass = $row["password"];
         $userID = $row['userID'];
-        if($inputUser == $username && $inputPass == $password){
-          $_SESSION['username'] = $username;
-          $_SESSION['userID'] = $userID;
-          header('location: userHomePage.php');
+        if($inputUser == $username && $inputPass == $password){ //check if the username and password matches the one in database
+          $_SESSION['username'] = $username; //session variable that contains the username
+          $_SESSION['userID'] = $userID; //session variable that contains the user id
+          header('location: userHomePage.php'); //send the user to the user home page
         }else{
-          $unpwER = "Username or Password is incorrect";
+          $unpwER = "Username or Password is incorrect"; //error message
         }
     }
 } else {
-    $unpwER = "Username or Password is incorrect";
+    $unpwER = "Username or Password is incorrect"; //error message
 }
 }
 

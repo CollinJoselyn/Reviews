@@ -1,4 +1,8 @@
 <?php
+/*
+This page is the main page for Tv shows. Here the user can search for tv shows. 
+This page displays popular tv shows and the highest and lowest rated shows.
+*/
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
@@ -22,7 +26,7 @@ include 'imbdAPI.php';
 </head>
 
 <?php
-
+//These variables get the data for the tv shows displayed on this page.
 $popular = getImdbRecord("The+Mandalorian", $ApiKey);
 $popular2 = getImdbRecord("The+Crown", $ApiKey);
 $popular3 = getImdbRecord("Rick+and+Morty", $ApiKey);
@@ -39,9 +43,9 @@ $lowest = getImdbRecord("For+Better+or+Worse", $ApiKey);
 $lowest2 = getImdbRecord("Fred:+the+Show", $ApiKey);
 $lowest3 = getImdbRecord("16+and+Pregnant", $ApiKey);
 
-unset($_SESSION['notSignIn']);
-unset($_SESSION['previousPage2']);
-$_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
+unset($_SESSION['notSignIn']); //unsets the notSignedIn session variable
+unset($_SESSION['previousPage2']); //unsets the previousPage2 session variable
+$_SESSION['previousPage2'] = $_SERVER['PHP_SELF']; //sets the previousPage2 variable to this page
 ?>
 
 <body>

@@ -1,4 +1,8 @@
 <?php
+/*
+This is the users home page. Here they can click links to see their reviews they left, 
+change password and delete account.
+*/
 session_start();
 require_once 'dbconnection.php';
 require_once 'inputFilters.php';
@@ -21,6 +25,7 @@ require_once 'inputFilters.php';
 
 </head>
 <?php
+//password change successfully pop up
 if($_SESSION['passChange'] == true){
 echo '<script type="text/javascript">alert("Password changed successfully!");</script>';
 $_SESSION['passChange'] = false;
@@ -34,7 +39,7 @@ $result = $db->query($sql);
 
 if($result->num_rows > 0){
   while($row = $result->fetch_assoc()){
-    $_SESSION['userID'] = $row['userID'];
+    $_SESSION['userID'] = $row['userID']; //set the session variable userID to the users id from the database
   }
 }
 ?>

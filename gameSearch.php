@@ -1,88 +1,55 @@
 <?php
+/*
+When the user clicks on one of the game titles on the videoGames.php page and the results.php page,
+it will be processed by this page. This will search the games api for the given title and after 
+that search it will send the user to gamesSearchResults.php page.
+*/
+
 session_start();
 require 'dbconnection.php';
 require 'gamesApi.php';
+require 'inputFilters.php';
 
-function test_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  return $data;
-}
-/*
-$gameTitle = "";
-$gameTitleErr = "";
-$_SESSION['gameInfo'] = "";
-$_SESSION['gameErr'] = "";
-$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
-$_SESSION['mediaName'] = $_GET['gameTitle'];
-if(isset($_GET['gSearchBtn'])){
-	if($_SERVER['REQUEST_METHOD'] == "GET"){
-		if(empty($_GET['gameTitle'])){
-			$gameTitleErr = "Please enter a game title";
-		}else{
-			$gameTitle = $_GET['gameTitle'];
-			$gameResults = findGame($gameTitle);
-			if($gameTitle != $gameResults->name){
-				$gameTitleErr = 'Please enter a valid game title';
-				$_SESSION['gameErr'] = $gameTitleErr;
-				header('location: videoGames.php');
-			}else{
-				$_SESSION['gameInfo'] = $gameResults;
-				if($db->query($sql) === TRUE){
-					header('location: gamesSearchResults.php');
-				}else{
-					$gameID = $gameResults->id;
-					$gTitle = $gameResults->name;
-					$releaseDate = $gameResults->released;
-					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
-					$db->query($sql2);
-					header('location: gamesSearchResults.php');
-				}
-				
-			}
-		}
-	}
-}*/
+
 $gbTitle = "";
-if(isset($_GET['gamePage'])){
+if(isset($_GET['gamePage'])){ //if the user clicks on one of the titles on the videoGames.php page
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
-		$_SESSION['mediaName'] = $_GET['gamePage'];
-		$gameTitle = $_GET['gamePage'];
-			$gameResults = findGame($gameTitle);
-				$_SESSION['gameInfo'] = $gameResults;
+		$_SESSION['mediaName'] = $_GET['gamePage'];  //session variable that contains the game title
+		$gameTitle = $_GET['gamePage']; //contains the game title 
+			$gameResults = findGame($gameTitle); //searches the api for the game title
+				$_SESSION['gameInfo'] = $gameResults; //session variable with game data
 				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
-				if($db->query($sql) === TRUE){
-					header('location: gamesSearchResults.php');
-				}else{
+				if($db->query($sql) === TRUE){ //check database if the game title is in it
+					header('location: gamesSearchResults.php'); //sends user to gamesSearchResults.php
+				}else{ //if not in database then add to it 
 					$gameID = $gameResults->id;
 					$gTitle = $gameResults->name;
 					$releaseDate = $gameResults->released;
 					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
 					$db->query($sql2);
-					header('location: gamesSearchResults.php');
+					header('location: gamesSearchResults.php'); //sends user to gamesSearchResults.php
 				}
 				
 			}
 	}
 
-	if(isset($_GET['vgButtons'])){
+	if(isset($_GET['vgButtons'])){ //if the user clicks on one of the game titles from results.php
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
-		$_SESSION['mediaName'] = $_GET['vgButtons'];
-		$gameTitle = $_GET['vgButtons'];
-			$gameResults = findGame($gameTitle);
-				$_SESSION['gamesSearchResults'] = $gameResults;
-				unset($_SESSION['gameInfo']);
+		$_SESSION['mediaName'] = $_GET['vgButtons'];  //session variable that contains the game title
+		$gameTitle = $_GET['vgButtons']; //contains the game title 
+			$gameResults = findGame($gameTitle); //search the api for the game title 
+				$_SESSION['gamesSearchResults'] = $gameResults; //session variable that contains the data for the given game title
+				unset($_SESSION['gameInfo']); //unsets the gameInfo session variable
 				$sql = "SELECT title FROM videogames WHERE title = '$gameTitle'";
-				if($db->query($sql) === TRUE){
-					header('location: gamesSearchResults.php');
-				}else{
+				if($db->query($sql) === TRUE){ //check the database to see if the game is in there
+					header('location: gamesSearchResults.php'); //send user to gamesSearchResults.php
+				}else{ //if not in database then add it to it 
 					$gameID = $gameResults->id;
 					$gTitle = $gameResults->name;
 					$releaseDate = $gameResults->released;
 					$sql2 = "INSERT INTO videogames (gameID, title, releaseDate) VALUES ('$gameID', '$gTitle', '$releaseDate')";
 					$db->query($sql2);
-					header('location: gamesSearchResults.php');
+					header('location: gamesSearchResults.php'); //send user to gamesSearchResults.php
 				}
 				
 			}

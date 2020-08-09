@@ -30,24 +30,27 @@ include 'gamesApi.php';
 </head>
 
 <?php
-
+//Checks isSignedIn session variable to see if it equals 'no'.
 if($_SESSION['isSignedIn'] === 'no'){
+//pop up error message telling user they have to be signed in to leave a review
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
 $_SESSION['isSignedIn'] = 'yes';
 }
 
+//This checks to see if the noRatingReview session variable is true. If user doesn't write both a review and leave a rating
 if($_SESSION['noRatingReview'] == true){
+//pop up to inform user they must write a review and leave a rating.
 echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
-$_SESSION['noRatingReview'] = false;
+$_SESSION['noRatingReview'] = false; //set the variable back to false
 }
 
-$poster = $_SESSION['gameInfo']->background_image;
-$gameInfo = $_SESSION['gameInfo'];
-$gameInfo2 = $_SESSION['gamesSearchResults'];
-$poster2 = $_SESSION['gamesSearchResults']->background_image;
-$_SESSION['type'] = "videoGame";
-unset($_SESSION['previousPage']);
-$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
+$poster = $_SESSION['gameInfo']->background_image; //gets the poster
+$gameInfo = $_SESSION['gameInfo']; //contains video game data from the title the user clicked on in the videoGame.php page
+$gameInfo2 = $_SESSION['gamesSearchResults']; //session variable that contains game data for the game the user searched for on videoGames.php
+$poster2 = $_SESSION['gamesSearchResults']->background_image; //gets the poster
+$_SESSION['type'] = "videoGame"; //session type is video game
+unset($_SESSION['previousPage']); //unset previousPage session variable
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //set the previousPage session variable to this page
 ?>
 
 
@@ -119,48 +122,48 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         $rating;
         $rating2;
         $noReview = "";
-        $id = $gameInfo->id;
-        $id2 = $gameInfo2->id;
-        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id'";
+        $id = $gameInfo->id; //gets the id of the title the user clicked on in the videoGame.php page
+        $id2 = $gameInfo2->id; //gets the id of the game the user searched for on videoGames.php
+        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id'"; //get the avg rating for the title the user clicked on in the videoGame.php page
         $results = $db->query($sqlRating);
-        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id2'";
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id2'"; //get the avg rating for the game the user searched for on videoGames.php
         $results2 = $db->query($sqlRating2);
-        $sql3 = "SELECT rating FROM review WHERE gameID = '$id'";
+        $sql3 = "SELECT rating FROM review WHERE gameID = '$id'"; //get the rating of the title the user clicked on in the videoGame.php page
         $results3 = $db->query($sql3);
-        $sql4 = "SELECT rating FROM review WHERE gameID = '$id2'";
+        $sql4 = "SELECT rating FROM review WHERE gameID = '$id2'"; //get the rating of the game the user searched for on videoGames.php
         $results4 = $db->query($sql4);
 
+        //gets the average rating for the title the user clicked on in the videoGame.php page
         if($results3->num_rows > 0){
         if($results->num_rows > 0){
           while($row = $results->fetch_assoc()){
-            if(is_null($row['avg'])){
-              $rating = "No reviews yet";
+            if(is_null($row['avg'])){ //check to see if it is null
+              $rating = "No reviews yet"; //will equal this if null
             }else{
-              $rating = $row['avg'];
+              $rating = $row['avg']; //if not null, it will equal this
             }
           }
         }
       }else{
-        //$rating = "No reviews yet";
-        $noReview = " People have reviewed this title";
+        $noReview = " People have reviewed this title"; //if nobody has review this title
       }
 
+        //gets the average rating for the game the user searched for on videoGames.php
         if($results4->num_rows > 0){
         if($results2->num_rows > 0){
           while($row = $results2->fetch_assoc()){
-            if(is_null($row['avg'])){
-              $rating2 = " People have reviewed the title";
+            if(is_null($row['avg'])){ //check to see if it is null
+              $rating2 = " People have reviewed the title"; //will equal this if null
             }else{
-              $rating2 = $row['avg'];
+              $rating2 = $row['avg']; //if not null, it will equal this
             }
           }
         }
       }else{
-        //$rating2 = "No reviews yet";
-        $noReview = " People have reviewed this title";
+        $noReview = " People have reviewed this title"; //if nobody has review this title
       }
 
-        if($gameInfo){
+        if($gameInfo){ //displays the data for the title the user clicked on in the videoGame.php page
           echo '<div class="col-container">';
           echo '<div class="col">';
          echo '<img style="height: 500px; width: 400px;" src="' .$poster .'" alt="Movie Poster">';
@@ -176,7 +179,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
          echo '</ul>';
          echo '</div>';
          echo '</div>';
-       }else{
+       }else{ //displays the data for the game the user searched for on videoGames.php
         echo '<div class="col-container">';
         echo '<div class="col">';
         echo '<img style="height: 500px; width: 400px;" src="' .$poster2 .'" alt="Movie Poster">';

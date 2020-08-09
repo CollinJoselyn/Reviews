@@ -1,4 +1,10 @@
 <?php
+/*
+This page displays the search results to the user. After the user types something in the search
+field on the movies.php, tv.php, index.php and videoGame.php pages, it will direct them
+to this page which displays the results.
+*/
+
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
@@ -108,30 +114,29 @@ include 'inputFilters.php';
       
 
 
-        if(isset($_GET['searchBtn'])){
+        if(isset($_GET['searchBtn'])){ //checks if the search button from index.php was clicked
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['search'])){
               //error message back to original page
-              $_SESSION['blank'] = "Please enter a title";
-              header('location: index.php');
-            }else{
-              unset($_SESSION['blank']);
-              $indexSearch = test_input($_GET['search']);
-              $mvtString = addPlus($indexSearch);
-              $data = getImdbRecord2($mvtString, $ApiKey);
-              $gameResult = findGames($indexSearch);
-              $results = $data['Search'];
-              $gameResult = findGames($indexSearch);
-              $gameResult = findGames($indexSearch);
-              $length = count($results);
-              $glength = count($gameResult);
-              echo '<form action="searchAll.php" method="get">';
-              //echo '<h2>' .'Results' .'</h2>';
+              $_SESSION['blank'] = "Please enter a title"; //session variable for error message if user enters nothing
+              header('location: index.php'); //send user back to index.php
+            }else{ //if user types something into the search bar in index.php
+              unset($_SESSION['blank']);  //unsets the session variable for blank error msg
+              $indexSearch = test_input($_GET['search']); //filters the string 
+              $mvtString = addPlus($indexSearch);  //replace white space with +
+              $data = getImdbRecord2($mvtString, $ApiKey);  //uses the give search title and searchs for movies and tv shows. will contain multiple results
+              $gameResult = findGames($indexSearch); //uses the given search title to search for games. Will contain multiple results
+              $results = $data['Search'];  //contains the results for the movie/tv shows
+              $gameResult = findGames($indexSearch); //contains the results for the video game search
+              $length = count($results);  //number of results for movies/tv 
+              $glength = count($gameResult); //number of results for video games
+              echo '<form action="searchAll.php" method="get">';  //form that contains the results of the search. When user clicks on one it will be processed by searchAll.php
               echo '<br>' .'<h2>' .'Movies and TV' .'</h2>' .'<br>';
-              if($length < 1){
+              if($length < 1){ //if there are zero results for the movie/tv search
+                //error message displayed to the user
                 echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in movies and tv. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
-              }else{
-              for($i = 0; $i < $length; $i++){
+              }else{ //if there are results for the movie/tv title
+              for($i = 0; $i < $length; $i++){ //loop used to display the results
                 $titles = $results[$i]['Title'];
                 $poster = $results[$i]['Poster'];
                 echo '<img src=' .$poster .'>';
@@ -140,12 +145,13 @@ include 'inputFilters.php';
               }
             }
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
-              if($glength < 1){
+              if($glength < 1){  //if there are zero results for the given video title
+                //displays error message to the user
                 echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>';
                 echo '<br>' .'<br>';
-                echo '<a href="index.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+                echo '<a href="index.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>'; //back button that sends user to index.php
               }else{
-              for($i = 0; $i < $glength; $i++){
+              for($i = 0; $i < $glength; $i++){ //loop used to display the video game results
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
                 echo '<img src=' .$poster .'>';
@@ -159,28 +165,28 @@ include 'inputFilters.php';
           }
         }
 
-        if(isset($_GET['searchMoviesBtn'])){
+        if(isset($_GET['searchMoviesBtn'])){ //If the user clicks the search button on movies.php page
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['movieTitle'])){
               //error message back to original page
-              $_SESSION['blank'] = "Please enter a title";
-              header('location: movies.php');
+              $_SESSION['blank'] = "Please enter a title"; //session variable with blank search entry error msg
+              header('location: movies.php'); //send user to movies.php
             }else{
               unset($_SESSION['blank']);
-              $indexSearch = test_input($_GET['movieTitle']);
-              $mvtString = addPlus($indexSearch);
-              $data = getImdbRecord2($mvtString, $ApiKey);
-              $results = $data['Search'];
-              $length = count($results);
-              echo '<form action="searchMovies.php" method="get">';
-              //echo '<h2>' .'Results' .'</h2>';
+              $indexSearch = test_input($_GET['movieTitle']); //filters the search entry
+              $mvtString = addPlus($indexSearch); //replace whitespace with +
+              $data = getImdbRecord2($mvtString, $ApiKey); //variable that contains the results (multiple) for the search entry. 
+              $results = $data['Search']; 
+              $length = count($results); //number of results
+              echo '<form action="searchMovies.php" method="get">';  //When user clicks on a title it will be processed by searchMovies.php
               echo '<br>' .'<h2>' .'Movies' .'</h2>' .'<br>';
-              if($length < 1){
+              if($length < 1){ //if there are zero results
+                //Error message given to the user
                 echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in movies. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>'; 
                 echo '<br>' .'<br>';
-                echo '<a href="movies.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+                echo '<a href="movies.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>'; //back button will send user to movies.php
               }else{
-              for($i = 0; $i < $length; $i++){
+              for($i = 0; $i < $length; $i++){ //this loop will display the results to the user
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
               echo '<img src=' .$poster .'>';
@@ -194,28 +200,28 @@ include 'inputFilters.php';
           }
         }
 
-        if(isset($_GET['tvSearchBtn'])){
+        if(isset($_GET['tvSearchBtn'])){ //if user clicks the search button on tv.php page
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['tvTitle'])){
               //error message back to original page
               $_SESSION['blank'] = "Please enter a title";
-              header('location: tv.php');
+              header('location: tv.php'); //send user back to tv.php
             }else{
               unset($_SESSION['blank']);
-              $indexSearch = test_input($_GET['tvTitle']);
-              $mvtString = addPlus($indexSearch);
-              $data = getImdbRecord2($mvtString, $ApiKey);
-              $results = $data['Search'];
-              $length = count($results);
-              echo '<form action="tvSearch.php" method="get">';
-              //echo '<h2>' .'Results' .'</h2>';
+              $indexSearch = test_input($_GET['tvTitle']); //filters the search entry
+              $mvtString = addPlus($indexSearch); //replaces the whitespace with a +
+              $data = getImdbRecord2($mvtString, $ApiKey); //searches the api for the title
+              $results = $data['Search']; //results of the search
+              $length = count($results); //number of results
+              echo '<form action="tvSearch.php" method="get">';  //form will send to tvSearch.php to process 
               echo '<br>' .'<h2>' .'TV Shows' .'</h2>' .'<br>';
-              if($length < 1){
+              if($length < 1){ //if there are no results
+                //display error message to the user
                 echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in tv shows. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
                 echo '<br>' .'<br>';
-                echo '<a href="tv.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
+                echo '<a href="tv.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';  //back button sends user to tv.php
               }else{
-              for($i = 0; $i < $length; $i++){
+              for($i = 0; $i < $length; $i++){ //loop will display results to the user
               $titles = $results[$i]['Title'];
               $poster = $results[$i]['Poster'];
               echo '<img src=' .$poster .'>';
@@ -229,7 +235,7 @@ include 'inputFilters.php';
           }
         }
 
-        if(isset($_GET['gSearchBtn'])){
+        if(isset($_GET['gSearchBtn'])){ //if the user clicks the search button on the videoGames.php page
           if($_SERVER['REQUEST_METHOD'] == 'GET'){
             if(empty($_GET['gameTitle'])){
               //error message back to original page
@@ -237,18 +243,18 @@ include 'inputFilters.php';
               header('location: videoGames.php');
             }else{
               unset($_SESSION['blank']);
-              $indexSearch = test_input($_GET['gameTitle']);
-              $gameResult = findGames($indexSearch);
-              $glength = count($gameResult);
-              echo '<form action="gameSearch.php" method="get">';
-              //echo '<h2>' .'Results' .'</h2>';
+              $indexSearch = test_input($_GET['gameTitle']); //filters the search entry
+              $gameResult = findGames($indexSearch);  //searches api for games with that title
+              $glength = count($gameResult); //number of results
+              echo '<form action="gameSearch.php" method="get">';  //form will send to gameSearch.php to process
               echo '<br>' .'<h2>' .'Video Games' .'</h2>' .'<br>';
-              if($glength < 1){
+              if($glength < 1){ //if there are no results
+                //display the error to the user
                 echo '<span style="color:red;">' .'0 results for ' .'<em>' .$indexSearch .'</em>' .' in video games. ' .'Please verify the title name and the spelling.' .'</span>' .'<br>';
                 echo '<br>' .'<br>';
                 echo '<a href="videoGames.php" class="backButton">' .'<img src="arrow.jpg">' .'Back' .'</a>';
               }else{
-              for($i = 0; $i < $glength; $i++){
+              for($i = 0; $i < $glength; $i++){  //loop that displays the results to the user
                 $gResult = $gameResult[$i]->name;
                 $poster = $gameResult[$i]->background_image;
                 echo '<img src=' .$poster .'>';

@@ -1,4 +1,8 @@
 <?php
+/*
+This page displays the data for the tv show the user searched for on tv.php or the title they clicked on in tv.php.
+The user can leave a review for the tv show displayed. 
+*/
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
@@ -21,25 +25,28 @@ include 'imbdAPI.php';
 </head>
 
 <?php
-
+//This checks to see if the noRatingReview session variable is true. If user doesn't write both a review and leave a rating
 if($_SESSION['noRatingReview'] == true){
+  //pop up to inform user they must write a review and leave a rating.
 echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
-$_SESSION['noRatingReview'] = false;
+$_SESSION['noRatingReview'] = false; //set the variable back to false
 }
 
+//Checks isSignedIn session variable to see if it equals 'no'.
 if($_SESSION['isSignedIn'] === 'no'){
+//pop up error message telling user they have to be signed in to leave a review
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
 $_SESSION['isSignedIn'] = 'yes';
 }
 
-$poster = $_SESSION['tTitle']['Poster'];
-$tvInfo = $_SESSION['tTitle'];
-$poster2 = $_SESSION['tPageButton']['Poster'];
-$tvInfo2 = $_SESSION['tPageButton'];
-$_SESSION['type'] = "movieTV";
+$poster = $_SESSION['tTitle']['Poster']; //contains the poster
+$tvInfo = $_SESSION['tTitle']; //contains tv show data from the title the user clicked on in tv.php page
+$poster2 = $_SESSION['tPageButton']['Poster']; //constains the poster
+$tvInfo2 = $_SESSION['tPageButton']; //session variable that contains data for the tv show that the user searched for on tv.php
+$_SESSION['type'] = "movieTV"; //determines the type
 
-unset($_SESSION['previousPage']);
-$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
+unset($_SESSION['previousPage']);  //unsets the previousPage session variable
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //sets the previousPage session variable to this page
 ?>
 
 
@@ -108,48 +115,48 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         $rating;
         $rating2;
         $noReview = "";
-        $id = $tvInfo['imdbID'];
-        $id2 = $tvInfo2['imdbID'];
-        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
+        $id = $tvInfo['imdbID']; //selects the imdbID from the title the user clicked on in tv.php page
+        $id2 = $tvInfo2['imdbID']; //selects the imdbID from the tv show that the user searched for on tv.php
+        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'"; //gets the average rating 
         $results = $db->query($sqlRating);
-        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id2'";
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id2'"; //gets the average rating
         $results2 = $db->query($sqlRating2);
-        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'";
+        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'"; //gets the rating
         $results3 = $db->query($sql3);
-        $sql4 = "SELECT rating FROM review WHERE titleID = '$id2'";
+        $sql4 = "SELECT rating FROM review WHERE titleID = '$id2'"; //gets the rating
         $results4 = $db->query($sql4);
 
-        if($results3->num_rows > 0){
+        //Gets the average rating for the title user clicked on in tv.php
+        if($results3->num_rows > 0){ 
         if($results->num_rows > 0){
           while($row = $results->fetch_assoc()){
-            if(is_null($row['avg'])){
-              $rating = "No reviews yet";
+            if(is_null($row['avg'])){ //checks if the result is null
+              $rating = "No reviews yet"; //if null, then rating will say no reviews yet
             }else{
-              $rating = $row['avg'];
+              $rating = $row['avg']; //if not null, then rating will contain the rating for that title
             }
           }
         }
       }else{
-        //$rating = "No reviews yet";
-        $noReview = " People have reviewed this title";
+        $noReview = " People have reviewed this title"; //no review message will be set
       }
 
+        //get the average rating for the title the user searched for on tv.php
         if($results4->num_rows > 0){
         if($results2->num_rows > 0){
           while($row = $results2->fetch_assoc()){
-            if(is_null($row['avg'])){
-              $rating2 = " People have reviewed the title";
+            if(is_null($row['avg'])){ //checks if the result is null
+              $rating2 = " People have reviewed the title"; 
             }else{
-              $rating2 = $row['avg'];
+              $rating2 = $row['avg']; //if not null, then rating will contain the rating for that title
             }
           }
         }
       }else{
-        //$rating2 = "No reviews yet";
-        $noReview = " People have reviewed this title";
+        $noReview = " People have reviewed this title"; //no review message will be set
       }
 
-        if($tvInfo && $_SESSION['mediaName'] == $tvInfo['Title']){
+        if($tvInfo && $_SESSION['mediaName'] == $tvInfo['Title']){ //displays the tv show data from the title the user clicked on in tv.php page
          echo '<img src="' .$poster .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$tvInfo['Title'] . '</li>';
@@ -163,7 +170,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
          echo '<li>' .'<span> ' .'Plot:  ' .'</span>'  .' ' .$tvInfo['Plot']  .'</li>';
          echo '<li>' .'<span> ' .'User Rating:  ' .'</span>' .' ' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
-       }else{
+       }else{ //displays the data for the tv show that the user searched for on tv.php
         echo '<img src="' .$poster2 .'" alt="Movie Poster">';
          echo  '<ul class="movieInfo">';
          echo '<li>' .'<span> ' .'Title:  ' .'</span>' .' ' .$tvInfo2['Title'] . '</li>';

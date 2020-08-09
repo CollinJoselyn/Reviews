@@ -27,25 +27,28 @@ include 'gamesApi.php';
 </head>
 
 <?php
-
+//Checks isSignedIn session variable to see if it equals 'no'.
 if($_SESSION['isSignedIn'] === 'no'){
+//pop up error message telling user they have to be signed in to leave a review
 echo '<script type="text/javascript">alert("You must be signed in to leave a review!");</script>';
-$_SESSION['isSignedIn'] = 'yes';
+$_SESSION['isSignedIn'] = 'yes'; //set back to yes
 }
 
+//This checks to see if the noRatingReview session variable is true. If user doesn't write both a review and leave a rating
 if($_SESSION['noRatingReview'] == true){
+//pop up to inform user they must write a review and leave a rating.
 echo '<script type="text/javascript">alert("Please write a review and leave a rating!");</script>';
-$_SESSION['noRatingReview'] = false;
+$_SESSION['noRatingReview'] = false; //set the variable back to false
 }
 
-$mtPoster = $_SESSION['mtSearchResults']['Poster'];
-$vgPoster = $_SESSION['vgSearchResults']->background_image;
-$mtInfo = $_SESSION['mtSearchResults'];
-$vgInfo = $_SESSION['vgSearchResults'];
-$mediaName = $_SESSION['mediaName'];
+$mtPoster = $_SESSION['mtSearchResults']['Poster']; //gets the poster for the movie/tv show data from the title the user searched for on index.php
+$vgPoster = $_SESSION['vgSearchResults']->background_image; //gets the poster for the video game data from the title the user searched for on index.php
+$mtInfo = $_SESSION['mtSearchResults']; //contains movie/tv show data from the title the user searched for on index.php
+$vgInfo = $_SESSION['vgSearchResults']; //contains video game data from the title the user searched for on index.php
+$mediaName = $_SESSION['mediaName']; //Title of the game/tv/movie
 $_SESSION['type'] = "";
-unset($_SESSION['previousPage']);
-$_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
+unset($_SESSION['previousPage']); //unset previousPage session variable
+$_SESSION['previousPage'] = $_SERVER['PHP_SELF']; //set the previousPage session variable to this page
 
 ?>
 
@@ -117,17 +120,18 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
         $rating2;
         $noReview = "";
         $noReview2 = "";
-        $id = $mtInfo['imdbID'];
-        $id2 = $vgInfo->id;
-        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'";
+        $id = $mtInfo['imdbID']; //the id for the movie/tv show data from the title the user searched for on index.php
+        $id2 = $vgInfo->id; // the id for the video game data from the title the user searched for on index.php
+        $sqlRating = "SELECT AVG(rating) avg FROM review WHERE titleID = '$id'"; //the average rating for the movie/tv user searched for on index.php
         $results = $db->query($sqlRating);
-        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id2'";
+        $sqlRating2 = "SELECT AVG(rating) avg FROM review WHERE gameID = '$id2'"; //the average rating for the video game user searched for on index.php
         $results2 = $db->query($sqlRating2);
-        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'";
+        $sql3 = "SELECT rating FROM review WHERE titleID = '$id'"; //rating for the movie/tv user searched for on index.php
         $results3 = $db->query($sql3);
-        $sql4 = "SELECT rating FROM review WHERE gameID = '$id2'";
+        $sql4 = "SELECT rating FROM review WHERE gameID = '$id2'"; //rating for the video game user searched for on index.php
         $results4 = $db->query($sql4);
 
+        //gets the average rating for the movie/tv the user searched for on index.php from the database
         if($results3->num_rows > 0){
         if($results->num_rows > 0){
           while($row = $results->fetch_assoc()){
@@ -139,10 +143,10 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           }
         }
       }else{
-        //$rating = "No reviews yet";
         $noReview = " People have reviewed this title";
       }
 
+        //gets the average rating for the video game the user searched for on index.php from the database
         if($results4->num_rows > 0){
         if($results2->num_rows > 0){
           while($row = $results2->fetch_assoc()){
@@ -154,11 +158,10 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
           }
         }
       }else{
-        //$rating2 = "No reviews yet";
         $noReview2 = " People have reviewed this title";
       }
 
-        if($mediaName === $mtInfo['Title']){
+        if($mediaName === $mtInfo['Title']){ //if media name is a movie/tv show
          $_SESSION['type'] = "movieTV";
          echo '<div class="moviePoster">';
          echo '<img src="' .$mtPoster .'" alt="Movie Poster">';
@@ -174,7 +177,7 @@ $_SESSION['previousPage'] = $_SERVER['PHP_SELF'];
          echo '<li>' .'<span>' .'Plot:'  .'</span>' .$mtInfo['Plot']  .'</li>';
          echo '<li>' .'<span>' .'User Rating:' .'</span>' .round($rating, 1) .$noReview .'</li>';
          echo '</ul>';
-        }else{
+        }else{ //if it is a video game
           echo '<div class="vgResults">';
           echo '<div class="col-container">';
           echo '<div class="col">';

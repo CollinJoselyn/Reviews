@@ -22,9 +22,10 @@ require_once 'inputFilters.php';
 </head>
 
 <script type="text/javascript">
+//confirmation message for deleting account
 function checkForm(e) { 
    if (!(window.confirm("Are you sure you want to delete your account?"))) 
-     e.returnValue = false; 
+     e.returnValue = false;  
  }
 </script>
 
@@ -101,6 +102,8 @@ function checkForm(e) {
   <?php
   $uid = $_SESSION['userID'];
 
+  //When user clicks the delete account button, it will use their user id to delete their account from the database.
+  //after the account is deleted, they will be re-directed to index.php
   if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if(isset($_GET['deleteAccount'])){
       $sql = "DELETE FROM review WHERE userID = '$uid'";

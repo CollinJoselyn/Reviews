@@ -1,4 +1,7 @@
 <?php
+/*
+This page displays the reviews left by the user. The user can view them and delete them.
+*/
 session_start();
 require_once 'dbconnection.php';
 ?>
@@ -21,7 +24,7 @@ require_once 'dbconnection.php';
 </head>
 
 <script type="text/javascript">
-
+//confirmation message for deleting a review
 function checkForm(e) { 
    if (!(window.confirm("Are you sure you want to delete this review?"))) 
      e.returnValue = false; 
@@ -90,12 +93,8 @@ function checkForm(e) {
         </div>
 
         <?php
-          $i = 0;
-          $k = 0;
           $_SESSION['did'] = 0;
           $uid = $_SESSION['userID'];
-          $_SESSION['deletedReviewID'] = array();
-          $_SESSION['arrElementNum'] = array();
           $sql = "SELECT writtenReview, date, titleOfMedia, reviewID FROM review WHERE userID = '$uid'";
           $results = $db->query($sql);
           if($results->num_rows > 0){

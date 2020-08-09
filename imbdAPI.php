@@ -11,14 +11,14 @@
 ?>
 
 <?php
+/*
+This script pulls data from the omdb api. THis api gives the movie and tv 
+data for the site.
+*/
 
-//$title = "The Big Lebowski";
-//$path = "http://www.omdbapi.com/?t=$title&apikey=99000d3e";
-//$json = file_get_contents($path);
-//$result = json_decode($json, TRUE);
-
-//echo $result;
 $ApiKey = "99000d3e";
+
+//THis function searches the omdb api for a certain movie/tv title. This only returns one result.
 function getImdbRecord($ImdbId, $ApiKey)
 {
     $path = "http://www.omdbapi.com/?t=$ImdbId&apikey=$ApiKey";
@@ -26,12 +26,14 @@ function getImdbRecord($ImdbId, $ApiKey)
     return json_decode($json, TRUE);
 }
 
+//This function returns the poster of the movie/tv title
 function getPoster($title, $ApiKey){
 	$path = "http://img.omdbapi.com/?apikey=$ApiKey&t=$title";
 	$json = file_get_contents($path);
 	return json_decode($json, TRUE);
 }
 
+//This function searches the omdb api for a movie/tv title. This returns multiple results pertaining to the searched title.
 function getImdbRecord2($ImdbId, $ApiKey)
 {
     $path = "http://www.omdbapi.com/?s=$ImdbId&apikey=$ApiKey";
@@ -39,12 +41,4 @@ function getImdbRecord2($ImdbId, $ApiKey)
     return json_decode($json, TRUE);
 }
 
-
-//$len = array_count_values($data['Search']);
-
-//echo "<pre>";
-//print_r($data['Search']);
-//echo "</pre>";
-//echo sizeof($data['Search'], 0);
-//echo $data['Search'];
 ?>

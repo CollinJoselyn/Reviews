@@ -1,4 +1,8 @@
 <?php
+/*
+This is the video games page. Here the user can search for a video game title.
+They also can see the recent releases and the highest and lowest rated games.
+*/
 session_start();
 require_once 'dbconnection.php';
 require_once 'gamesApi.php';
@@ -22,7 +26,7 @@ require_once 'gamesApi.php';
 </head>
 
 <?php
-
+//These variables get the game data for this page
 $recent = findGame("Star Wars Battlefront II");
 $recent2 = findGame("Star Wars Jedi: Fallen Order");
 $recent3 = findGame("Death Stranding");
@@ -39,7 +43,7 @@ $highest = findGame("Grand Theft Auto: San Andreas");
 $highest2 = findGame("MVP Baseball 2005");
 $highest3 = findGame("The Last of Us");
 
-unset($_SESSION['notSignIn']);
+unset($_SESSION['notSignIn']); 
 unset($_SESSION['previousPage2']);
 $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
 ?>

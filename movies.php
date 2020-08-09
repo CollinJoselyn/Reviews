@@ -1,4 +1,8 @@
 <?php
+/*
+This is the movie page. Here the user can search for a movie. They can 
+also see recent releases and the highest and lowest rated movies.
+*/
 session_start();
 require_once 'dbconnection.php';
 include 'imbdAPI.php';
@@ -22,6 +26,7 @@ include 'imbdAPI.php';
 </head>
 
 <?php
+//These variables get the data for the movies displayed on this page
 $highest = getImdbRecord("The+Big+Lebowski", $ApiKey);
 $highest2 = getImdbRecord("The+Dark+Knight", $ApiKey);
 $highest3 = getImdbRecord("American+Psycho", $ApiKey);
