@@ -112,6 +112,10 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
     </div>
   </div>
 
+  <?php
+  unset($_SESSION['blank']);
+  ?>
+
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
