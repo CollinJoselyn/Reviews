@@ -102,8 +102,8 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF']; //set the previousPage sessio
         <br><h1>Search</h1>
         <form action="results.php" method="get">
           Search by Title<input type="text" name="search" value="">
-          <input type="submit" value="Search" name="searchBtn"><span style="color:red;position:absolute;"><?php echo $_SESSION['blank']; ?></span><br>
-          <span><?php echo $_SESSION['gameErr'] ?></span>
+          <input type="submit" value="Search" name="searchBtn" onclick="loading()"><span style="color:red;position:absolute;"><?php echo $_SESSION['blank']; ?></span><br>
+          <span><?php echo $_SESSION['gameErr'] ?></span><span style="font-size: 30px; color: green;" id="load"><?php echo 'Searching Please Wait'; ?><img id="load" style="height:80px; width:80px;"  src="loading.gif"></span>
         </form>
         </div>
     </div>
@@ -195,6 +195,15 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF']; //set the previousPage sessio
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript">
+var a = document.getElementById("load");
+a.style.display = "none";
+
+function loading(){
+  a.style.display = "block";
+}
+</script>
 
 </body>
 

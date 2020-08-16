@@ -105,8 +105,8 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
         <p style="font-family: mv boli;font-size:60px;">Reviews</p><br>
         <h1 class="mt-5">Movies</h1><br>
         <form action="results.php" method="get">
-          Search By Title <input type="text" name="movieTitle"><input type="submit" name="searchMoviesBtn" value="Search">
-          <span style="color:red;position:absolute;"><?php echo $_SESSION['blank'];?></span>
+          Search By Title <input type="text" name="movieTitle"><input type="submit" name="searchMoviesBtn" value="Search" onclick="loading()">
+          <span style="color:red;position:absolute;"><?php echo $_SESSION['blank'];?></span><span style="font-size: 30px; color: green;" id="load4"><?php echo 'Searching Please Wait'; ?><img id="load" style="height:80px; width:80px;"  src="loading.gif"></span>
         </form>
       </div>
     </div>
@@ -182,6 +182,15 @@ $_SESSION['previousPage2'] = $_SERVER['PHP_SELF'];
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.slim.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+   <script type="text/javascript">
+var a = document.getElementById("load4");
+a.style.display = "none";
+
+function loading(){
+  a.style.display = "block";
+}
+</script>
 
 </body>
 
